@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { AnimatePresence } from "framer-motion";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
 
 const Index = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -100,10 +101,9 @@ const Index = () => {
             className="relative max-w-4xl mx-auto mb-8 md:mb-12"
           >
             <div className="rounded-lg overflow-hidden shadow-2xl border border-white/10">
-              <img 
-                src="/public/lovable-uploads/f6d412a1-a0ef-414f-a003-446d06141402.png" 
-                alt="Course Preview" 
-                className="w-full aspect-video object-cover"
+              <YouTubeEmbed 
+                videoId="7EHqhKXjzzs"
+                className="w-full"
               />
               <div className="absolute bottom-3 md:bottom-6 left-3 md:left-6 bg-green-500/80 px-3 py-1 md:px-4 md:py-2 rounded-md text-white font-medium text-xs md:text-sm">
                 go viral authentically.
