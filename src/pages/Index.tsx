@@ -208,7 +208,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-8">
             <PricingCard
               title="Content Academy"
-              price={isAnnual ? "49.75" : "59.99"}
+              price={isAnnual ? "49.75" : "99.99"}
               features={[
                 "13+ Hours of Video Guides",
                 "5 Weekly LIVE Community Calls",
