@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Link } from "react-scroll";
 
 const Navbar = () => {
   return (
@@ -8,26 +9,19 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-end items-center h-16">
           <div className="flex items-center space-x-6">
-            <motion.a 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              href="#" 
-              className="text-light-blue hover:text-white transition-colors duration-200 text-sm"
-            >
-              Does this work?
-            </motion.a>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.2 }}
             >
-              <Button 
-                variant="link" 
-                className="text-light-blue hover:text-white p-0 text-sm"
+              <Link 
+                to="testimonials" 
+                smooth={true} 
+                duration={500} 
+                className="text-light-blue hover:text-white transition-colors duration-200 text-sm cursor-pointer"
               >
-                Sign Up
-              </Button>
+                Does this work?
+              </Link>
             </motion.div>
           </div>
         </div>

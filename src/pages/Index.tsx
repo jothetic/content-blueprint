@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { Element } from 'react-scroll';
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -133,8 +134,8 @@ const Index = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
+      <Element name="testimonials">
+        <section className="py-20 px-4 bg-white">
           <p className="text-soft-purple text-sm font-medium tracking-wide uppercase mb-3 text-center">STUDENT TESTIMONIALS</p>
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-black">
             We've helped 1,000+ creators reach their goals on Instagram and TikTok.
@@ -190,8 +191,8 @@ const Index = () => {
               </Carousel>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </Element>
 
       {/* Pricing Section */}
       <section className="py-20 px-4 bg-deep-purple-gradient">
