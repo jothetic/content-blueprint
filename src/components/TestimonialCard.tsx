@@ -6,30 +6,28 @@ import { motion } from "framer-motion";
 interface TestimonialCardProps {
   name: string;
   role: string;
-  followers: string;
   quote: string;
   image: string;
 }
 
-const TestimonialCard = ({ name, role, followers, quote, image }: TestimonialCardProps) => {
+const TestimonialCard = ({ name, role, quote, image }: TestimonialCardProps) => {
   return (
     <motion.div
-      whileHover={{ scale: 1.02 }}
+      whileHover={{ y: -5 }}
       transition={{ duration: 0.2 }}
     >
-      <Card className="p-6 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
-        <div className="flex items-center space-x-4 mb-4">
-          <Avatar className="h-12 w-12 ring-2 ring-teal-500/20">
+      <Card className="p-6 bg-white shadow-md border-none">
+        <div className="flex items-start space-x-4 mb-4">
+          <Avatar className="h-14 w-14 rounded-full">
             <AvatarImage src={image} alt={name} />
-            <AvatarFallback className="bg-teal-500/10 text-teal-500">{name[0]}</AvatarFallback>
+            <AvatarFallback className="bg-soft-purple/10 text-soft-purple">{name[0]}</AvatarFallback>
           </Avatar>
           <div>
-            <h3 className="font-semibold text-white">{name}</h3>
-            <p className="text-teal-400">{role}</p>
-            <p className="text-sm text-gray-400">{followers}</p>
+            <h3 className="font-bold text-black">{name}</h3>
+            <p className="text-gray-600 text-sm">{role}</p>
           </div>
         </div>
-        <p className="text-gray-300 italic leading-relaxed">&quot;{quote}&quot;</p>
+        <p className="text-gray-700 leading-relaxed">&quot;{quote}&quot;</p>
       </Card>
     </motion.div>
   );

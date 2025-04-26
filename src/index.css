@@ -3,6 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -43,6 +45,7 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
+    font-family: 'Poppins', sans-serif;
   }
 }
 
@@ -58,5 +61,45 @@
 }
 
 .animate-fade-in {
-  animation: fade-in 1s ease-out forwards;
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.8s ease-out forwards;
+}
+
+.bg-deep-purple-gradient {
+  background: linear-gradient(to bottom, #1A0033 0%, #0D001F 100%);
+}
+
+.bg-soft-purple {
+  background-color: #B197FF;
+}
+
+.text-soft-purple {
+  color: #B197FF;
+}
+
+.text-light-blue {
+  color: #8ECDF7;
+}
+
+.hover-grow:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.bg-soft-gray {
+  background-color: #F5F5F7;
 }
