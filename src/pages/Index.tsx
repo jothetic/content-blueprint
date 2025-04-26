@@ -278,7 +278,7 @@ const Index = () => {
                   ]}
                   ctaText="Get Full Access"
                   highlighted={true}
-                  onCtaClick={() => window.open("https://whop.com/content-blueprint/", "_blank")}
+                  onCtaClick={() => window.open("https://whop.com/content-blueprint/#my-offers-prod_8bOwN6ScSdHgP", "_blank")}
                 />
               ) : (
                 <PricingCard
@@ -292,7 +292,7 @@ const Index = () => {
                   ]}
                   ctaText="Start for Free"
                   highlighted={false}
-                  onCtaClick={() => window.open("https://whop.com/content-blueprint/", "_blank")}
+                  onCtaClick={() => window.open("https://whop.com/creator-blueprint-lite/#my-offers-prod_BkyKBvhyYTal0", "_blank")}
                 />
               )}
             </motion.div>
