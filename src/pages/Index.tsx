@@ -105,9 +105,6 @@ const Index = () => {
                 videoId="7EHqhKXjzzs"
                 className="w-full"
               />
-              <div className="absolute bottom-3 md:bottom-6 left-3 md:left-6 bg-green-500/80 px-3 py-1 md:px-4 md:py-2 rounded-md text-white font-medium text-xs md:text-sm">
-                go viral authentically.
-              </div>
             </div>
           </motion.div>
           
