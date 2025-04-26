@@ -119,7 +119,10 @@ const Index = () => {
             variants={fadeIn}
             className="flex flex-col items-center"
           >
-            <Button className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover-grow mb-4">
+            <Button 
+              className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover-grow mb-4"
+              onClick={() => window.open("https://whop.com/content-blueprint/", "_blank")}
+            >
               → Start Your Journey <ArrowRightIcon className="ml-1 w-4 h-4 md:w-5 md:h-5" />
             </Button>
             
@@ -261,6 +264,7 @@ const Index = () => {
                 "Essential growth templates"
               ]}
               ctaText="Start for Free"
+              onCtaClick={() => window.open("https://whop.com/content-blueprint/", "_blank")}
             />
             <PricingCard
               title="Content Blueprint"
@@ -274,6 +278,7 @@ const Index = () => {
                 "Premium Real-Time Chat Support"
               ]}
               ctaText="Get Full Access"
+              onCtaClick={() => window.open("https://whop.com/content-blueprint/", "_blank")}
             />
           </div>
         </div>
