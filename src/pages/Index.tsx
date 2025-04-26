@@ -78,19 +78,19 @@ const Index = () => {
         >
           <motion.h1 
             variants={fadeIn}
-            className="text-3xl md:text-5xl lg:text-6xl font-bold mb-2 text-white"
+            className="text-3xl md:text-5xl lg:text-6xl font-bold mb-2 text-white tracking-tight"
           >
             🚀 Master the Blueprint to Grow
           </motion.h1>
           <motion.h1 
             variants={fadeIn}
-            className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-soft-purple"
+            className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-soft-purple tracking-tight"
           >
             and Monetize Your Audience.
           </motion.h1>
           <motion.p 
             variants={fadeIn}
-            className="text-base md:text-lg text-white mb-6 md:mb-8 max-w-2xl mx-auto"
+            className="text-base md:text-lg text-white mb-6 md:mb-8 max-w-2xl mx-auto font-medium"
           >
             Turn views into income with proven systems, live coaching, and exclusive tools—built by a creator who made $100K at 15.
           </motion.p>
