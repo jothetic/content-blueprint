@@ -10,6 +10,7 @@ import { ArrowRight, ArrowLeft, ArrowRight as ArrowRightIcon, Star } from "lucid
 import { motion } from "framer-motion";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { AnimatePresence } from "framer-motion";
 
 const Index = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -254,50 +255,48 @@ const Index = () => {
           
           <PricingToggle onToggle={setIsPaid} />
           
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+          <AnimatePresence mode="wait">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className={`${isPaid ? 'order-1' : 'order-2'}`}
+              key={isPaid ? 'paid' : 'free'}
+              initial={{ opacity: 0, x: isPaid ? -20 : 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: isPaid ? 20 : -20 }}
+              transition={{ duration: 0.3 }}
+              className="max-w-xl mx-auto"
             >
-              <PricingCard
-                title="Content Blueprint"
-                price="24.99"
-                features={[
-                  "10+ Premium Trainings",
-                  "3 Weekly Live Calls with Maddox",
-                  "Private Discord Community",
-                  "Exclusive Vendor Resources",
-                  "Real Templates and Files",
-                  "Premium Real-Time Chat Support"
-                ]}
-                ctaText="Get Full Access"
-                highlighted={true}
-                onCtaClick={() => window.open("https://whop.com/content-blueprint/", "_blank")}
-              />
+              {isPaid ? (
+                <PricingCard
+                  title="Content Blueprint"
+                  price="24.99"
+                  features={[
+                    "10+ Premium Trainings",
+                    "3 Weekly Live Calls with Maddox",
+                    "Private Discord Community",
+                    "Exclusive Vendor Resources",
+                    "Real Templates and Files",
+                    "Premium Real-Time Chat Support"
+                  ]}
+                  ctaText="Get Full Access"
+                  highlighted={true}
+                  onCtaClick={() => window.open("https://whop.com/content-blueprint/", "_blank")}
+                />
+              ) : (
+                <PricingCard
+                  title="Creator Blueprint Lite"
+                  price="0"
+                  features={[
+                    "Starter program with 7-day content roadmap",
+                    "Free resources and guides",
+                    "Basic community access",
+                    "Essential growth templates"
+                  ]}
+                  ctaText="Start for Free"
+                  highlighted={false}
+                  onCtaClick={() => window.open("https://whop.com/content-blueprint/", "_blank")}
+                />
+              )}
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className={`${isPaid ? 'order-2' : 'order-1'}`}
-            >
-              <PricingCard
-                title="Creator Blueprint Lite"
-                price="0"
-                features={[
-                  "Starter program with 7-day content roadmap",
-                  "Free resources and guides",
-                  "Basic community access",
-                  "Essential growth templates"
-                ]}
-                ctaText="Start for Free"
-                highlighted={false}
-                onCtaClick={() => window.open("https://whop.com/content-blueprint/", "_blank")}
-              />
-            </motion.div>
-          </div>
+          </AnimatePresence>
         </div>
       </section>
     </div>
