@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Element } from 'react-scroll';
 import { Button } from "@/components/ui/button";
@@ -65,7 +64,7 @@ const Index = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-16 px-4">
+      <section className="pt-32 pb-16 px-4 md:px-6 lg:px-8">
         <motion.div
           initial="hidden"
           animate={visible ? "visible" : "hidden"}
@@ -136,67 +135,71 @@ const Index = () => {
 
       {/* Testimonials Section */}
       <Element name="testimonials">
-        <section className="py-20 px-4 bg-white">
-          <p className="text-soft-purple text-sm font-medium tracking-wide uppercase mb-3 text-center">STUDENT TESTIMONIALS</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-black">
-            We've helped over 1,000 entrepreneurs reach 10K per month
-          </h2>
-          
-          <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-            <div className="lg:col-span-1">
-              <Carousel className="w-full">
-                <CarouselContent>
-                  {testimonials.map((testimonial, index) => (
-                    <CarouselItem key={index}>
-                      <TestimonialCard {...testimonial} />
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <div className="flex justify-center mt-6 gap-4">
-                  <CarouselPrevious className="relative inset-0 translate-y-0" />
-                  <CarouselNext className="relative inset-0 translate-y-0" />
-                </div>
-              </Carousel>
-            </div>
+        <section className="py-12 md:py-20 px-4 md:px-6 lg:px-8 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <p className="text-soft-purple text-sm font-medium tracking-wide uppercase mb-3 text-center">
+              STUDENT TESTIMONIALS
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-black px-4">
+              We've helped over 1,000 entrepreneurs reach 10K per month
+            </h2>
             
-            {/* Video Testimonial Carousel */}
-            <div className="lg:col-span-2 bg-soft-gray rounded-lg p-6">
-              <Carousel className="w-full">
-                <CarouselContent>
-                  <CarouselItem>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div>
-                        <VideoTestimonialCard
-                          quote="Mino got me from 10k to 55k followers on TikTok, 300 to 355k followers on IG."
-                          thumbnail="/public/lovable-uploads/f6d412a1-a0ef-414f-a003-446d06141402.png"
-                          onClick={() => setIsPlaying(!isPlaying)}
-                        />
-                      </div>
-                      <div className="flex items-center">
+            <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12">
+              <div className="lg:col-span-1">
+                <Carousel className="w-full">
+                  <CarouselContent>
+                    {testimonials.map((testimonial, index) => (
+                      <CarouselItem key={index}>
+                        <TestimonialCard {...testimonial} />
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <div className="flex justify-center mt-6 gap-4">
+                    <CarouselPrevious className="relative inset-0 translate-y-0" />
+                    <CarouselNext className="relative inset-0 translate-y-0" />
+                  </div>
+                </Carousel>
+              </div>
+              
+              {/* Video Testimonial Carousel */}
+              <div className="lg:col-span-2 bg-soft-gray rounded-lg p-4 md:p-6">
+                <Carousel className="w-full">
+                  <CarouselContent>
+                    <CarouselItem>
+                      <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                         <div>
-                          <h3 className="font-bold text-xl mb-3">Alison Chang</h3>
-                          <p className="text-gray-700 leading-relaxed">
-                            "This program completely transformed my approach to social media. 
-                            I've not only gained more followers but also built a genuine community 
-                            that engages with my content and converts to sales."
-                          </p>
+                          <VideoTestimonialCard
+                            quote="Mino got me from 10k to 55k followers on TikTok, 300 to 355k followers on IG."
+                            thumbnail="/public/lovable-uploads/f6d412a1-a0ef-414f-a003-446d06141402.png"
+                            onClick={() => setIsPlaying(!isPlaying)}
+                          />
+                        </div>
+                        <div className="flex items-center">
+                          <div className="py-4 md:py-0">
+                            <h3 className="font-bold text-xl mb-3">Alison Chang</h3>
+                            <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+                              "This program completely transformed my approach to social media. 
+                              I've not only gained more followers but also built a genuine community 
+                              that engages with my content and converts to sales."
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </CarouselItem>
-                </CarouselContent>
-                <div className="flex justify-center mt-6 gap-4">
-                  <CarouselPrevious className="relative inset-0 translate-y-0" />
-                  <CarouselNext className="relative inset-0 translate-y-0" />
-                </div>
-              </Carousel>
+                    </CarouselItem>
+                  </CarouselContent>
+                  <div className="flex justify-center mt-6 gap-4">
+                    <CarouselPrevious className="relative inset-0 translate-y-0" />
+                    <CarouselNext className="relative inset-0 translate-y-0" />
+                  </div>
+                </Carousel>
+              </div>
             </div>
           </div>
         </section>
       </Element>
 
       {/* Pricing Section */}
-      <section className="py-20 px-4 bg-deep-purple-gradient">
+      <section className="py-12 md:py-20 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-white">
             Start your personal branding journey today

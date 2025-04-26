@@ -18,7 +18,7 @@ const VideoTestimonialCard = ({ quote, thumbnail, onClick }: VideoTestimonialCar
       className="w-full"
     >
       <Card className="bg-transparent border-0 shadow-none">
-        <blockquote className="italic text-lg text-gray-700 mb-4">"{quote}"</blockquote>
+        <blockquote className="italic text-sm md:text-lg text-gray-700 mb-3 md:mb-4">"{quote}"</blockquote>
         <div className="relative cursor-pointer" onClick={onClick}>
           <img 
             src={thumbnail} 
@@ -26,10 +26,10 @@ const VideoTestimonialCard = ({ quote, thumbnail, onClick }: VideoTestimonialCar
             className="w-full rounded-lg shadow-md object-cover aspect-video"
           />
           <Button
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full w-16 h-16 flex items-center justify-center"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full w-12 h-12 md:w-16 md:h-16 flex items-center justify-center"
             onClick={onClick}
           >
-            <Play className="h-8 w-8 text-white ml-1" />
+            <Play className="h-6 w-6 md:h-8 md:w-8 text-white ml-1" />
           </Button>
         </div>
       </Card>
