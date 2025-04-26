@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Play } from "lucide-react";
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface VideoTestimonialCardProps {
   quote: string;
@@ -11,15 +12,16 @@ interface VideoTestimonialCardProps {
 }
 
 const VideoTestimonialCard = ({ quote, thumbnail, onClick }: VideoTestimonialCardProps) => {
+  const isMobile = useIsMobile();
+  
   return (
     <motion.div
-      whileHover={{ scale: 1.02 }}
+      whileHover={{ scale: isMobile ? 1 : 1.02 }}
       transition={{ duration: 0.2 }}
       className="w-full"
     >
       <Card className="bg-transparent border-0 shadow-none">
-        <blockquote className="italic text-sm md:text-lg text-gray-700 mb-3 md:mb-4">"{quote}"</blockquote>
-        <div className="relative cursor-pointer" onClick={onClick}>
+        <div className="relative cursor-pointer mb-3" onClick={onClick}>
           <img 
             src={thumbnail} 
             alt="Video testimonial thumbnail" 
@@ -32,6 +34,7 @@ const VideoTestimonialCard = ({ quote, thumbnail, onClick }: VideoTestimonialCar
             <Play className="h-6 w-6 md:h-8 md:w-8 text-white ml-1" />
           </Button>
         </div>
+        <blockquote className="italic text-sm md:text-lg text-gray-700">"{quote}"</blockquote>
       </Card>
     </motion.div>
   );
