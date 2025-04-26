@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -48,51 +49,50 @@
   }
 }
 
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-@keyframes shine {
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
   to {
-    background-position: 200% center;
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@keyframes pulse-soft {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
 }
 
-.animate-float {
-  animation: float 4s ease-in-out infinite;
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.animate-shine {
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  background-size: 200% 100%;
-  animation: shine 4s linear infinite;
-}
-
-.animate-pulse-soft {
-  animation: pulse-soft 2s ease-in-out infinite;
+.animate-slide-in {
+  animation: slide-in 0.8s ease-out forwards;
 }
 
 .bg-deep-purple-gradient {
-  background: linear-gradient(135deg, #2A0F49 0%, #1A0033 100%);
+  background: linear-gradient(to bottom, #1A0033 0%, #0D001F 100%);
 }
 
 .bg-soft-purple {
-  background-color: #9B6FFF;
+  background-color: #B197FF;
 }
 
 .text-soft-purple {
-  color: #9B6FFF;
+  color: #B197FF;
 }
 
 .text-light-blue {
-  color: #A5C7FF;
+  color: #8ECDF7;
 }
 
 .hover-grow:hover {
@@ -101,13 +101,5 @@
 }
 
 .bg-soft-gray {
-  background-color: #F7F7FA;
-}
-
-.glass-card {
-  @apply backdrop-blur-lg bg-white/5 border border-white/20 shadow-xl;
-}
-
-.text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#9B6FFF] to-[#A5C7FF];
+  background-color: #F5F5F7;
 }
