@@ -10,9 +10,10 @@ interface PricingCardProps {
   features: string[];
   ctaText: string;
   applyOnly?: boolean;
+  onCtaClick?: () => void;
 }
 
-const PricingCard = ({ title, price, features, ctaText, applyOnly }: PricingCardProps) => {
+const PricingCard = ({ title, price, features, ctaText, applyOnly, onCtaClick }: PricingCardProps) => {
   return (
     <motion.div
       whileHover={{ y: -5 }}
@@ -46,6 +47,7 @@ const PricingCard = ({ title, price, features, ctaText, applyOnly }: PricingCard
         </ul>
         <Button 
           className={`w-full ${applyOnly ? 'bg-white text-[#1A0033] hover:bg-gray-200' : 'bg-soft-purple hover:bg-soft-purple/90'} transition-all duration-200 font-medium`}
+          onClick={onCtaClick}
         >
           {ctaText}
         </Button>
