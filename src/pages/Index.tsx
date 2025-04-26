@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -37,6 +36,27 @@ const Index = () => {
       }
     }
   };
+
+  const testimonials = [
+    {
+      name: "Renzo Guevarra",
+      role: "CEO Growthology Agency, 500k+ followers",
+      quote: "The academy transformed my content strategy. My engagement increased by 300% in just two months.",
+      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+    },
+    {
+      name: "Sarah Miller",
+      role: "Fashion Influencer, 250k+ followers",
+      quote: "This program helped me turn my passion into a 6-figure business. The community support is incredible.",
+      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+    },
+    {
+      name: "David Chen",
+      role: "Digital Creator, 400k+ followers",
+      quote: "The strategies taught here are game-changing. I've tripled my monthly revenue since joining.",
+      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-deep-purple-gradient overflow-x-hidden">
@@ -122,15 +142,22 @@ const Index = () => {
           
           <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
             <div className="lg:col-span-1">
-              <TestimonialCard
-                name="Renzo Guevarra"
-                role="CEO Growthology Agency, 500k+ followers"
-                quote="The academy transformed my content strategy. My engagement increased by 300% in just two months."
-                image="/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
-              />
+              <Carousel className="w-full">
+                <CarouselContent>
+                  {testimonials.map((testimonial, index) => (
+                    <CarouselItem key={index}>
+                      <TestimonialCard {...testimonial} />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <div className="flex justify-center mt-6 gap-4">
+                  <CarouselPrevious className="relative inset-0 translate-y-0" />
+                  <CarouselNext className="relative inset-0 translate-y-0" />
+                </div>
+              </Carousel>
             </div>
             
-            {/* Carousel Testimonial */}
+            {/* Video Testimonial Carousel */}
             <div className="lg:col-span-2 bg-soft-gray rounded-lg p-6">
               <Carousel className="w-full">
                 <CarouselContent>
