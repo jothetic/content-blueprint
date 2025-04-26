@@ -15,6 +15,7 @@ const Index = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isAnnual, setIsAnnual] = useState(true);
   const [visible, setVisible] = useState(false);
+  const [isPaid, setIsPaid] = useState(true);
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -251,35 +252,51 @@ const Index = () => {
             Here's What You'll Unlock:
           </p>
           
-          <PricingToggle onToggle={setIsAnnual} />
+          <PricingToggle onToggle={setIsPaid} />
           
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-            <PricingCard
-              title="Creator Blueprint Lite"
-              price="0"
-              features={[
-                "Starter program with 7-day content roadmap",
-                "Free resources and guides",
-                "Basic community access",
-                "Essential growth templates"
-              ]}
-              ctaText="Start for Free"
-              onCtaClick={() => window.open("https://whop.com/content-blueprint/", "_blank")}
-            />
-            <PricingCard
-              title="Content Blueprint"
-              price={isAnnual ? "24.99" : "30"}
-              features={[
-                "10+ Premium Trainings",
-                "3 Weekly Live Calls with Maddox",
-                "Private Discord Community",
-                "Exclusive Vendor Resources",
-                "Real Templates and Files",
-                "Premium Real-Time Chat Support"
-              ]}
-              ctaText="Get Full Access"
-              onCtaClick={() => window.open("https://whop.com/content-blueprint/", "_blank")}
-            />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className={`${isPaid ? 'order-1' : 'order-2'}`}
+            >
+              <PricingCard
+                title="Content Blueprint"
+                price="24.99"
+                features={[
+                  "10+ Premium Trainings",
+                  "3 Weekly Live Calls with Maddox",
+                  "Private Discord Community",
+                  "Exclusive Vendor Resources",
+                  "Real Templates and Files",
+                  "Premium Real-Time Chat Support"
+                ]}
+                ctaText="Get Full Access"
+                highlighted={true}
+                onCtaClick={() => window.open("https://whop.com/content-blueprint/", "_blank")}
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className={`${isPaid ? 'order-2' : 'order-1'}`}
+            >
+              <PricingCard
+                title="Creator Blueprint Lite"
+                price="0"
+                features={[
+                  "Starter program with 7-day content roadmap",
+                  "Free resources and guides",
+                  "Basic community access",
+                  "Essential growth templates"
+                ]}
+                ctaText="Start for Free"
+                highlighted={false}
+                onCtaClick={() => window.open("https://whop.com/content-blueprint/", "_blank")}
+              />
+            </motion.div>
           </div>
         </div>
       </section>

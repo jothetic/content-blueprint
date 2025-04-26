@@ -3,15 +3,15 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface PricingToggleProps {
-  onToggle: (isAnnual: boolean) => void;
+  onToggle: (isPaid: boolean) => void;
 }
 
 const PricingToggle = ({ onToggle }: PricingToggleProps) => {
-  const [isAnnual, setIsAnnual] = useState(true);
+  const [isPaid, setIsPaid] = useState(true);
 
   const handleToggle = () => {
-    const newValue = !isAnnual;
-    setIsAnnual(newValue);
+    const newValue = !isPaid;
+    setIsPaid(newValue);
     onToggle(newValue);
   };
 
@@ -19,23 +19,23 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
     <div className="flex flex-col items-center justify-center mb-12">
       <div className="flex items-center justify-center mb-4">
         <motion.span 
-          className={`text-lg font-medium mr-3 cursor-pointer transition-all duration-300 ${isAnnual ? 'text-white scale-110' : 'text-gray-400 scale-90'}`}
+          className={`text-lg font-medium mr-3 cursor-pointer transition-all duration-300 ${isPaid ? 'text-white scale-110' : 'text-gray-400 scale-90'}`}
           onClick={() => {
-            setIsAnnual(true);
+            setIsPaid(true);
             onToggle(true);
           }}
           whileHover={{ scale: 1.1 }}
         >
-          Annual
+          Premium Access
           <AnimatePresence>
-            {isAnnual && (
+            {isPaid && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 className="text-green-400 text-sm mt-1"
               >
-                Save 50%
+                Most Popular
               </motion.div>
             )}
           </AnimatePresence>
@@ -47,7 +47,7 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
           <motion.div 
             className="w-6 h-6 rounded-full bg-soft-purple shadow-lg shadow-soft-purple/50"
             animate={{ 
-              x: isAnnual ? 0 : 32,
+              x: isPaid ? 0 : 32,
               scale: [1, 1.2, 1],
             }}
             transition={{ 
@@ -59,28 +59,28 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
           />
         </div>
         <motion.span 
-          className={`text-lg font-medium ml-3 cursor-pointer transition-all duration-300 ${!isAnnual ? 'text-white scale-110' : 'text-gray-400 scale-90'}`}
+          className={`text-lg font-medium ml-3 cursor-pointer transition-all duration-300 ${!isPaid ? 'text-white scale-110' : 'text-gray-400 scale-90'}`}
           onClick={() => {
-            setIsAnnual(false);
+            setIsPaid(false);
             onToggle(false);
           }}
           whileHover={{ scale: 1.1 }}
         >
-          Monthly
+          Free Plan
         </motion.span>
       </div>
       <AnimatePresence mode="wait">
         <motion.div
-          key={isAnnual ? 'annual' : 'monthly'}
+          key={isPaid ? 'paid' : 'free'}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           className="text-center text-white/80"
         >
-          {isAnnual ? (
-            "🎉 Save 50% with annual billing!"
+          {isPaid ? (
+            "🚀 Unlock all premium features and support"
           ) : (
-            "Flexible monthly payments"
+            "Try our basic features for free"
           )}
         </motion.div>
       </AnimatePresence>
