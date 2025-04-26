@@ -108,12 +108,6 @@ const Index = () => {
               <div className="absolute bottom-3 md:bottom-6 left-3 md:left-6 bg-green-500/80 px-3 py-1 md:px-4 md:py-2 rounded-md text-white font-medium text-xs md:text-sm">
                 go viral authentically.
               </div>
-              <Button
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/40 backdrop-blur-sm rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center"
-                onClick={() => setIsPlaying(!isPlaying)}
-              >
-                <div className="w-0 h-0 border-t-[12px] md:border-t-[15px] border-t-transparent border-l-[20px] md:border-l-[25px] border-l-white border-b-[12px] md:border-b-[15px] border-b-transparent ml-1" />
-              </Button>
             </div>
           </motion.div>
           
