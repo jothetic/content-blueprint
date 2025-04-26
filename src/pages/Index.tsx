@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Element } from 'react-scroll';
 import { Button } from "@/components/ui/button";
@@ -78,19 +77,19 @@ const Index = () => {
             variants={fadeIn}
             className="text-3xl md:text-5xl lg:text-6xl font-bold mb-2 text-white"
           >
-            Master short-form content.
+            🚀 Master the Blueprint to Grow
           </motion.h1>
           <motion.h1 
             variants={fadeIn}
             className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-soft-purple"
           >
-            Scale your business.
+            and Monetize Your Audience.
           </motion.h1>
           <motion.p 
             variants={fadeIn}
             className="text-base md:text-lg text-white mb-6 md:mb-8 max-w-2xl mx-auto"
           >
-            Watch this complete guide to build your authentic fanbase on TikTok and Instagram in 2025:
+            Turn views into income with proven systems, live coaching, and exclusive tools—built by a creator who made $100K at 15.
           </motion.p>
           
           {/* Video Section */}
@@ -121,7 +120,7 @@ const Index = () => {
             className="flex flex-col items-center"
           >
             <Button className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover-grow mb-4">
-              Start <ArrowRightIcon className="ml-1 w-4 h-4 md:w-5 md:h-5" />
+              → Start Your Journey <ArrowRightIcon className="ml-1 w-4 h-4 md:w-5 md:h-5" />
             </Button>
             
             <div className="flex items-center text-gray-400 text-xs md:text-sm mt-2">
@@ -140,12 +139,12 @@ const Index = () => {
       <Element name="testimonials">
         <section className="py-10 md:py-20 px-4 md:px-6 lg:px-8 bg-white">
           <div className="max-w-7xl mx-auto">
-            <p className="text-soft-purple text-xs md:text-sm font-medium tracking-wide uppercase mb-2 md:mb-3 text-center">
-              STUDENT TESTIMONIALS
-            </p>
             <h2 className="text-2xl md:text-4xl font-bold text-center mb-6 md:mb-12 text-black px-2 md:px-4">
-              We've helped over 1,000 entrepreneurs reach 10K per month
+              🔥 Your Step-by-Step Blueprint for Real Growth and Income
             </h2>
+            <p className="text-center text-gray-700 mb-12 max-w-2xl mx-auto px-4">
+              Creator Blueprint isn't just another content course—it's the complete system Maddox used to scale past $100K before turning 16. Inside, you'll unlock real strategies, weekly coaching calls, exclusive vendor tools, and a community that pushes you to win.
+            </p>
             
             {!isMobile ? (
               // Desktop layout
@@ -243,39 +242,38 @@ const Index = () => {
       <section className="py-10 md:py-20 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl md:text-4xl font-bold text-center mb-2 md:mb-4 text-white">
-            Start your personal branding journey today
+            Choose Your Blueprint
           </h2>
           <p className="text-center text-soft-purple mb-8 md:mb-12 text-sm md:text-base">
-            Join the program that fits your needs
+            Here's What You'll Unlock:
           </p>
           
           <PricingToggle onToggle={setIsAnnual} />
           
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             <PricingCard
-              title="Content Academy"
-              price={isAnnual ? "49.75" : "99.99"}
+              title="Creator Blueprint Lite"
+              price="0"
               features={[
-                "13+ Hours of Video Guides",
-                "5 Weekly LIVE Community Calls",
-                "Private Creator Community",
-                "Bi-Annual In-person Creator Events",
-                "4+ TikTok/IG Business Guides"
+                "Starter program with 7-day content roadmap",
+                "Free resources and guides",
+                "Basic community access",
+                "Essential growth templates"
               ]}
               ctaText="Start for Free"
             />
             <PricingCard
-              title="Academy Inner Circle"
+              title="Content Blueprint"
+              price={isAnnual ? "24.99" : "30"}
               features={[
-                "2 Weekly Private Calls with Mino",
-                "2 Weekly Business Coaching Calls",
-                "Private Entrepreneur Community",
-                "Exclusive Sales + Webinar Guides",
-                "Exclusive Copy+Paste Funnels",
-                "EditorMatch: pairing with an editor"
+                "10+ Premium Trainings",
+                "3 Weekly Live Calls with Maddox",
+                "Private Discord Community",
+                "Exclusive Vendor Resources",
+                "Real Templates and Files",
+                "Premium Real-Time Chat Support"
               ]}
-              ctaText="Apply Now"
-              applyOnly={true}
+              ctaText="Get Full Access"
             />
           </div>
         </div>
