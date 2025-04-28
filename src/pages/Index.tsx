@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Element, scroller } from 'react-scroll';
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,8 @@ const Index = () => {
   const isMobile = useIsMobile();
 
   useEffect(() => {
+    // Ensure we start at the top of the page
+    window.scrollTo(0, 0);
     setVisible(true);
   }, []);
 
