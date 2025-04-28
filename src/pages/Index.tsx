@@ -14,6 +14,7 @@ import YouTubeEmbed from "@/components/YouTubeEmbed";
 import BackToTop from "@/components/BackToTop";
 import CarouselIndicator from "@/components/CarouselIndicator";
 import TestimonialSkeleton from "@/components/TestimonialSkeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Index = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -241,8 +242,7 @@ const Index = () => {
                 }}
                 className="w-full px-4 md:px-0"
                 onSelect={(api) => {
-                  const selectedIndex = api.selectedScrollSnap();
-                  setCurrentTestimonialSlide(selectedIndex);
+                  setCurrentTestimonialSlide(api.selectedScrollSnap());
                 }}
               >
                 <CarouselContent>
@@ -293,8 +293,7 @@ const Index = () => {
                 }}
                 className="w-full px-4 md:px-0"
                 onSelect={(api) => {
-                  const selectedIndex = api.selectedScrollSnap();
-                  setCurrentImageSlide(selectedIndex);
+                  setCurrentImageSlide(api.selectedScrollSnap());
                 }}
               >
                 <CarouselContent>
