@@ -59,6 +59,27 @@ const Index = () => {
     }
   };
 
+  const testimonialImages = [
+    "/public/lovable-uploads/5c0e7ac0-bd51-4283-9e56-b83e52c761d3.png",
+    "/public/lovable-uploads/21495e52-2ac4-44c5-a66b-e2f59fe9b720.png",
+    "/public/lovable-uploads/1d23383f-2912-463f-9355-15c54d694e34.png",
+    "/public/lovable-uploads/d0cddb8d-dae4-4011-9f4b-93dc8b114512.png",
+    "/public/lovable-uploads/c4a4c75f-fefa-46b0-a89e-12d70f36b467.png",
+    "/public/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png",
+    "/public/lovable-uploads/4ed3fc31-8cbf-4bd2-95c9-618c54edba8b.png",
+    "/public/lovable-uploads/4ee30212-8722-4c54-b21c-13d3ead83a36.png",
+    "/public/lovable-uploads/67162bff-1d28-4fcf-9cea-b25419541e4c.png",
+    "/public/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png",
+    "/public/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png",
+    "/public/lovable-uploads/34464386-e73c-4de1-a744-f16a4b6b4b29.png",
+    "/public/lovable-uploads/9ac7752e-e8a9-4b1c-a151-45fbf20484bb.png",
+    "/public/lovable-uploads/6da00e19-deb3-43a3-9431-9b89ca44e15a.png",
+    "/public/lovable-uploads/51a943ac-c3fa-45e0-882c-0f2db5942a8a.png",
+    "/public/lovable-uploads/1c09b964-cc50-46b4-902a-9b28bea52ba8.png",
+    "/public/lovable-uploads/424b3593-d73e-43d2-9b3f-d5c8f6599283.png",
+    "/public/lovable-uploads/42e66244-bd3b-4ff8-b130-b3e9e75c8902.png"
+  ];
+
   const writtenTestimonials = [
     {
       name: "JT Vendors",
@@ -76,45 +97,6 @@ const Index = () => {
       name: "Kenny Witt",
       role: "Content Creator | YouTuber",
       quote: "This course showed me how to grow from 0 to nearly 10K followers. The video content strategies and community support have been game-changing.",
-      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
-    }
-  ];
-
-  const imageTestimonials = [
-    {
-      name: "Alex Martinez",
-      role: "Student Entrepreneur",
-      quote: "Went from making $0 to $500/day using these methods. If you're 13-20 and want to start making real money online, this is your blueprint!",
-      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
-    },
-    {
-      name: "Sarah Chen",
-      role: "Digital Marketer | 45K Followers",
-      quote: "I can't thank you enough brother! Within 3 months, my account grew from 5K to 45K followers. The engagement strategies are pure gold!",
-      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
-    },
-    {
-      name: "Mike Thompson",
-      role: "Fitness Influencer | 92K Followers",
-      quote: "The blueprint really works! Went from struggling to get views to hitting 100K+ consistently. Made over $12K last month from brand deals alone.",
-      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
-    },
-    {
-      name: "Emma Rodriguez",
-      role: "Fashion Creator | 156K Following",
-      quote: "Best investment I've made for my social media career. Not only did I grow my following, but I learned how to actually monetize it properly!",
-      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
-    },
-    {
-      name: "James Wilson",
-      role: "Tech Reviewer | 83.5K Subscribers",
-      quote: "From 10K to 83.5K subscribers in 6 months following your strategies. The engagement methods are next level - averaging 25K views per video now.",
-      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
-    },
-    {
-      name: "Lisa Parker",
-      role: "Lifestyle Creator | 120K+ Community",
-      quote: "Your mentorship changed everything. The community is incredible, and the strategies helped me quit my 9-5. Now making 5 figures monthly from my content!",
       image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
     }
   ];
@@ -199,68 +181,79 @@ const Index = () => {
         </motion.div>
       </section>
 
-      {/* Written Testimonials Section */}
+      {/* Testimonials Section */}
       <Element name="testimonials">
-        <section className="py-10 md:py-16 px-4 md:px-6 lg:px-8 bg-white/5">
-          <div className="max-w-7xl mx-auto">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-10 text-white"
-            >
-              What Our Students Are Saying
-            </motion.h2>
-            
-            <Carousel className="w-full max-w-4xl mx-auto">
-              <CarouselContent>
-                {writtenTestimonials.map((testimonial, index) => (
-                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                    <TestimonialCard {...testimonial} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <div className="flex justify-center mt-6 gap-4">
-                <CarouselPrevious className="relative inset-0 translate-y-0" />
-                <CarouselNext className="relative inset-0 translate-y-0" />
-              </div>
-            </Carousel>
-          </div>
-        </section>
-
-        {/* Image Testimonials Section */}
         <section className="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-white">
           <div className="max-w-7xl mx-auto">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-2xl md:text-4xl font-bold text-center mb-6 md:mb-12 text-black"
+              className="text-2xl md:text-4xl font-bold text-center mb-12 text-black"
             >
-              🔥 Real Results, Real Growth
+              Real Results from Real Students 🚀
             </motion.h2>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center text-gray-700 mb-12 max-w-2xl mx-auto"
-            >
-              Join thousands of creators who've transformed their social media presence and income using our proven strategies.
-            </motion.p>
-            
-            <Carousel className="w-full max-w-6xl mx-auto">
-              <CarouselContent>
-                {imageTestimonials.map((testimonial, index) => (
-                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 xl:basis-1/3">
+
+            <div className="grid md:grid-cols-2 gap-8 items-start">
+              {/* Written Testimonials */}
+              <div className="space-y-6">
+                <motion.h3 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="text-xl md:text-2xl font-semibold mb-6"
+                >
+                  What Our Students Say
+                </motion.h3>
+                {writtenTestimonials.map((testimonial, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.2 }}
+                  >
                     <TestimonialCard {...testimonial} />
-                  </CarouselItem>
+                  </motion.div>
                 ))}
-              </CarouselContent>
-              <div className="flex justify-center mt-6 gap-4">
-                <CarouselPrevious className="relative inset-0 translate-y-0" />
-                <CarouselNext className="relative inset-0 translate-y-0" />
               </div>
-            </Carousel>
+
+              {/* Image Carousel */}
+              <div>
+                <motion.h3 
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="text-xl md:text-2xl font-semibold mb-6"
+                >
+                  Student Success Stories
+                </motion.h3>
+                <Carousel className="w-full">
+                  <CarouselContent>
+                    {testimonialImages.map((image, index) => (
+                      <CarouselItem key={index}>
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          className="relative aspect-[9/16] w-full overflow-hidden rounded-xl"
+                        >
+                          <img 
+                            src={image} 
+                            alt={`Success story ${index + 1}`}
+                            className="object-cover w-full h-full"
+                          />
+                        </motion.div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <div className="flex justify-center mt-4 gap-4">
+                    <CarouselPrevious className="relative inset-0 translate-y-0" />
+                    <CarouselNext className="relative inset-0 translate-y-0" />
+                  </div>
+                </Carousel>
+              </div>
+            </div>
           </div>
         </section>
       </Element>
