@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Element } from 'react-scroll';
 import { Button } from "@/components/ui/button";
@@ -98,6 +99,18 @@ const Index = () => {
       role: "Content Creator | YouTuber",
       quote: "This course showed me how to grow from 0 to nearly 10K followers. The video content strategies and community support have been game-changing.",
       image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+    },
+    {
+      name: "Sarah Chen",
+      role: "Digital Marketing Specialist",
+      quote: "The ROI tracking methods alone were worth the investment. My clients are seeing 2-3x better results after implementing these strategies.",
+      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+    },
+    {
+      name: "Mike Rodriguez",
+      role: "Freelance Content Creator",
+      quote: "Gone from struggling to find clients to having a waitlist. The personal branding module was a game-changer for my business.",
+      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
     }
   ];
 
@@ -194,66 +207,59 @@ const Index = () => {
               Real Results from Real Students 🚀
             </motion.h2>
 
-            <div className="grid md:grid-cols-2 gap-8 items-start">
-              {/* Written Testimonials */}
-              <div className="space-y-6">
-                <motion.h3 
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="text-xl md:text-2xl font-semibold mb-6"
-                >
-                  What Our Students Say
-                </motion.h3>
-                {writtenTestimonials.map((testimonial, index) => (
+            {/* Written Testimonials Carousel */}
+            <div className="mb-16">
+              <Carousel className="w-full">
+                <CarouselContent>
+                  {writtenTestimonials.map((testimonial, index) => (
+                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <TestimonialCard {...testimonial} />
+                      </motion.div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <div className="flex justify-center mt-4 gap-4">
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </div>
+              </Carousel>
+            </div>
+
+            {/* Success Stories Image Grid */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mt-12"
+            >
+              <h3 className="text-xl md:text-2xl font-semibold mb-8 text-center">
+                Success Stories Showcase
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {testimonialImages.map((image, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.2 }}
+                    transition={{ delay: index * 0.05 }}
+                    className="aspect-[9/16] rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300"
                   >
-                    <TestimonialCard {...testimonial} />
+                    <img 
+                      src={image} 
+                      alt={`Success story ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
                   </motion.div>
                 ))}
               </div>
-
-              {/* Image Carousel */}
-              <div>
-                <motion.h3 
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="text-xl md:text-2xl font-semibold mb-6"
-                >
-                  Student Success Stories
-                </motion.h3>
-                <Carousel className="w-full">
-                  <CarouselContent>
-                    {testimonialImages.map((image, index) => (
-                      <CarouselItem key={index}>
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.95 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          className="relative aspect-[9/16] w-full overflow-hidden rounded-xl"
-                        >
-                          <img 
-                            src={image} 
-                            alt={`Success story ${index + 1}`}
-                            className="object-cover w-full h-full"
-                          />
-                        </motion.div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <div className="flex justify-center mt-4 gap-4">
-                    <CarouselPrevious className="relative inset-0 translate-y-0" />
-                    <CarouselNext className="relative inset-0 translate-y-0" />
-                  </div>
-                </Carousel>
-              </div>
-            </div>
+            </motion.div>
           </div>
         </section>
       </Element>
