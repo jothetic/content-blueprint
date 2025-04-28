@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Element } from 'react-scroll';
+import { Element, scroller } from 'react-scroll';
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -176,7 +176,13 @@ const Index = () => {
           >
             <Button 
               className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover-grow mb-4"
-              onClick={() => window.open("https://whop.com/content-blueprint/", "_blank")}
+              onClick={() => {
+                scroller.scrollTo('pricing-section', {
+                  duration: 800,
+                  smooth: true,
+                  offset: -50
+                });
+              }}
             >
               → Start Your Journey <ArrowRightIcon className="ml-1 w-4 h-4 md:w-5 md:h-5" />
             </Button>
@@ -273,57 +279,59 @@ const Index = () => {
       </Element>
 
       {/* Pricing Section */}
-      <section className="py-10 md:py-20 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2 
-            className="text-2xl md:text-4xl font-bold text-center mb-2 md:mb-4 text-white"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Choose Your Blueprint
-          </motion.h2>
-          <motion.p 
-            className="text-center text-soft-purple mb-8 md:mb-12 text-sm md:text-base"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            Here's What You'll Unlock:
-          </motion.p>
-          
-          <PricingToggle onToggle={setIsAnnual} />
-          
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={isAnnual ? 'annual' : 'monthly'}
-              initial={{ opacity: 0, x: isAnnual ? -20 : 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: isAnnual ? 20 : -20 }}
-              transition={{ duration: 0.3 }}
-              className="max-w-xl mx-auto"
+      <Element name="pricing-section">
+        <section className="py-10 md:py-20 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
+          <div className="max-w-6xl mx-auto">
+            <motion.h2 
+              className="text-2xl md:text-4xl font-bold text-center mb-2 md:mb-4 text-white"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
             >
-              <PricingCard
-                title="Content Blueprint"
-                price={isAnnual ? "179" : "15"}
-                features={[
-                  "10+ Premium Trainings",
-                  "3 Weekly Live Calls with Maddox",
-                  "Private Discord Community",
-                  "Exclusive Vendor Resources",
-                  "Real Templates and Files",
-                  "Premium Real-Time Chat Support"
-                ]}
-                ctaText={`Get ${isAnnual ? 'Yearly' : 'Monthly'} Access`}
-                highlighted={true}
-                onCtaClick={() => window.open(`https://whop.com/content-blueprint/#my-offers-prod_${isAnnual ? '8bOwN6ScSdHgP' : 'BkyKBvhyYTal0'}`, "_blank")}
-              />
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </section>
+              Choose Your Blueprint
+            </motion.h2>
+            <motion.p 
+              className="text-center text-soft-purple mb-8 md:mb-12 text-sm md:text-base"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              Here's What You'll Unlock:
+            </motion.p>
+            
+            <PricingToggle onToggle={setIsAnnual} />
+            
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={isAnnual ? 'annual' : 'monthly'}
+                initial={{ opacity: 0, x: isAnnual ? -20 : 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: isAnnual ? 20 : -20 }}
+                transition={{ duration: 0.3 }}
+                className="max-w-xl mx-auto"
+              >
+                <PricingCard
+                  title="Content Blueprint"
+                  price={isAnnual ? "179" : "15"}
+                  features={[
+                    "10+ Premium Trainings",
+                    "3 Weekly Live Calls with Maddox",
+                    "Private Discord Community",
+                    "Exclusive Vendor Resources",
+                    "Real Templates and Files",
+                    "Premium Real-Time Chat Support"
+                  ]}
+                  ctaText={`Get ${isAnnual ? 'Yearly' : 'Monthly'} Access`}
+                  highlighted={true}
+                  onCtaClick={() => window.open(`https://whop.com/content-blueprint/#my-offers-prod_${isAnnual ? '8bOwN6ScSdHgP' : 'BkyKBvhyYTal0'}`, "_blank")}
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </section>
+      </Element>
     </div>
   );
 };
