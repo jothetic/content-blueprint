@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Element, scroller } from 'react-scroll';
 import { Button } from "@/components/ui/button";
@@ -59,25 +60,26 @@ const Index = () => {
     }
   };
 
+  // Fix image paths by removing "/public" prefix
   const testimonialImages = [
-    "/public/lovable-uploads/5c0e7ac0-bd51-4283-9e56-b83e52c761d3.png",
-    "/public/lovable-uploads/21495e52-2ac4-44c5-a66b-e2f59fe9b720.png",
-    "/public/lovable-uploads/1d23383f-2912-463f-9355-15c54d694e34.png",
-    "/public/lovable-uploads/d0cddb8d-dae4-4011-9f4b-93dc8b114512.png",
-    "/public/lovable-uploads/c4a4c75f-fefa-46b0-a89e-12d70f36b467.png",
-    "/public/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png",
-    "/public/lovable-uploads/4ed3fc31-8cbf-4bd2-95c9-618c54edba8b.png",
-    "/public/lovable-uploads/4ee30212-8722-4c54-b21c-13d3ead83a36.png",
-    "/public/lovable-uploads/67162bff-1d28-4fcf-9cea-b25419541e4c.png",
-    "/public/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png",
-    "/public/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png",
-    "/public/lovable-uploads/34464386-e73c-4de1-a744-f16a4b6b4b29.png",
-    "/public/lovable-uploads/9ac7752e-e8a9-4b1c-a151-45fbf20484bb.png",
-    "/public/lovable-uploads/6da00e19-deb3-43a3-9431-9b89ca44e15a.png",
-    "/public/lovable-uploads/51a943ac-c3fa-45e0-882c-0f2db5942a8a.png",
-    "/public/lovable-uploads/1c09b964-cc50-46b4-902a-9b28bea52ba8.png",
-    "/public/lovable-uploads/424b3593-d73e-43d2-9b3f-d5c8f6599283.png",
-    "/public/lovable-uploads/42e66244-bd3b-4ff8-b130-b3e9e75c8902.png"
+    "/lovable-uploads/5c0e7ac0-bd51-4283-9e56-b83e52c761d3.png",
+    "/lovable-uploads/21495e52-2ac4-44c5-a66b-e2f59fe9b720.png",
+    "/lovable-uploads/1d23383f-2912-463f-9355-15c54d694e34.png",
+    "/lovable-uploads/d0cddb8d-dae4-4011-9f4b-93dc8b114512.png",
+    "/lovable-uploads/c4a4c75f-fefa-46b0-a89e-12d70f36b467.png",
+    "/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png",
+    "/lovable-uploads/4ed3fc31-8cbf-4bd2-95c9-618c54edba8b.png",
+    "/lovable-uploads/4ee30212-8722-4c54-b21c-13d3ead83a36.png",
+    "/lovable-uploads/67162bff-1d28-4fcf-9cea-b25419541e4c.png",
+    "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png",
+    "/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png",
+    "/lovable-uploads/34464386-e73c-4de1-a744-f16a4b6b4b29.png",
+    "/lovable-uploads/9ac7752e-e8a9-4b1c-a151-45fbf20484bb.png",
+    "/lovable-uploads/6da00e19-deb3-43a3-9431-9b89ca44e15a.png",
+    "/lovable-uploads/51a943ac-c3fa-45e0-882c-0f2db5942a8a.png",
+    "/lovable-uploads/1c09b964-cc50-46b4-902a-9b28bea52ba8.png",
+    "/lovable-uploads/424b3593-d73e-43d2-9b3f-d5c8f6599283.png",
+    "/lovable-uploads/42e66244-bd3b-4ff8-b130-b3e9e75c8902.png"
   ];
 
   const writtenTestimonials = [
@@ -85,31 +87,31 @@ const Index = () => {
       name: "JT Vendors",
       role: "E-commerce Success Story | 28.1K Followers",
       quote: "The strategies from this program helped me scale my store to over $74K in sales. This is the real deal - in just 9 months I've seen a 58% increase in revenue!",
-      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+      image: "/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
     },
     {
       name: "Derek Smith",
       role: "Reseller | 65.9K Followers",
       quote: "Started from 2K followers, now at 65.9K. The growth strategies really work - I'm now making consistent sales with my reselling business!",
-      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+      image: "/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
     },
     {
       name: "Kenny Witt",
       role: "Content Creator | YouTuber",
       quote: "This course showed me how to grow from 0 to nearly 10K followers. The video content strategies and community support have been game-changing.",
-      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+      image: "/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
     },
     {
       name: "Sarah Chen",
       role: "Digital Marketing Specialist",
       quote: "The ROI tracking methods alone were worth the investment. My clients are seeing 2-3x better results after implementing these strategies.",
-      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+      image: "/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
     },
     {
       name: "Mike Rodriguez",
       role: "Freelance Content Creator",
       quote: "Gone from struggling to find clients to having a waitlist. The personal branding module was a game-changer for my business.",
-      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+      image: "/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
     }
   ];
 
