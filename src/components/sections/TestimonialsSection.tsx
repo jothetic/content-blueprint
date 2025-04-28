@@ -96,6 +96,39 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
     }
   };
 
+  // Set up effect to update currentSlide when carousel changes
+  React.useEffect(() => {
+    if (testimonialCarouselApi) {
+      const updateTestimonialSlide = () => {
+        setCurrentTestimonialSlide(testimonialCarouselApi.selectedScrollSnap());
+      };
+      
+      testimonialCarouselApi.on("select", updateTestimonialSlide);
+      // Call once to set initial state
+      updateTestimonialSlide();
+      
+      return () => {
+        testimonialCarouselApi.off("select", updateTestimonialSlide);
+      };
+    }
+  }, [testimonialCarouselApi]);
+
+  React.useEffect(() => {
+    if (imageCarouselApi) {
+      const updateImageSlide = () => {
+        setCurrentImageSlide(imageCarouselApi.selectedScrollSnap());
+      };
+      
+      imageCarouselApi.on("select", updateImageSlide);
+      // Call once to set initial state
+      updateImageSlide();
+      
+      return () => {
+        imageCarouselApi.off("select", updateImageSlide);
+      };
+    }
+  }, [imageCarouselApi]);
+
   return (
     <section className="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
@@ -117,11 +150,6 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
             }}
             setApi={setTestimonialCarouselApi}
             className="w-full px-4 md:px-0"
-            onSelect={(api) => {
-              if (api) {
-                setCurrentTestimonialSlide(api.selectedScrollSnap());
-              }
-            }}
           >
             <CarouselContent>
               {isLoading ? (
@@ -166,11 +194,6 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
             }}
             setApi={setImageCarouselApi}
             className="w-full px-4 md:px-0"
-            onSelect={(api) => {
-              if (api) {
-                setCurrentImageSlide(api.selectedScrollSnap());
-              }
-            }}
           >
             <CarouselContent>
               {isLoading ? (
