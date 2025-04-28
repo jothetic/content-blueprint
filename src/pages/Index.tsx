@@ -51,7 +51,7 @@ const Index = () => {
       image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
     },
     {
-      name: "Derek",
+      name: "Derek Smith",
       role: "Reseller | 65.9K Followers",
       quote: "Started from 2K followers, now at 65.9K. The growth strategies really work - I'm now making consistent sales with my reselling business!",
       image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
@@ -63,9 +63,39 @@ const Index = () => {
       image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
     },
     {
-      name: "Alex M.",
+      name: "Alex Martinez",
       role: "Student Entrepreneur",
       quote: "Went from making $0 to $500/day using these methods. If you're 13-20 and want to start making real money online, this is your blueprint!",
+      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+    },
+    {
+      name: "Sarah Chen",
+      role: "Digital Marketer | 45K Followers",
+      quote: "I can't thank you enough brother! Within 3 months, my account grew from 5K to 45K followers. The engagement strategies are pure gold!",
+      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+    },
+    {
+      name: "Mike Thompson",
+      role: "Fitness Influencer | 92K Followers",
+      quote: "The blueprint really works! Went from struggling to get views to hitting 100K+ consistently. Made over $12K last month from brand deals alone.",
+      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+    },
+    {
+      name: "Emma Rodriguez",
+      role: "Fashion Creator | 156K Following",
+      quote: "Best investment I've made for my social media career. Not only did I grow my following, but I learned how to actually monetize it properly!",
+      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+    },
+    {
+      name: "James Wilson",
+      role: "Tech Reviewer | 83.5K Subscribers",
+      quote: "From 10K to 83.5K subscribers in 6 months following your strategies. The engagement methods are next level - averaging 25K views per video now.",
+      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+    },
+    {
+      name: "Lisa Parker",
+      role: "Lifestyle Creator | 120K+ Community",
+      quote: "Your mentorship changed everything. The community is incredible, and the strategies helped me quit my 9-5. Now making 5 figures monthly from my content!",
       image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
     }
   ];
@@ -148,94 +178,19 @@ const Index = () => {
               Creator Blueprint isn't just another content course—it's the complete system Maddox used to scale past $100K before turning 16. Inside, you'll unlock real strategies, weekly coaching calls, exclusive vendor tools, and a community that pushes you to win.
             </p>
             
-            {!isMobile ? (
-              // Desktop layout
-              <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12">
-                <div className="lg:col-span-1">
-                  <Carousel className="w-full">
-                    <CarouselContent>
-                      {testimonials.map((testimonial, index) => (
-                        <CarouselItem key={index}>
-                          <TestimonialCard {...testimonial} />
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                    <div className="flex justify-center mt-6 gap-4">
-                      <CarouselPrevious className="relative inset-0 translate-y-0" />
-                      <CarouselNext className="relative inset-0 translate-y-0" />
-                    </div>
-                  </Carousel>
-                </div>
-                
-                {/* Video Testimonial Carousel */}
-                <div className="lg:col-span-2 bg-soft-gray rounded-lg p-4 md:p-6">
-                  <Carousel className="w-full">
-                    <CarouselContent>
-                      <CarouselItem>
-                        <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-                          <div>
-                            <VideoTestimonialCard
-                              quote="Mino got me from 10k to 55k followers on TikTok, 300 to 355k followers on IG."
-                              thumbnail="/public/lovable-uploads/f6d412a1-a0ef-414f-a003-446d06141402.png"
-                              onClick={() => setIsPlaying(!isPlaying)}
-                            />
-                          </div>
-                          <div className="flex items-center">
-                            <div className="py-4 md:py-0">
-                              <h3 className="font-bold text-xl mb-3">Alison Chang</h3>
-                              <p className="text-gray-700 leading-relaxed text-sm md:text-base">
-                                "This program completely transformed my approach to social media. 
-                                I've not only gained more followers but also built a genuine community 
-                                that engages with my content and converts to sales."
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </CarouselItem>
-                    </CarouselContent>
-                    <div className="flex justify-center mt-6 gap-4">
-                      <CarouselPrevious className="relative inset-0 translate-y-0" />
-                      <CarouselNext className="relative inset-0 translate-y-0" />
-                    </div>
-                  </Carousel>
-                </div>
+            <Carousel className="w-full max-w-5xl mx-auto">
+              <CarouselContent>
+                {testimonials.map((testimonial, index) => (
+                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                    <TestimonialCard {...testimonial} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex justify-center mt-6 gap-4">
+                <CarouselPrevious className="relative inset-0 translate-y-0" />
+                <CarouselNext className="relative inset-0 translate-y-0" />
               </div>
-            ) : (
-              // Mobile layout - completely different structure
-              <div className="space-y-6 mb-8">
-                {/* Mobile Video Testimonial */}
-                <div className="bg-soft-gray rounded-lg p-4">
-                  <VideoTestimonialCard
-                    quote="Mino got me from 10k to 55k followers on TikTok, 300 to 355k followers on IG."
-                    thumbnail="/public/lovable-uploads/f6d412a1-a0ef-414f-a003-446d06141402.png"
-                    onClick={() => setIsPlaying(!isPlaying)}
-                  />
-                  <div className="mt-4">
-                    <h3 className="font-bold text-lg mb-2">Alison Chang</h3>
-                    <p className="text-gray-700 leading-relaxed text-sm">
-                      "This program completely transformed my approach to social media. 
-                      I've not only gained more followers but also built a genuine community 
-                      that engages with my content and converts to sales."
-                    </p>
-                  </div>
-                </div>
-                
-                {/* Mobile Regular Testimonials */}
-                <Carousel className="w-full">
-                  <CarouselContent>
-                    {testimonials.map((testimonial, index) => (
-                      <CarouselItem key={index} className="basis-full">
-                        <TestimonialCard {...testimonial} />
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <div className="flex justify-center mt-4 gap-2">
-                    <CarouselPrevious className="relative inset-0 translate-y-0 h-8 w-8" />
-                    <CarouselNext className="relative inset-0 translate-y-0 h-8 w-8" />
-                  </div>
-                </Carousel>
-              </div>
-            )}
+            </Carousel>
           </div>
         </section>
       </Element>
