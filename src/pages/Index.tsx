@@ -17,28 +17,45 @@ const Index = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isAnnual, setIsAnnual] = useState(true);
   const [visible, setVisible] = useState(false);
-  const [isPaid, setIsPaid] = useState(true);
   const isMobile = useIsMobile();
 
   useEffect(() => {
     setVisible(true);
   }, []);
 
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.6 }
-    }
-  };
-
-  const staggerContainer = {
+  const heroVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: 0.3,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const titleVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 20
+      }
+    }
+  };
+
+  const fadeUpVariant = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 50,
+        damping: 20
       }
     }
   };
@@ -109,23 +126,30 @@ const Index = () => {
         <motion.div
           initial="hidden"
           animate={visible ? "visible" : "hidden"}
-          variants={staggerContainer}
+          variants={heroVariants}
           className="max-w-4xl mx-auto text-center"
         >
-          <motion.h1 
-            variants={fadeIn}
-            className="text-3xl md:text-5xl lg:text-6xl font-bold mb-2 text-white tracking-tight"
-          >
-            🚀 Master the Blueprint to Grow
-          </motion.h1>
-          <motion.h1 
-            variants={fadeIn}
-            className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-soft-purple tracking-tight"
-          >
-            and Monetize Your Audience.
-          </motion.h1>
+          <motion.div variants={titleVariants}>
+            <motion.h1 
+              className="text-3xl md:text-5xl lg:text-6xl font-bold mb-2 text-white tracking-tight"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              🚀 Master the Blueprint to Grow
+            </motion.h1>
+            <motion.h1 
+              className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-soft-purple tracking-tight"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              and Monetize Your Audience.
+            </motion.h1>
+          </motion.div>
+
           <motion.p 
-            variants={fadeIn}
+            variants={fadeUpVariant}
             className="text-base md:text-lg text-white mb-6 md:mb-8 max-w-2xl mx-auto font-medium"
           >
             Turn views into income with proven systems, live coaching, and exclusive tools—built by a creator who made $100K at 15.
@@ -133,8 +157,11 @@ const Index = () => {
           
           {/* Video Section */}
           <motion.div
-            variants={fadeIn}
+            variants={fadeUpVariant}
             className="relative max-w-4xl mx-auto mb-8 md:mb-12"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
           >
             <div className="rounded-lg overflow-hidden shadow-2xl border border-white/10">
               <YouTubeEmbed 
@@ -145,8 +172,11 @@ const Index = () => {
           </motion.div>
           
           <motion.div
-            variants={fadeIn}
+            variants={fadeUpVariant}
             className="flex flex-col items-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
           >
             <Button 
               className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover-grow mb-4"
@@ -198,55 +228,51 @@ const Index = () => {
       {/* Pricing Section */}
       <section className="py-10 md:py-20 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-2 md:mb-4 text-white">
+          <motion.h2 
+            className="text-2xl md:text-4xl font-bold text-center mb-2 md:mb-4 text-white"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             Choose Your Blueprint
-          </h2>
-          <p className="text-center text-soft-purple mb-8 md:mb-12 text-sm md:text-base">
+          </motion.h2>
+          <motion.p 
+            className="text-center text-soft-purple mb-8 md:mb-12 text-sm md:text-base"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             Here's What You'll Unlock:
-          </p>
+          </motion.p>
           
-          <PricingToggle onToggle={setIsPaid} />
+          <PricingToggle onToggle={setIsAnnual} />
           
           <AnimatePresence mode="wait">
             <motion.div
-              key={isPaid ? 'paid' : 'free'}
-              initial={{ opacity: 0, x: isPaid ? -20 : 20 }}
+              key={isAnnual ? 'annual' : 'monthly'}
+              initial={{ opacity: 0, x: isAnnual ? -20 : 20 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: isPaid ? 20 : -20 }}
+              exit={{ opacity: 0, x: isAnnual ? 20 : -20 }}
               transition={{ duration: 0.3 }}
               className="max-w-xl mx-auto"
             >
-              {isPaid ? (
-                <PricingCard
-                  title="Content Blueprint"
-                  price="24.99"
-                  features={[
-                    "10+ Premium Trainings",
-                    "3 Weekly Live Calls with Maddox",
-                    "Private Discord Community",
-                    "Exclusive Vendor Resources",
-                    "Real Templates and Files",
-                    "Premium Real-Time Chat Support"
-                  ]}
-                  ctaText="Get Full Access"
-                  highlighted={true}
-                  onCtaClick={() => window.open("https://whop.com/content-blueprint/#my-offers-prod_8bOwN6ScSdHgP", "_blank")}
-                />
-              ) : (
-                <PricingCard
-                  title="Creator Blueprint Lite"
-                  price="0"
-                  features={[
-                    "Starter program with 7-day content roadmap",
-                    "Free resources and guides",
-                    "Basic community access",
-                    "Essential growth templates"
-                  ]}
-                  ctaText="Start for Free"
-                  highlighted={false}
-                  onCtaClick={() => window.open("https://whop.com/creator-blueprint-lite/#my-offers-prod_BkyKBvhyYTal0", "_blank")}
-                />
-              )}
+              <PricingCard
+                title="Content Blueprint"
+                price={isAnnual ? "179" : "15"}
+                features={[
+                  "10+ Premium Trainings",
+                  "3 Weekly Live Calls with Maddox",
+                  "Private Discord Community",
+                  "Exclusive Vendor Resources",
+                  "Real Templates and Files",
+                  "Premium Real-Time Chat Support"
+                ]}
+                ctaText={`Get ${isAnnual ? 'Yearly' : 'Monthly'} Access`}
+                highlighted={true}
+                onCtaClick={() => window.open(`https://whop.com/content-blueprint/#my-offers-prod_${isAnnual ? '8bOwN6ScSdHgP' : 'BkyKBvhyYTal0'}`, "_blank")}
+              />
             </motion.div>
           </AnimatePresence>
         </div>
