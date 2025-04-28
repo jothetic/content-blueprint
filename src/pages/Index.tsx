@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Element, scroller } from 'react-scroll';
 import { Button } from "@/components/ui/button";
@@ -12,17 +11,25 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useIsMobile } from "@/hooks/use-mobile";
 import { AnimatePresence } from "framer-motion";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
+import BackToTop from "@/components/BackToTop";
+import CarouselIndicator from "@/components/CarouselIndicator";
+import TestimonialSkeleton from "@/components/TestimonialSkeleton";
 
 const Index = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isAnnual, setIsAnnual] = useState(true);
   const [visible, setVisible] = useState(false);
   const isMobile = useIsMobile();
+  const [currentTestimonialSlide, setCurrentTestimonialSlide] = useState(0);
+  const [currentImageSlide, setCurrentImageSlide] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Ensure we start at the top of the page
     window.scrollTo(0, 0);
     setVisible(true);
+    // Simulate loading state
+    const timer = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(timer);
   }, []);
 
   const heroVariants = {
@@ -127,6 +134,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-deep-purple-gradient overflow-x-hidden">
       <Navbar />
+      <BackToTop />
       
       {/* Hero Section */}
       <section className="pt-24 md:pt-32 pb-10 md:pb-16 px-4 md:px-6 lg:px-8">
@@ -224,7 +232,7 @@ const Index = () => {
               Real Results from Real Students 🚀
             </motion.h2>
 
-            {/* Written Testimonials Carousel - Mobile Optimized */}
+            {/* Written Testimonials Carousel */}
             <div className="max-w-3xl mx-auto mb-8 md:mb-16">
               <Carousel
                 opts={{
@@ -232,24 +240,48 @@ const Index = () => {
                   loop: true,
                 }}
                 className="w-full px-4 md:px-0"
+                onSelect={(api) => {
+                  const selectedIndex = api.selectedScrollSnap();
+                  setCurrentTestimonialSlide(selectedIndex);
+                }}
               >
                 <CarouselContent>
-                  {writtenTestimonials.map((testimonial, index) => (
-                    <CarouselItem key={index} className="md:basis-full">
-                      <div className="px-1 md:px-4">
-                        <TestimonialCard {...testimonial} />
-                      </div>
-                    </CarouselItem>
-                  ))}
+                  {isLoading ? (
+                    Array.from({ length: 3 }).map((_, index) => (
+                      <CarouselItem key={`skeleton-${index}`} className="md:basis-full">
+                        <div className="px-1 md:px-4">
+                          <TestimonialSkeleton />
+                        </div>
+                      </CarouselItem>
+                    ))
+                  ) : (
+                    writtenTestimonials.map((testimonial, index) => (
+                      <CarouselItem key={index} className="md:basis-full">
+                        <div className="px-1 md:px-4">
+                          <TestimonialCard {...testimonial} />
+                        </div>
+                      </CarouselItem>
+                    ))
+                  )}
                 </CarouselContent>
                 <div className="flex justify-center mt-4 gap-2 md:gap-4">
                   <CarouselPrevious className="static transform-none" />
                   <CarouselNext className="static transform-none" />
                 </div>
               </Carousel>
+              <CarouselIndicator
+                totalSlides={writtenTestimonials.length}
+                currentSlide={currentTestimonialSlide}
+                onSelect={(index) => {
+                  const carousel = document.querySelector("[data-carousel]");
+                  if (carousel) {
+                    carousel.scrollTo({ left: index * carousel.clientWidth, behavior: "smooth" });
+                  }
+                }}
+              />
             </div>
 
-            {/* Success Stories Image Carousel - Mobile Optimized */}
+            {/* Success Stories Image Carousel */}
             <div className="max-w-2xl mx-auto">
               <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center">
                 Success Stories Showcase
@@ -260,31 +292,55 @@ const Index = () => {
                   loop: true,
                 }}
                 className="w-full px-4 md:px-0"
+                onSelect={(api) => {
+                  const selectedIndex = api.selectedScrollSnap();
+                  setCurrentImageSlide(selectedIndex);
+                }}
               >
                 <CarouselContent>
-                  {testimonialImages.map((image, index) => (
-                    <CarouselItem key={index} className="basis-3/4 md:basis-1/2 lg:basis-1/3">
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.05 }}
-                        className="aspect-[9/16] rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 px-1 md:px-2"
-                      >
-                        <img 
-                          src={image} 
-                          alt={`Success story ${index + 1}`}
-                          className="w-full h-full object-cover rounded-lg"
-                        />
-                      </motion.div>
-                    </CarouselItem>
-                  ))}
+                  {isLoading ? (
+                    Array.from({ length: 5 }).map((_, index) => (
+                      <CarouselItem key={`image-skeleton-${index}`} className="basis-3/4 md:basis-1/2 lg:basis-1/3">
+                        <div className="aspect-[9/16] rounded-lg overflow-hidden px-1 md:px-2">
+                          <Skeleton className="w-full h-full" />
+                        </div>
+                      </CarouselItem>
+                    ))
+                  ) : (
+                    testimonialImages.map((image, index) => (
+                      <CarouselItem key={index} className="basis-3/4 md:basis-1/2 lg:basis-1/3">
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: index * 0.05 }}
+                          className="aspect-[9/16] rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 px-1 md:px-2"
+                        >
+                          <img 
+                            src={image} 
+                            alt={`Success story ${index + 1}`}
+                            className="w-full h-full object-cover rounded-lg"
+                          />
+                        </motion.div>
+                      </CarouselItem>
+                    ))
+                  )}
                 </CarouselContent>
                 <div className="flex justify-center mt-4 gap-2 md:gap-4">
                   <CarouselPrevious className="static transform-none" />
                   <CarouselNext className="static transform-none" />
                 </div>
               </Carousel>
+              <CarouselIndicator
+                totalSlides={testimonialImages.length}
+                currentSlide={currentImageSlide}
+                onSelect={(index) => {
+                  const carousel = document.querySelector("[data-carousel]");
+                  if (carousel) {
+                    carousel.scrollTo({ left: index * carousel.clientWidth, behavior: "smooth" });
+                  }
+                }}
+              />
             </div>
           </div>
         </section>
