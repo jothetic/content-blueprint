@@ -114,11 +114,11 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-deep-purple-gradient overflow-x-hidden">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-24 md:pt-32 pb-10 md:pb-16 px-4 md:px-6 lg:px-8">
+      <section className="pt-24 md:pt-32 pb-10 md:pb-16 px-4 md:px-6 lg:px-8 bg-modern-gradient">
         <motion.div
           initial="hidden"
           animate={visible ? "visible" : "hidden"}
@@ -201,13 +201,13 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-black"
+              className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-sky-600"
             >
               Real Results from Real Students 🚀
             </motion.h2>
 
-            {/* Written Testimonials Carousel - Mobile Optimized */}
-            <div className="max-w-3xl mx-auto mb-8 md:mb-16">
+            {/* Written Testimonials Carousel */}
+            <div className="max-w-3xl mx-auto mb-12 md:mb-16">
               <Carousel
                 opts={{
                   align: "center",
@@ -218,22 +218,22 @@ const Index = () => {
                 <CarouselContent>
                   {writtenTestimonials.map((testimonial, index) => (
                     <CarouselItem key={index} className="md:basis-full">
-                      <div className="px-1 md:px-4">
+                      <div className="px-2 md:px-4">
                         <TestimonialCard {...testimonial} />
                       </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <div className="flex justify-center mt-4 gap-2 md:gap-4">
-                  <CarouselPrevious className="static transform-none" />
-                  <CarouselNext className="static transform-none" />
+                <div className="flex justify-center mt-6 gap-4">
+                  <CarouselPrevious className="static transform-none bg-white shadow-lg hover:bg-gray-50" />
+                  <CarouselNext className="static transform-none bg-white shadow-lg hover:bg-gray-50" />
                 </div>
               </Carousel>
             </div>
 
-            {/* Success Stories Image Carousel - Mobile Optimized */}
+            {/* Success Stories Image Carousel */}
             <div className="max-w-2xl mx-auto">
-              <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center">
+              <h3 className="text-lg md:text-2xl font-semibold mb-6 text-center text-gray-800">
                 Success Stories Showcase
               </h3>
               <Carousel
@@ -241,30 +241,30 @@ const Index = () => {
                   align: "center",
                   loop: true,
                 }}
-                className="w-full px-4 md:px-0"
+                className="w-full px-2 md:px-0"
               >
                 <CarouselContent>
                   {testimonialImages.map((image, index) => (
-                    <CarouselItem key={index} className="basis-3/4 md:basis-1/2 lg:basis-1/3">
+                    <CarouselItem key={index} className="basis-[85%] md:basis-1/2 lg:basis-1/3 pl-4">
                       <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.05 }}
-                        className="aspect-[9/16] rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 px-1 md:px-2"
+                        className="aspect-[9/16] rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
                       >
                         <img 
                           src={image} 
                           alt={`Success story ${index + 1}`}
-                          className="w-full h-full object-cover rounded-lg"
+                          className="w-full h-full object-cover"
                         />
                       </motion.div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <div className="flex justify-center mt-4 gap-2 md:gap-4">
-                  <CarouselPrevious className="static transform-none" />
-                  <CarouselNext className="static transform-none" />
+                <div className="flex justify-center mt-6 gap-4">
+                  <CarouselPrevious className="static transform-none bg-white shadow-lg hover:bg-gray-50" />
+                  <CarouselNext className="static transform-none bg-white shadow-lg hover:bg-gray-50" />
                 </div>
               </Carousel>
             </div>
@@ -273,7 +273,7 @@ const Index = () => {
       </Element>
 
       {/* Pricing Section */}
-      <section className="py-10 md:py-20 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
+      <section className="py-10 md:py-20 px-4 md:px-6 lg:px-8 bg-modern-gradient">
         <div className="max-w-6xl mx-auto">
           <motion.h2 
             className="text-2xl md:text-4xl font-bold text-center mb-2 md:mb-4 text-white"
