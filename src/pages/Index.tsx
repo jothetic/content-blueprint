@@ -188,7 +188,8 @@ const Index = () => {
                 scroller.scrollTo('pricing-section', {
                   duration: 800,
                   smooth: true,
-                  offset: -50
+                  offset: -50,
+                  spy: true
                 });
               }}
             >
