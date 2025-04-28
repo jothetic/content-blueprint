@@ -85,12 +85,14 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
   const handleTestimonialSelect = (index: number) => {
     if (testimonialCarouselApi) {
       testimonialCarouselApi.scrollTo(index);
+      setCurrentTestimonialSlide(index);
     }
   };
 
   const handleImageSelect = (index: number) => {
     if (imageCarouselApi) {
       imageCarouselApi.scrollTo(index);
+      setCurrentImageSlide(index);
     }
   };
 
@@ -115,9 +117,9 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
             }}
             setApi={setTestimonialCarouselApi}
             className="w-full px-4 md:px-0"
-            onSelect={() => {
-              if (testimonialCarouselApi) {
-                setCurrentTestimonialSlide(testimonialCarouselApi.selectedScrollSnap() || 0);
+            onSelect={(api) => {
+              if (api) {
+                setCurrentTestimonialSlide(api.selectedScrollSnap());
               }
             }}
           >
@@ -164,9 +166,9 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
             }}
             setApi={setImageCarouselApi}
             className="w-full px-4 md:px-0"
-            onSelect={() => {
-              if (imageCarouselApi) {
-                setCurrentImageSlide(imageCarouselApi.selectedScrollSnap() || 0);
+            onSelect={(api) => {
+              if (api) {
+                setCurrentImageSlide(api.selectedScrollSnap());
               }
             }}
           >

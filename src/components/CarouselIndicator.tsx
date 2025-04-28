@@ -18,7 +18,7 @@ const CarouselIndicator = ({ totalSlides, currentSlide, onSelect }: CarouselIndi
           key={index}
           variant="ghost"
           size="icon"
-          className={`w-8 h-8 p-0 ${currentSlide === index ? 'text-soft-purple' : 'text-gray-400'}`}
+          className={`w-8 h-8 p-0 ${currentSlide === index ? 'text-purple-500' : 'text-gray-400'}`}
           onClick={() => onSelect(index)}
           aria-label={`Go to slide ${index + 1}`}
           aria-current={currentSlide === index}
