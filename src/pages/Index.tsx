@@ -45,21 +45,27 @@ const Index = () => {
 
   const testimonials = [
     {
-      name: "Renzo Guevarra",
-      role: "CEO Growthology Agency, 500k+ followers",
-      quote: "The academy transformed my content strategy. My engagement increased by 300% in just two months.",
+      name: "JT Vendors",
+      role: "E-commerce Success Story | 28.1K Followers",
+      quote: "The strategies from this program helped me scale my store to over $74K in sales. This is the real deal - in just 9 months I've seen a 58% increase in revenue!",
       image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
     },
     {
-      name: "Sarah Miller",
-      role: "Fashion Influencer, 250k+ followers",
-      quote: "This program helped me turn my passion into a 6-figure business. The community support is incredible.",
+      name: "Derek",
+      role: "Reseller | 65.9K Followers",
+      quote: "Started from 2K followers, now at 65.9K. The growth strategies really work - I'm now making consistent sales with my reselling business!",
       image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
     },
     {
-      name: "David Chen",
-      role: "Digital Creator, 400k+ followers",
-      quote: "The strategies taught here are game-changing. I've tripled my monthly revenue since joining.",
+      name: "Kenny Witt",
+      role: "Content Creator | YouTuber",
+      quote: "This course showed me how to grow from 0 to nearly 10K followers. The video content strategies and community support have been game-changing.",
+      image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+    },
+    {
+      name: "Alex M.",
+      role: "Student Entrepreneur",
+      quote: "Went from making $0 to $500/day using these methods. If you're 13-20 and want to start making real money online, this is your blueprint!",
       image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
     }
   ];
