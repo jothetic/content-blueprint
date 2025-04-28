@@ -9,8 +9,10 @@ interface CarouselIndicatorProps {
 }
 
 const CarouselIndicator = ({ totalSlides, currentSlide, onSelect }: CarouselIndicatorProps) => {
+  if (totalSlides <= 1) return null;
+  
   return (
-    <div className="flex justify-center gap-2 mt-4">
+    <div className="flex justify-center gap-2 mt-4 flex-wrap">
       {Array.from({ length: totalSlides }).map((_, index) => (
         <Button
           key={index}
@@ -18,6 +20,8 @@ const CarouselIndicator = ({ totalSlides, currentSlide, onSelect }: CarouselIndi
           size="icon"
           className={`w-8 h-8 p-0 ${currentSlide === index ? 'text-soft-purple' : 'text-gray-400'}`}
           onClick={() => onSelect(index)}
+          aria-label={`Go to slide ${index + 1}`}
+          aria-current={currentSlide === index}
         >
           <CircleDot className="w-4 h-4" />
         </Button>
