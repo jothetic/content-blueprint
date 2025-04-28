@@ -201,37 +201,39 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-2xl md:text-4xl font-bold text-center mb-12 text-black"
+              className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-black"
             >
               Real Results from Real Students 🚀
             </motion.h2>
 
-            {/* Written Testimonials Carousel */}
-            <div className="max-w-3xl mx-auto mb-16">
+            {/* Written Testimonials Carousel - Mobile Optimized */}
+            <div className="max-w-3xl mx-auto mb-8 md:mb-16">
               <Carousel
                 opts={{
                   align: "center",
                   loop: true,
                 }}
-                className="w-full"
+                className="w-full px-4 md:px-0"
               >
                 <CarouselContent>
                   {writtenTestimonials.map((testimonial, index) => (
                     <CarouselItem key={index} className="md:basis-full">
-                      <TestimonialCard {...testimonial} />
+                      <div className="px-1 md:px-4">
+                        <TestimonialCard {...testimonial} />
+                      </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <div className="flex justify-center mt-4 gap-4">
-                  <CarouselPrevious />
-                  <CarouselNext />
+                <div className="flex justify-center mt-4 gap-2 md:gap-4">
+                  <CarouselPrevious className="static transform-none" />
+                  <CarouselNext className="static transform-none" />
                 </div>
               </Carousel>
             </div>
 
-            {/* Success Stories Image Carousel */}
+            {/* Success Stories Image Carousel - Mobile Optimized */}
             <div className="max-w-2xl mx-auto">
-              <h3 className="text-xl md:text-2xl font-semibold mb-6 text-center">
+              <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center">
                 Success Stories Showcase
               </h3>
               <Carousel
@@ -239,30 +241,30 @@ const Index = () => {
                   align: "center",
                   loop: true,
                 }}
-                className="w-full"
+                className="w-full px-4 md:px-0"
               >
                 <CarouselContent>
                   {testimonialImages.map((image, index) => (
-                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                    <CarouselItem key={index} className="basis-3/4 md:basis-1/2 lg:basis-1/3">
                       <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.05 }}
-                        className="aspect-[9/16] rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300"
+                        className="aspect-[9/16] rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 px-1 md:px-2"
                       >
                         <img 
                           src={image} 
                           alt={`Success story ${index + 1}`}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover rounded-lg"
                         />
                       </motion.div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <div className="flex justify-center mt-4 gap-4">
-                  <CarouselPrevious />
-                  <CarouselNext />
+                <div className="flex justify-center mt-4 gap-2 md:gap-4">
+                  <CarouselPrevious className="static transform-none" />
+                  <CarouselNext className="static transform-none" />
                 </div>
               </Carousel>
             </div>
