@@ -60,6 +60,9 @@ const Index = () => {
   };
 
   const testimonialImages = [
+    "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png", // 2.7M views
+    "/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png", // 65K followers
+    "/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png", // Shopify dashboard
     "/lovable-uploads/171f1432-c3ef-4494-bf8e-3de920255ad2.png",
     "/lovable-uploads/fd4edd9c-d981-4a64-a1cd-31ac4b99e115.png",
     "/lovable-uploads/ea5ac916-acb8-42e8-9695-e42bc31aede1.png",
@@ -67,12 +70,9 @@ const Index = () => {
     "/lovable-uploads/1d23383f-2912-463f-9355-15c54d694e34.png",
     "/lovable-uploads/d0cddb8d-dae4-4011-9f4b-93dc8b114512.png",
     "/lovable-uploads/c4a4c75f-fefa-46b0-a89e-12d70f36b467.png",
-    "/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png",
     "/lovable-uploads/4ed3fc31-8cbf-4bd2-95c9-618c54edba8b.png",
     "/lovable-uploads/4ee30212-8722-4c54-b21c-13d3ead83a36.png",
     "/lovable-uploads/67162bff-1d28-4fcf-9cea-b25419541e4c.png",
-    "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png",
-    "/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png",
     "/lovable-uploads/34464386-e73c-4de1-a744-f16a4b6b4b29.png",
     "/lovable-uploads/9ac7752e-e8a9-4b1c-a151-45fbf20484bb.png",
     "/lovable-uploads/6da00e19-deb3-43a3-9431-9b89ca44e15a.png",
@@ -83,6 +83,24 @@ const Index = () => {
   ];
 
   const writtenTestimonials = [
+    {
+      name: "Viral Creator",
+      role: "Content Creator | 2.7M+ Views",
+      quote: "Hit over 2.7M views using the viral content strategies from the program. The engagement tactics really work!",
+      image: "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png"
+    },
+    {
+      name: "Growth Expert",
+      role: "Social Media Influencer | 65K+ Followers",
+      quote: "Grew from 0 to 65K real followers using the community building strategies. The engagement has been incredible!",
+      image: "/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png"
+    },
+    {
+      name: "E-commerce Pro",
+      role: "Shopify Merchant | $10K+ Revenue",
+      quote: "Scaled to over $10,000 in monthly revenue using the sales funnel blueprint. The ROI has been amazing!",
+      image: "/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png"
+    },
     {
       name: "JT Vendors",
       role: "E-commerce Entrepreneur | 116K+ Sessions",
