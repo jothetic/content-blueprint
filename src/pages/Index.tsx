@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Element, scroller } from 'react-scroll';
 import { Button } from "@/components/ui/button";
@@ -60,10 +59,11 @@ const Index = () => {
     }
   };
 
-  // Fix image paths by removing "/public" prefix
   const testimonialImages = [
-    "/lovable-uploads/5c0e7ac0-bd51-4283-9e56-b83e52c761d3.png",
-    "/lovable-uploads/21495e52-2ac4-44c5-a66b-e2f59fe9b720.png",
+    "/lovable-uploads/171f1432-c3ef-4494-bf8e-3de920255ad2.png",
+    "/lovable-uploads/fd4edd9c-d981-4a64-a1cd-31ac4b99e115.png",
+    "/lovable-uploads/ea5ac916-acb8-42e8-9695-e42bc31aede1.png",
+    "/lovable-uploads/0d79d1cb-7250-40c9-b0bf-c6d6003a5c10.png",
     "/lovable-uploads/1d23383f-2912-463f-9355-15c54d694e34.png",
     "/lovable-uploads/d0cddb8d-dae4-4011-9f4b-93dc8b114512.png",
     "/lovable-uploads/c4a4c75f-fefa-46b0-a89e-12d70f36b467.png",
@@ -85,33 +85,21 @@ const Index = () => {
   const writtenTestimonials = [
     {
       name: "JT Vendors",
-      role: "E-commerce Success Story | 28.1K Followers",
-      quote: "The strategies from this program helped me scale my store to over $74K in sales. This is the real deal - in just 9 months I've seen a 58% increase in revenue!",
-      image: "/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+      role: "E-commerce Entrepreneur | 116K+ Sessions",
+      quote: "Scaled to $39.5K in total sales with a 1.94% conversion rate and 793% session growth. The strategies and systems really work!",
+      image: "/lovable-uploads/171f1432-c3ef-4494-bf8e-3de920255ad2.png"
     },
     {
-      name: "Derek Smith",
-      role: "Reseller | 65.9K Followers",
-      quote: "Started from 2K followers, now at 65.9K. The growth strategies really work - I'm now making consistent sales with my reselling business!",
-      image: "/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+      name: "JJ Vending",
+      role: "Shopify Merchant | 389+ Orders",
+      quote: "Hit $4,005.41 in sales with a 2.09% conversion rate in just 22 days. The growth strategies and support have been invaluable!",
+      image: "/lovable-uploads/fd4edd9c-d981-4a64-a1cd-31ac4b99e115.png"
     },
     {
-      name: "Kenny Witt",
-      role: "Content Creator | YouTuber",
-      quote: "This course showed me how to grow from 0 to nearly 10K followers. The video content strategies and community support have been game-changing.",
-      image: "/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
-    },
-    {
-      name: "Sarah Chen",
-      role: "Digital Marketing Specialist",
-      quote: "The ROI tracking methods alone were worth the investment. My clients are seeing 2-3x better results after implementing these strategies.",
-      image: "/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
-    },
-    {
-      name: "Mike Rodriguez",
-      role: "Freelance Content Creator",
-      quote: "Gone from struggling to find clients to having a waitlist. The personal branding module was a game-changer for my business.",
-      image: "/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
+      name: "Motivated Vendor",
+      role: "E-commerce Success Story | $5K+ Monthly",
+      quote: "Reached $5,000+ in monthly revenue with consistent growth. This program gave me the blueprint I needed to scale!",
+      image: "/lovable-uploads/ea5ac916-acb8-42e8-9695-e42bc31aede1.png"
     }
   ];
 
