@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Element } from 'react-scroll';
 import { Button } from "@/components/ui/button";
@@ -207,59 +206,68 @@ const Index = () => {
               Real Results from Real Students 🚀
             </motion.h2>
 
-            {/* Written Testimonials Carousel */}
-            <div className="mb-16">
-              <Carousel className="w-full">
-                <CarouselContent>
-                  {writtenTestimonials.map((testimonial, index) => (
-                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                      >
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+              {/* Written Testimonials */}
+              <div className="w-full lg:w-1/2">
+                <Carousel
+                  opts={{
+                    align: "start",
+                    loop: true,
+                  }}
+                  className="w-full"
+                >
+                  <CarouselContent>
+                    {writtenTestimonials.map((testimonial, index) => (
+                      <CarouselItem key={index} className="md:basis-full">
                         <TestimonialCard {...testimonial} />
-                      </motion.div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <div className="flex justify-center mt-4 gap-4">
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </div>
-              </Carousel>
-            </div>
-
-            {/* Success Stories Image Grid */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mt-12"
-            >
-              <h3 className="text-xl md:text-2xl font-semibold mb-8 text-center">
-                Success Stories Showcase
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {testimonialImages.map((image, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.05 }}
-                    className="aspect-[9/16] rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300"
-                  >
-                    <img 
-                      src={image} 
-                      alt={`Success story ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-                ))}
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <div className="flex justify-center mt-4 gap-4">
+                    <CarouselPrevious />
+                    <CarouselNext />
+                  </div>
+                </Carousel>
               </div>
-            </motion.div>
+
+              {/* Image Carousel */}
+              <div className="w-full lg:w-1/2">
+                <h3 className="text-xl md:text-2xl font-semibold mb-6 text-center">
+                  Success Stories Showcase
+                </h3>
+                <Carousel
+                  opts={{
+                    align: "start",
+                    loop: true,
+                  }}
+                  className="w-full"
+                >
+                  <CarouselContent>
+                    {testimonialImages.map((image, index) => (
+                      <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: index * 0.05 }}
+                          className="aspect-[9/16] rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300"
+                        >
+                          <img 
+                            src={image} 
+                            alt={`Success story ${index + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </motion.div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <div className="flex justify-center mt-4 gap-4">
+                    <CarouselPrevious />
+                    <CarouselNext />
+                  </div>
+                </Carousel>
+              </div>
+            </div>
           </div>
         </section>
       </Element>
