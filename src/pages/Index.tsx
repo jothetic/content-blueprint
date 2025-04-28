@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import TestimonialCard from "@/components/TestimonialCard";
 import PricingCard from "@/components/PricingCard";
 import PricingToggle from "@/components/PricingToggle";
-import VideoTestimonialCard from "@/components/VideoTestimonialCard";
 import { ArrowRight, ArrowLeft, ArrowRight as ArrowRightIcon, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -60,7 +59,7 @@ const Index = () => {
     }
   };
 
-  const testimonials = [
+  const writtenTestimonials = [
     {
       name: "JT Vendors",
       role: "E-commerce Success Story | 28.1K Followers",
@@ -78,7 +77,10 @@ const Index = () => {
       role: "Content Creator | YouTuber",
       quote: "This course showed me how to grow from 0 to nearly 10K followers. The video content strategies and community support have been game-changing.",
       image: "/public/lovable-uploads/01d386bc-2c28-41ed-bb80-b177b7c6a656.png"
-    },
+    }
+  ];
+
+  const imageTestimonials = [
     {
       name: "Alex Martinez",
       role: "Student Entrepreneur",
@@ -197,21 +199,59 @@ const Index = () => {
         </motion.div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Written Testimonials Section */}
       <Element name="testimonials">
-        <section className="py-10 md:py-20 px-4 md:px-6 lg:px-8 bg-white">
+        <section className="py-10 md:py-16 px-4 md:px-6 lg:px-8 bg-white/5">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-2xl md:text-4xl font-bold text-center mb-6 md:mb-12 text-black px-2 md:px-4">
-              🔥 Your Step-by-Step Blueprint for Real Growth and Income
-            </h2>
-            <p className="text-center text-gray-700 mb-12 max-w-2xl mx-auto px-4">
-              Creator Blueprint isn't just another content course—it's the complete system Maddox used to scale past $100K before turning 16. Inside, you'll unlock real strategies, weekly coaching calls, exclusive vendor tools, and a community that pushes you to win.
-            </p>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-10 text-white"
+            >
+              What Our Students Are Saying
+            </motion.h2>
             
-            <Carousel className="w-full max-w-5xl mx-auto">
+            <Carousel className="w-full max-w-4xl mx-auto">
               <CarouselContent>
-                {testimonials.map((testimonial, index) => (
+                {writtenTestimonials.map((testimonial, index) => (
                   <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                    <TestimonialCard {...testimonial} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex justify-center mt-6 gap-4">
+                <CarouselPrevious className="relative inset-0 translate-y-0" />
+                <CarouselNext className="relative inset-0 translate-y-0" />
+              </div>
+            </Carousel>
+          </div>
+        </section>
+
+        {/* Image Testimonials Section */}
+        <section className="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-2xl md:text-4xl font-bold text-center mb-6 md:mb-12 text-black"
+            >
+              🔥 Real Results, Real Growth
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center text-gray-700 mb-12 max-w-2xl mx-auto"
+            >
+              Join thousands of creators who've transformed their social media presence and income using our proven strategies.
+            </motion.p>
+            
+            <Carousel className="w-full max-w-6xl mx-auto">
+              <CarouselContent>
+                {imageTestimonials.map((testimonial, index) => (
+                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 xl:basis-1/3">
                     <TestimonialCard {...testimonial} />
                   </CarouselItem>
                 ))}
