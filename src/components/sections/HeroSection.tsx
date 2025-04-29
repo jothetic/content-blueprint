@@ -15,8 +15,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
   const controls = useAnimation();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const rotateX = useTransform(mouseY, [-300, 300], [10, -10]);
-  const rotateY = useTransform(mouseX, [-300, 300], [-10, 10]);
+  const rotateX = useTransform(mouseY, [-300, 300], [5, -5]);
+  const rotateY = useTransform(mouseX, [-300, 300], [-5, 5]);
 
   useEffect(() => {
     if (visible && !hasShownInitialAnimation) {
@@ -138,50 +138,21 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
 
         <motion.p 
           variants={fadeUpVariant}
-          className="text-base md:text-lg text-white mb-6 md:mb-8 max-w-2xl mx-auto font-medium relative"
+          className="text-base md:text-lg text-white mb-6 md:mb-8 max-w-2xl mx-auto font-medium"
         >
-          <motion.span 
-            className="absolute left-0 top-0 w-full h-full bg-shimmer"
-            animate={{ x: ["0%", "100%"] }}
-            transition={{ 
-              duration: 2.5, 
-              repeat: Infinity, 
-              ease: "linear",
-              repeatDelay: 1
-            }}
-            style={{ opacity: 0.5 }}
-          />
           Turn views into income with proven systems, live coaching, and exclusive tools—built by a creator who made $100K at 15.
         </motion.p>
         
-        {/* Video Section */}
+        {/* Video Section - Simplified animation */}
         <motion.div
           variants={fadeUpVariant}
-          className="relative max-w-4xl mx-auto mb-8 md:mb-12 perspective-1000"
-          style={{
-            rotateX,
-            rotateY,
-            transformStyle: "preserve-3d",
-          }}
-          whileHover={{ scale: 1.02 }}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
+          className="relative max-w-4xl mx-auto mb-8 md:mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
           <motion.div 
             className="absolute -inset-1 bg-gradient-to-r from-purple-500/30 via-blue-500/30 to-purple-500/30 rounded-lg blur-sm"
-            animate={{ 
-              background: [
-                "linear-gradient(to right, rgba(168, 85, 247, 0.3), rgba(59, 130, 246, 0.3), rgba(168, 85, 247, 0.3))",
-                "linear-gradient(to right, rgba(59, 130, 246, 0.3), rgba(168, 85, 247, 0.3), rgba(59, 130, 246, 0.3))",
-                "linear-gradient(to right, rgba(168, 85, 247, 0.3), rgba(59, 130, 246, 0.3), rgba(168, 85, 247, 0.3))",
-              ]
-            }}
-            transition={{ 
-              duration: 4, 
-              repeat: Infinity, 
-              repeatType: "reverse" 
-            }}
           />
           <div className="rounded-lg overflow-hidden shadow-2xl border border-white/10 relative z-10">
             <YouTubeEmbed 
