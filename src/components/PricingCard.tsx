@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 interface PricingCardProps {
   title: string;
   price?: string;
+  monthlyPrice?: string;
+  upfrontPrice?: string | null;
   features: string[];
   ctaText: string;
   highlighted?: boolean;
@@ -16,7 +18,9 @@ interface PricingCardProps {
 
 const PricingCard = ({ 
   title, 
-  price, 
+  price,
+  monthlyPrice,
+  upfrontPrice,
   features, 
   ctaText, 
   highlighted = false,
@@ -43,15 +47,35 @@ const PricingCard = ({
         {!applyOnly && (
           <AnimatePresence mode="wait">
             <motion.div 
-              key={price}
+              key={monthlyPrice || price}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.3 }}
               className="mb-6"
             >
-              <span className="text-3xl font-bold text-white">${price}</span>
-              <span className="text-gray-300 ml-1">/month</span>
+              {monthlyPrice && (
+                <div>
+                  <div className="flex items-center">
+                    <span className="text-3xl font-bold text-white">${monthlyPrice}</span>
+                    <span className="text-gray-300 ml-1">/month</span>
+                  </div>
+                  
+                  {upfrontPrice && (
+                    <div className="text-gray-300 text-sm mt-1">
+                      <span className="font-medium">${upfrontPrice}</span> billed annually
+                    </div>
+                  )}
+                </div>
+              )}
+              
+              {/* For backward compatibility */}
+              {!monthlyPrice && price && (
+                <div className="flex items-center">
+                  <span className="text-3xl font-bold text-white">${price}</span>
+                  <span className="text-gray-300 ml-1">/month</span>
+                </div>
+              )}
             </motion.div>
           </AnimatePresence>
         )}

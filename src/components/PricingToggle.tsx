@@ -35,7 +35,7 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
                 exit={{ opacity: 0, y: -10 }}
                 className="text-green-400 text-sm mt-1"
               >
-                Save 40%
+                Save 50%
               </motion.div>
             )}
           </AnimatePresence>
@@ -78,9 +78,9 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
           className="text-center text-white/80"
         >
           {isAnnual ? (
-            "🎉 Save 40% with annual billing"
+            "🎉 $15/month billed annually ($179 upfront)"
           ) : (
-            "Flexible monthly billing"
+            "Simple monthly billing"
           )}
         </motion.div>
       </AnimatePresence>

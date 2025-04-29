@@ -45,7 +45,8 @@ const PricingSection: React.FC<PricingSectionProps> = ({ isAnnual, setIsAnnual }
           >
             <PricingCard
               title="Content Blueprint"
-              price={isAnnual ? "179" : "15"}
+              monthlyPrice={isAnnual ? "15" : "30"}
+              upfrontPrice={isAnnual ? "179" : null}
               features={[
                 "10+ Premium Trainings",
                 "3 Weekly Live Calls with Maddox",
