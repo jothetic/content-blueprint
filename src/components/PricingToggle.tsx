@@ -69,21 +69,7 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
           Monthly
         </motion.span>
       </div>
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={isAnnual ? 'annual' : 'monthly'}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="text-center text-white/80"
-        >
-          {isAnnual ? (
-            "🎉 $15/month billed annually ($179 upfront)"
-          ) : (
-            "Simple monthly billing"
-          )}
-        </motion.div>
-      </AnimatePresence>
+      {/* Removed the AnimatePresence block that showed pricing information */}
     </div>
   );
 };
