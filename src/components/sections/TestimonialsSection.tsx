@@ -1,10 +1,8 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import TestimonialCard from "@/components/TestimonialCard";
 import TestimonialSkeleton from "@/components/TestimonialSkeleton";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import CarouselIndicator from "@/components/CarouselIndicator";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { CarouselApi } from "@/components/ui/carousel";
 
@@ -80,21 +78,6 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
     "/lovable-uploads/424b3593-d73e-43d2-9b3f-d5c8f6599283.png",
     "/lovable-uploads/42e66244-bd3b-4ff8-b130-b3e9e75c8902.png"
   ];
-
-  // Handle indicator clicks
-  const handleTestimonialSelect = (index: number) => {
-    if (testimonialCarouselApi) {
-      testimonialCarouselApi.scrollTo(index);
-      setCurrentTestimonialSlide(index);
-    }
-  };
-
-  const handleImageSelect = (index: number) => {
-    if (imageCarouselApi) {
-      imageCarouselApi.scrollTo(index);
-      setCurrentImageSlide(index);
-    }
-  };
 
   // Set up effect to update currentSlide when carousel changes
   React.useEffect(() => {
@@ -175,11 +158,6 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
               <CarouselNext className="static transform-none" />
             </div>
           </Carousel>
-          <CarouselIndicator
-            totalSlides={writtenTestimonials.length}
-            currentSlide={currentTestimonialSlide}
-            onSelect={handleTestimonialSelect}
-          />
         </div>
 
         {/* Success Stories Image Carousel */}
@@ -229,11 +207,6 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
               <CarouselNext className="static transform-none" />
             </div>
           </Carousel>
-          <CarouselIndicator
-            totalSlides={testimonialImages.length}
-            currentSlide={currentImageSlide}
-            onSelect={handleImageSelect}
-          />
         </div>
       </div>
     </section>
