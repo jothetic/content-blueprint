@@ -57,7 +57,9 @@ const PricingSection: React.FC<PricingSectionProps> = ({ isAnnual, setIsAnnual }
               ]}
               ctaText={`Get ${isAnnual ? 'Yearly' : 'Monthly'} Access`}
               highlighted={true}
-              onCtaClick={() => window.open(`https://whop.com/content-blueprint/#my-offers-prod_${isAnnual ? '8bOwN6ScSdHgP' : 'BkyKBvhyYTal0'}`, "_blank")}
+              onCtaClick={() => window.open(isAnnual 
+                ? "https://whop.com/checkout/plan_MC63d0DmpMZ7f?d2c=true" 
+                : "https://whop.com/checkout/plan_D22BacLLTv4zt?d2c=true", "_blank")}
             />
           </motion.div>
         </AnimatePresence>
