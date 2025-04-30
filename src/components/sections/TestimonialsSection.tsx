@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -192,11 +193,14 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                       transition={{ delay: index * 0.05 }}
                       className="aspect-[9/16] rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 px-1 md:px-2"
                     >
-                      <img 
-                        src={image} 
-                        alt={`Success story ${index + 1}`}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
+                      <div className="w-full h-full bg-gray-100 flex items-center justify-center overflow-hidden rounded-lg">
+                        <img 
+                          src={image} 
+                          alt={`Success story ${index + 1}`}
+                          className="w-full h-full object-contain"
+                          loading="lazy"
+                        />
+                      </div>
                     </motion.div>
                   </CarouselItem>
                 ))
