@@ -16,8 +16,8 @@ const Navbar = () => {
           <div className="flex items-center">
             <div className="text-white font-bold flex items-center">
               <span className="text-red-500 text-xl mr-1">C</span>
-              <span className="text-white text-lg">Content</span>
-              <span className="text-purple-300 text-lg ml-1">Academy</span>
+              <span className="text-white text-lg">Creator</span>
+              <span className="text-purple-300 text-lg ml-1">Blueprint</span>
             </div>
           </div>
 
