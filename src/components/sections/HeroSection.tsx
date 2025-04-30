@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight as ArrowRightIcon, Star } from "lucide-react";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { scroller } from 'react-scroll';
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface HeroSectionProps {
   visible: boolean;
@@ -17,6 +18,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
   const mouseY = useMotionValue(0);
   const rotateX = useTransform(mouseY, [-300, 300], [5, -5]);
   const rotateY = useTransform(mouseX, [-300, 300], [-5, 5]);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (visible && !hasShownInitialAnimation) {
@@ -63,6 +65,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isMobile) return; // Skip mouse movement effects on mobile
+    
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
@@ -71,7 +75,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
   };
 
   return (
-    <section className="pt-24 md:pt-32 pb-10 md:pb-16 px-4 md:px-6 lg:px-8 overflow-hidden">
+    <section className="pt-16 md:pt-32 pb-10 md:pb-16 px-4 md:px-6 lg:px-8 overflow-hidden">
       <motion.div
         initial="hidden"
         animate={controls}
@@ -112,7 +116,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
 
         <motion.div variants={titleVariants}>
           <motion.h1 
-            className="text-3xl md:text-5xl lg:text-6xl font-bold mb-2 text-white tracking-tight"
+            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold mb-2 text-white tracking-tight"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -127,7 +131,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
             Master the Blueprint to Grow
           </motion.h1>
           <motion.h1 
-            className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-soft-purple tracking-tight"
+            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-soft-purple tracking-tight"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
@@ -138,7 +142,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
 
         <motion.p 
           variants={fadeUpVariant}
-          className="text-base md:text-lg text-white mb-6 md:mb-8 max-w-2xl mx-auto font-medium"
+          className="text-sm sm:text-base md:text-lg text-white mb-6 md:mb-8 max-w-2xl mx-auto font-medium"
         >
           Turn views into income with proven systems, live coaching, and exclusive tools—built by a creator who made $100K at 15.
         </motion.p>
@@ -197,7 +201,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
                   repeatDelay: 1
                 }}
               />
-              <motion.span className="relative z-10 flex items-center">
+              <motion.span className="relative z-10 flex items-center whitespace-nowrap">
                 → Start Your Journey <ArrowRightIcon className="ml-1 w-4 h-4 md:w-5 md:h-5" />
               </motion.span>
             </Button>

@@ -6,6 +6,7 @@ import TestimonialSkeleton from "@/components/TestimonialSkeleton";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { CarouselApi } from "@/components/ui/carousel";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface TestimonialsSectionProps {
   isLoading: boolean;
@@ -16,6 +17,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
   const [currentImageSlide, setCurrentImageSlide] = useState(0);
   const [testimonialCarouselApi, setTestimonialCarouselApi] = useState<CarouselApi | null>(null);
   const [imageCarouselApi, setImageCarouselApi] = useState<CarouselApi | null>(null);
+  const isMobile = useIsMobile();
 
   // Sample data for testimonials
   const writtenTestimonials = [
@@ -114,13 +116,13 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
   }, [imageCarouselApi]);
 
   return (
-    <section className="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-white">
+    <section className="py-12 md:py-24 px-4 md:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-black"
+          className="text-xl sm:text-2xl md:text-4xl font-bold text-center mb-6 md:mb-12 text-black"
         >
           Real Results from Real Students 🚀
         </motion.h2>
@@ -133,7 +135,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
               loop: true,
             }}
             setApi={setTestimonialCarouselApi}
-            className="w-full px-4 md:px-0"
+            className="w-full px-2 md:px-0"
           >
             <CarouselContent>
               {isLoading ? (
@@ -154,16 +156,16 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 ))
               )}
             </CarouselContent>
-            <div className="flex justify-center mt-4 gap-2 md:gap-4">
-              <CarouselPrevious className="static transform-none" />
-              <CarouselNext className="static transform-none" />
+            <div className="flex justify-center mt-4 gap-1 sm:gap-2 md:gap-4">
+              <CarouselPrevious className="static transform-none h-9 w-9 sm:h-10 sm:w-10" />
+              <CarouselNext className="static transform-none h-9 w-9 sm:h-10 sm:w-10" />
             </div>
           </Carousel>
         </div>
 
         {/* Success Stories Image Carousel */}
         <div className="max-w-2xl mx-auto">
-          <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center">
+          <h3 className="text-base sm:text-lg md:text-2xl font-semibold mb-3 md:mb-6 text-center">
             Success Stories Showcase
           </h3>
           <Carousel
@@ -172,12 +174,12 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
               loop: true,
             }}
             setApi={setImageCarouselApi}
-            className="w-full px-4 md:px-0"
+            className="w-full px-1 md:px-0"
           >
             <CarouselContent>
               {isLoading ? (
                 Array.from({ length: 5 }).map((_, index) => (
-                  <CarouselItem key={`image-skeleton-${index}`} className="basis-3/4 md:basis-1/2 lg:basis-1/3">
+                  <CarouselItem key={`image-skeleton-${index}`} className="basis-3/4 sm:basis-1/2 md:basis-1/3">
                     <div className="aspect-[9/16] rounded-lg overflow-hidden px-1 md:px-2">
                       <Skeleton className="w-full h-full" />
                     </div>
@@ -185,7 +187,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 ))
               ) : (
                 testimonialImages.map((image, index) => (
-                  <CarouselItem key={index} className="basis-3/4 md:basis-1/2 lg:basis-1/3">
+                  <CarouselItem key={index} className="basis-3/4 sm:basis-1/2 md:basis-1/3">
                     <motion.div
                       initial={{ opacity: 0, scale: 0.95 }}
                       whileInView={{ opacity: 1, scale: 1 }}
@@ -206,9 +208,9 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 ))
               )}
             </CarouselContent>
-            <div className="flex justify-center mt-4 gap-2 md:gap-4">
-              <CarouselPrevious className="static transform-none" />
-              <CarouselNext className="static transform-none" />
+            <div className="flex justify-center mt-4 gap-1 sm:gap-2 md:gap-4">
+              <CarouselPrevious className="static transform-none h-8 w-8 sm:h-10 sm:w-10" />
+              <CarouselNext className="static transform-none h-8 w-8 sm:h-10 sm:w-10" />
             </div>
           </Carousel>
         </div>

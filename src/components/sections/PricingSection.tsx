@@ -23,7 +23,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ isAnnual, setIsAnnual }
           Choose Your Blueprint
         </motion.h2>
         <motion.p 
-          className="text-center text-soft-purple mb-8 md:mb-12 text-sm md:text-base"
+          className="text-center text-soft-purple mb-6 md:mb-10 text-sm md:text-base"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -41,7 +41,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ isAnnual, setIsAnnual }
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: isAnnual ? 20 : -20 }}
             transition={{ duration: 0.3 }}
-            className="max-w-xl mx-auto"
+            className="max-w-xs sm:max-w-sm md:max-w-xl mx-auto"
           >
             <PricingCard
               title="Content Blueprint"
