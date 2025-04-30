@@ -52,12 +52,14 @@
     overflow-x: hidden;
     touch-action: manipulation;
     -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: transparent;
   }
   
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Poppins', sans-serif;
     position: relative;
+    overscroll-behavior-y: none;
   }
   
   #root {
@@ -67,6 +69,7 @@
   }
 }
 
+/* Animation Keyframes */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -97,8 +100,9 @@
   animation: slide-in 0.8s ease-out forwards;
 }
 
+/* Background Colors */
 .bg-deep-purple-gradient {
-  background: linear-gradient(to bottom, #1A0033 0%, #0D001F 100%);
+  background: linear-gradient(to bottom, #0c0041 0%, #0D001F 100%);
 }
 
 .bg-soft-purple {
@@ -120,4 +124,39 @@
 
 .bg-soft-gray {
   background-color: #F5F5F7;
+}
+
+/* Triangle for play button */
+.border-l-12 {
+  border-left-width: 12px;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .rounded-t-3xl {
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+  }
+  
+  section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  .embla {
+    overflow: hidden;
+  }
+  
+  .embla__viewport {
+    overflow: hidden;
+  }
+  
+  .embla__container {
+    display: flex;
+  }
+  
+  .embla__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+  }
 }

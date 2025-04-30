@@ -1,215 +1,171 @@
-import React, { useState } from "react";
+
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import TestimonialCard from "@/components/TestimonialCard";
-import TestimonialSkeleton from "@/components/TestimonialSkeleton";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Skeleton } from "@/components/ui/skeleton";
-import type { CarouselApi } from "@/components/ui/carousel";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import { scroller } from "react-scroll";
 import { useIsMobile } from "@/hooks/use-mobile";
+import Autoplay from "embla-carousel-autoplay";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 interface TestimonialsSectionProps {
   isLoading: boolean;
 }
 
 const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) => {
-  const [currentTestimonialSlide, setCurrentTestimonialSlide] = useState(0);
-  const [currentImageSlide, setCurrentImageSlide] = useState(0);
-  const [testimonialCarouselApi, setTestimonialCarouselApi] = useState<CarouselApi | null>(null);
-  const [imageCarouselApi, setImageCarouselApi] = useState<CarouselApi | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [carouselApi, setCarouselApi] = useState<any>(null);
+  const autoplayRef = useRef(Autoplay({ delay: 4000, stopOnInteraction: false }));
   const isMobile = useIsMobile();
 
-  // Sample data for testimonials
-  const writtenTestimonials = [
+  const testimonials = [
+    {
+      name: "Renzo Guevarra",
+      role: "CEO Growthology Agency",
+      stats: "500k+ followers",
+      quote: "Mino got me from 10k to 55k followers on TikTok, 300 to 355k followers on IG.",
+      image: "/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png",
+      videoImage: "/lovable-uploads/171f1432-c3ef-4494-bf8e-3de920255ad2.png"
+    },
     {
       name: "Viral Creator",
-      role: "Content Creator | 2.7M+ Views",
-      quote: "Hit over 2.7M views using the viral content strategies from the program. The engagement tactics really work!",
-      image: "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png"
+      role: "Content Creator",
+      stats: "2.7M+ Views",
+      quote: "Hit over 2.7M views using the viral content strategies from the program.",
+      image: "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png",
+      videoImage: "/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png"
     },
     {
       name: "Growth Expert",
-      role: "Social Media Influencer | 65K+ Followers",
-      quote: "Grew from 0 to 65K real followers using the community building strategies. The engagement has been incredible!",
-      image: "/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png"
-    },
-    {
-      name: "E-commerce Pro",
-      role: "Shopify Merchant | $10K+ Revenue",
-      quote: "Scaled to over $10,000 in monthly revenue using the sales funnel blueprint. The ROI has been amazing!",
-      image: "/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png"
-    },
-    {
-      name: "JT Vendors",
-      role: "E-commerce Entrepreneur | 116K+ Sessions",
-      quote: "Scaled to $39.5K in total sales with a 1.94% conversion rate and 793% session growth. The strategies and systems really work!",
-      image: "/lovable-uploads/171f1432-c3ef-4494-bf8e-3de920255ad2.png"
-    },
-    {
-      name: "JJ Vending",
-      role: "Shopify Merchant | 389+ Orders",
-      quote: "Hit $4,005.41 in sales with a 2.09% conversion rate in just 22 days. The growth strategies and support have been invaluable!",
-      image: "/lovable-uploads/fd4edd9c-d981-4a64-a1cd-31ac4b99e115.png"
-    },
-    {
-      name: "Motivated Vendor",
-      role: "E-commerce Success Story | $5K+ Monthly",
-      quote: "Reached $5,000+ in monthly revenue with consistent growth. This program gave me the blueprint I needed to scale!",
-      image: "/lovable-uploads/ea5ac916-acb8-42e8-9695-e42bc31aede1.png"
+      role: "Social Media Influencer",
+      stats: "65K+ Followers",
+      quote: "Grew from 0 to 65K real followers using the community building strategies.",
+      image: "/lovable-uploads/fd4edd9c-d981-4a64-a1cd-31ac4b99e115.png",
+      videoImage: "/lovable-uploads/ea5ac916-acb8-42e8-9695-e42bc31aede1.png"
     }
   ];
-
-  const testimonialImages = [
-    "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png", // 2.7M views
-    "/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png", // 65K followers
-    "/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png", // Shopify dashboard
-    "/lovable-uploads/171f1432-c3ef-4494-bf8e-3de920255ad2.png",
-    "/lovable-uploads/fd4edd9c-d981-4a64-a1cd-31ac4b99e115.png",
-    "/lovable-uploads/ea5ac916-acb8-42e8-9695-e42bc31aede1.png",
-    "/lovable-uploads/0d79d1cb-7250-40c9-b0bf-c6d6003a5c10.png",
-    "/lovable-uploads/1d23383f-2912-463f-9355-15c54d694e34.png",
-    "/lovable-uploads/d0cddb8d-dae4-4011-9f4b-93dc8b114512.png",
-    "/lovable-uploads/c4a4c75f-fefa-46b0-a89e-12d70f36b467.png",
-    "/lovable-uploads/4ed3fc31-8cbf-4bd2-95c9-618c54edba8b.png",
-    "/lovable-uploads/4ee30212-8722-4c54-b21c-13d3ead83a36.png",
-    "/lovable-uploads/67162bff-1d28-4fcf-9cea-b25419541e4c.png",
-    "/lovable-uploads/34464386-e73c-4de1-a744-f16a4b6b4b29.png",
-    "/lovable-uploads/9ac7752e-e8a9-4b1c-a151-45fbf20484bb.png",
-    "/lovable-uploads/6da00e19-deb3-43a3-9431-9b89ca44e15a.png",
-    "/lovable-uploads/51a943ac-c3fa-45e0-882c-0f2db5942a8a.png",
-    "/lovable-uploads/1c09b964-cc50-46b4-902a-9b28bea52ba8.png",
-    "/lovable-uploads/424b3593-d73e-43d2-9b3f-d5c8f6599283.png",
-    "/lovable-uploads/42e66244-bd3b-4ff8-b130-b3e9e75c8902.png"
-  ];
-
-  // Set up effect to update currentSlide when carousel changes
+  
   React.useEffect(() => {
-    if (testimonialCarouselApi) {
-      const updateTestimonialSlide = () => {
-        setCurrentTestimonialSlide(testimonialCarouselApi.selectedScrollSnap());
+    if (carouselApi) {
+      const updateSlide = () => {
+        setCurrentSlide(carouselApi.selectedScrollSnap());
       };
       
-      testimonialCarouselApi.on("select", updateTestimonialSlide);
-      // Call once to set initial state
-      updateTestimonialSlide();
+      carouselApi.on("select", updateSlide);
+      updateSlide();
       
       return () => {
-        testimonialCarouselApi.off("select", updateTestimonialSlide);
+        carouselApi.off("select", updateSlide);
       };
     }
-  }, [testimonialCarouselApi]);
-
-  React.useEffect(() => {
-    if (imageCarouselApi) {
-      const updateImageSlide = () => {
-        setCurrentImageSlide(imageCarouselApi.selectedScrollSnap());
-      };
-      
-      imageCarouselApi.on("select", updateImageSlide);
-      // Call once to set initial state
-      updateImageSlide();
-      
-      return () => {
-        imageCarouselApi.off("select", updateImageSlide);
-      };
-    }
-  }, [imageCarouselApi]);
+  }, [carouselApi]);
 
   return (
-    <section className="py-6 md:py-16 px-2 md:px-6 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-base sm:text-lg md:text-2xl lg:text-4xl font-bold text-center mb-3 md:mb-8 text-black"
-        >
-          Real Results from Real Students 🚀
-        </motion.h2>
-
-        {/* Written Testimonials Carousel */}
-        <div className="max-w-3xl mx-auto mb-4 md:mb-10">
-          <Carousel
-            opts={{
-              align: "center",
-              loop: true,
-            }}
-            setApi={setTestimonialCarouselApi}
-            className="w-full"
-          >
-            <CarouselContent>
-              {isLoading ? (
-                Array.from({ length: 3 }).map((_, index) => (
-                  <CarouselItem key={`skeleton-${index}`} className="md:basis-full">
-                    <div className="px-0 md:px-2">
-                      <TestimonialSkeleton />
-                    </div>
-                  </CarouselItem>
-                ))
-              ) : (
-                writtenTestimonials.map((testimonial, index) => (
-                  <CarouselItem key={index} className="md:basis-full">
-                    <TestimonialCard {...testimonial} />
-                  </CarouselItem>
-                ))
-              )}
-            </CarouselContent>
-            <div className="flex justify-center mt-2 gap-1 sm:gap-2">
-              <CarouselPrevious className="static transform-none h-6 w-6 sm:h-8 sm:w-8" />
-              <CarouselNext className="static transform-none h-6 w-6 sm:h-8 sm:w-8" />
-            </div>
-          </Carousel>
-        </div>
-
-        {/* Success Stories Image Carousel - Smaller for mobile */}
-        <div className="max-w-lg mx-auto">
-          <h3 className="text-xs sm:text-sm md:text-xl font-semibold mb-2 md:mb-4 text-center">
-            Success Stories Showcase
+    <section className="py-8 px-4 bg-white rounded-t-3xl -mt-4 relative z-20">
+      <div className="max-w-xl mx-auto">
+        <div className="text-center mb-6">
+          <h2 className="text-purple-500 uppercase text-sm font-medium tracking-wide mb-4">
+            STUDENT TESTIMONIALS
+          </h2>
+          
+          <h3 className="text-2xl font-bold mb-2">
+            We've helped <span className="text-purple-500">1,000+ creators</span> reach their goals on Instagram and TikTok.
           </h3>
-          <Carousel
-            opts={{
-              align: "center",
-              loop: true,
-            }}
-            setApi={setImageCarouselApi}
-            className="w-full"
-          >
-            <CarouselContent>
-              {isLoading ? (
-                Array.from({ length: 5 }).map((_, index) => (
-                  <CarouselItem key={`image-skeleton-${index}`} className="basis-1/3 md:basis-1/4">
-                    <div className="aspect-square rounded-lg overflow-hidden px-0.5 md:px-1">
-                      <Skeleton className="w-full h-full" />
-                    </div>
-                  </CarouselItem>
-                ))
-              ) : (
-                testimonialImages.map((image, index) => (
-                  <CarouselItem key={index} className="basis-1/3 md:basis-1/4">
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.03 }}
-                      className="aspect-square rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 px-0.5 md:px-1"
-                    >
-                      <div className="w-full h-full bg-gray-100 flex items-center justify-center overflow-hidden rounded-lg">
+        </div>
+        
+        <Carousel
+          setApi={setCarouselApi}
+          plugins={[autoplayRef.current]}
+          className="w-full mb-6"
+          opts={{
+            align: "center",
+            loop: true,
+          }}
+        >
+          <CarouselContent>
+            {isLoading ? (
+              <CarouselItem>
+                <div className="h-64 bg-gray-100 animate-pulse rounded-xl"></div>
+              </CarouselItem>
+            ) : (
+              testimonials.map((testimonial, index) => (
+                <CarouselItem key={index} className="basis-full">
+                  <div className="bg-white p-4 rounded-xl">
+                    <div className="flex items-center mb-3">
+                      <div className="mr-3">
                         <img 
-                          src={image} 
-                          alt={`Success story ${index + 1}`}
-                          className="w-full h-full object-contain"
-                          loading="lazy"
+                          src={testimonial.image} 
+                          alt={testimonial.name}
+                          className="w-14 h-14 rounded-full object-cover"
                         />
                       </div>
-                    </motion.div>
-                  </CarouselItem>
-                ))
-              )}
-            </CarouselContent>
-            <div className="flex justify-center mt-2 gap-1">
-              <CarouselPrevious className="static transform-none h-5 w-5 sm:h-7 sm:w-7" />
-              <CarouselNext className="static transform-none h-5 w-5 sm:h-7 sm:w-7" />
-            </div>
-          </Carousel>
+                      <div>
+                        <h4 className="font-bold text-lg">{testimonial.name}</h4>
+                        <p className="text-purple-500 text-sm">{testimonial.role}</p>
+                        <p className="text-purple-500 text-sm">{testimonial.stats}</p>
+                      </div>
+                    </div>
+                    
+                    <blockquote className="text-gray-800 mb-4">
+                      "{testimonial.quote}"
+                    </blockquote>
+                    
+                    <div className="relative rounded-lg overflow-hidden">
+                      <img 
+                        src={testimonial.videoImage}
+                        alt="Video thumbnail" 
+                        className="w-full h-auto rounded-lg"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="bg-black/70 rounded-full p-3">
+                          <div className="w-0 h-0 border-y-8 border-y-transparent border-l-12 border-l-white ml-1"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))
+            )}
+          </CarouselContent>
+        </Carousel>
+        
+        {/* Dots Indicator */}
+        <div className="flex justify-center gap-2 mb-8">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              className={`w-2 h-2 rounded-full ${
+                currentSlide === index ? "bg-gray-600" : "bg-gray-300"
+              }`}
+              onClick={() => carouselApi?.scrollTo(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+        
+        <div className="text-center">
+          <Button
+            className="bg-purple-500 hover:bg-purple-600 text-white rounded-full py-6 px-8 text-lg font-medium w-full mb-20"
+            onClick={() => {
+              scroller.scrollTo('pricing-section', {
+                duration: 800,
+                smooth: true,
+                offset: -50,
+                spy: true
+              });
+            }}
+          >
+            Start my personal brand <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
+          
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-white mb-2">
+              Start your personal<br />branding journey<br />today
+            </h2>
+            <p className="text-white/80 text-lg mb-8">
+              Join the program that fits<br />your needs
+            </p>
+          </div>
         </div>
       </div>
     </section>

@@ -13,7 +13,6 @@ interface TestimonialCardProps {
 
 const TestimonialCard = ({ name, role, quote, image }: TestimonialCardProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [hovered, setHovered] = useState(false);
 
   return (
     <motion.div
@@ -21,27 +20,17 @@ const TestimonialCard = ({ name, role, quote, image }: TestimonialCardProps) => 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.4 }}
-      whileHover={{ y: -3, scale: 1.01 }}
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
       className="px-1"
     >
-      <Card className="p-2 sm:p-3 md:p-4 bg-white shadow-md border-none h-full relative overflow-hidden group">
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-        />
-        
+      <Card className="p-3 bg-white shadow-sm border-none h-full relative overflow-hidden group">
         <div className="relative z-10">
-          <div className="flex items-start space-x-2 mb-1.5 sm:mb-2">
+          <div className="flex items-start space-x-2 mb-2">
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <Avatar className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 rounded-full">
+              <Avatar className="h-8 w-8 rounded-full">
                 <AvatarImage 
                   src={image} 
                   alt={name} 
@@ -52,16 +41,16 @@ const TestimonialCard = ({ name, role, quote, image }: TestimonialCardProps) => 
               </Avatar>
             </motion.div>
             <motion.div
-              initial={{ x: -10, opacity: 0 }}
+              initial={{ x: -5, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.1 }}
             >
-              <h3 className="font-bold text-black text-xs sm:text-sm">{name}</h3>
-              <p className="text-gray-600 text-xs sm:text-xs">{role}</p>
+              <h3 className="font-bold text-black text-sm">{name}</h3>
+              <p className="text-gray-600 text-xs">{role}</p>
             </motion.div>
           </div>
           <motion.p 
-            className="text-xs sm:text-sm text-gray-700 leading-relaxed"
+            className="text-xs text-gray-700 leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.2 }}
@@ -70,7 +59,7 @@ const TestimonialCard = ({ name, role, quote, image }: TestimonialCardProps) => 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className="text-soft-purple text-xs sm:text-sm md:text-base font-serif"
+              className="text-soft-purple text-xs font-serif"
             >
               &ldquo;
             </motion.span>
@@ -79,7 +68,7 @@ const TestimonialCard = ({ name, role, quote, image }: TestimonialCardProps) => 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className="text-soft-purple text-xs sm:text-sm md:text-base font-serif"
+              className="text-soft-purple text-xs font-serif"
             >
               &rdquo;
             </motion.span>
