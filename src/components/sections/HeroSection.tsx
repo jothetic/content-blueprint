@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight as ArrowRightIcon, Star } from "lucide-react";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
