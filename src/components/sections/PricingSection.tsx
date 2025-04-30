@@ -48,7 +48,6 @@ const PricingSection: React.FC<PricingSectionProps> = ({ isAnnual, setIsAnnual }
               monthlyPrice={isAnnual ? "15" : "30"}
               upfrontPrice={isAnnual ? "179" : null}
               features={[
-                "10+ Premium Trainings",
                 "3 Weekly Live Calls with Maddox",
                 "Private Discord Community",
                 "Exclusive Vendor Resources",
