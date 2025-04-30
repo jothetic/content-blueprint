@@ -14,11 +14,11 @@ const Navbar = () => {
   const isMobile = useIsMobile();
 
   return (
-    <nav className="fixed w-full top-0 z-50 bg-transparent">
+    <nav className="fixed w-full top-0 z-50 bg-transparent pointer-events-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between md:justify-end items-center h-16">
           {/* Desktop nav items */}
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-6 pointer-events-auto">
             <motion.div
               style={{ opacity, y: translateY }}
               initial={{ opacity: 0 }}
@@ -40,7 +40,7 @@ const Navbar = () => {
         {/* Mobile navigation - simplified with no toggle menu */}
         {isMobile && (
           <motion.div 
-            className="flex flex-row justify-center space-x-4 py-2"
+            className="flex flex-row justify-center space-x-4 py-2 pointer-events-auto"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2 }}

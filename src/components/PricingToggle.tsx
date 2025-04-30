@@ -16,10 +16,10 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center mb-6 md:mb-12">
-      <div className="flex items-center justify-center mb-3 md:mb-4">
+    <div className="flex flex-col items-center justify-center mb-4 md:mb-8">
+      <div className="flex items-center justify-center mb-2 md:mb-4">
         <span 
-          className={`text-sm sm:text-base md:text-lg font-medium mr-2 sm:mr-3 cursor-pointer transition-all duration-300 ${isAnnual ? 'text-white scale-105' : 'text-gray-400 scale-95'}`}
+          className={`text-sm md:text-base font-medium mr-2 cursor-pointer transition-all duration-300 ${isAnnual ? 'text-white scale-105' : 'text-gray-400 scale-95'}`}
           onClick={() => {
             setIsAnnual(true);
             onToggle(true);
@@ -27,18 +27,18 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
         >
           Yearly
           {isAnnual && (
-            <div className="text-green-400 text-xs sm:text-sm mt-0.5 sm:mt-1">
+            <div className="text-green-400 text-xs mt-0.5">
               Save 50%
             </div>
           )}
         </span>
         <motion.div 
-          className="w-12 h-6 sm:w-14 sm:h-7 md:w-16 md:h-8 bg-white/20 rounded-full p-1 cursor-pointer flex relative overflow-hidden"
+          className="w-12 h-6 md:w-14 md:h-7 bg-white/20 rounded-full p-1 cursor-pointer flex relative overflow-hidden"
           onClick={handleToggle}
           whileHover={{ boxShadow: "0 0 15px rgba(177, 151, 255, 0.5)" }}
         >
           <motion.div 
-            className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-soft-purple shadow-lg shadow-soft-purple/50"
+            className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-soft-purple shadow-lg shadow-soft-purple/50"
             animate={{ 
               x: isAnnual ? 0 : [null, 24],
             }}
@@ -50,7 +50,7 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
           />
         </motion.div>
         <span 
-          className={`text-sm sm:text-base md:text-lg font-medium ml-2 sm:ml-3 cursor-pointer transition-all duration-300 ${!isAnnual ? 'text-white scale-105' : 'text-gray-400 scale-95'}`}
+          className={`text-sm md:text-base font-medium ml-2 cursor-pointer transition-all duration-300 ${!isAnnual ? 'text-white scale-105' : 'text-gray-400 scale-95'}`}
           onClick={() => {
             setIsAnnual(false);
             onToggle(false);
