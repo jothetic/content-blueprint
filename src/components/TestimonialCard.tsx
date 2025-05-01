@@ -17,16 +17,16 @@ const TestimonialCard = ({ name, role, quote, image }: TestimonialCardProps) => 
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.4 }}
-      whileHover={{ y: -3, scale: 1.01 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ y: -10, scale: 1.02 }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
-      className="px-1"
+      className="px-2"
     >
-      <Card className="p-2 sm:p-3 md:p-4 bg-white shadow-md border-none h-full relative overflow-hidden group">
+      <Card className="p-6 bg-white shadow-md border-none h-full relative overflow-hidden group">
         <motion.div 
           className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10"
           initial={{ opacity: 0 }}
@@ -34,43 +34,55 @@ const TestimonialCard = ({ name, role, quote, image }: TestimonialCardProps) => 
           transition={{ duration: 0.3 }}
         />
         
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+          initial={{ x: "-100%" }}
+          animate={{ 
+            x: hovered ? "100%" : "-100%"
+          }}
+          transition={{ 
+            duration: 0.8,
+            ease: "easeInOut"
+          }}
+        />
+        
         <div className="relative z-10">
-          <div className="flex items-start space-x-2 mb-1.5 sm:mb-2">
+          <div className="flex items-start space-x-4 mb-4">
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <Avatar className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 rounded-full">
+              <Avatar className="h-14 w-14 rounded-full">
                 <AvatarImage 
                   src={image} 
                   alt={name} 
                   onLoad={() => setImageLoaded(true)}
                   className={`transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                 />
-                <AvatarFallback className="bg-soft-purple/10 text-soft-purple text-xs">{name[0]}</AvatarFallback>
+                <AvatarFallback className="bg-soft-purple/10 text-soft-purple">{name[0]}</AvatarFallback>
               </Avatar>
             </motion.div>
             <motion.div
-              initial={{ x: -10, opacity: 0 }}
+              initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <h3 className="font-bold text-black text-xs sm:text-sm">{name}</h3>
-              <p className="text-gray-600 text-xs sm:text-xs">{role}</p>
+              <h3 className="font-bold text-black">{name}</h3>
+              <p className="text-gray-600 text-sm">{role}</p>
             </motion.div>
           </div>
           <motion.p 
-            className="text-xs sm:text-sm text-gray-700 leading-relaxed"
+            className="text-gray-700 leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
           >
             <motion.span
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className="text-soft-purple text-xs sm:text-sm md:text-base font-serif"
+              className="text-soft-purple text-xl font-serif"
             >
               &ldquo;
             </motion.span>
@@ -79,7 +91,7 @@ const TestimonialCard = ({ name, role, quote, image }: TestimonialCardProps) => 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className="text-soft-purple text-xs sm:text-sm md:text-base font-serif"
+              className="text-soft-purple text-xl font-serif"
             >
               &rdquo;
             </motion.span>

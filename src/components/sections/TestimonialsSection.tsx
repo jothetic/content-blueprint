@@ -1,212 +1,216 @@
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import TestimonialCard from "@/components/TestimonialCard";
-import { Button } from "@/components/ui/button";
+import TestimonialSkeleton from "@/components/TestimonialSkeleton";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import CarouselIndicator from "@/components/CarouselIndicator";
+import type { CarouselApi } from "@/components/ui/carousel";
 
 interface TestimonialsSectionProps {
   isLoading: boolean;
 }
 
 const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) => {
-  const [activeTestimonialIndex, setActiveTestimonialIndex] = useState(0);
-  const [activeSuccessStoryIndex, setActiveSuccessStoryIndex] = useState(0);
-  const isMobile = useIsMobile();
+  const [currentTestimonialSlide, setCurrentTestimonialSlide] = useState(0);
+  const [currentImageSlide, setCurrentImageSlide] = useState(0);
+  const [testimonialCarouselApi, setTestimonialCarouselApi] = useState<CarouselApi | null>(null);
+  const [imageCarouselApi, setImageCarouselApi] = useState<CarouselApi | null>(null);
 
   // Sample data for testimonials
   const writtenTestimonials = [
     {
-      name: "JT Vendors",
-      role: "Content Creator | 28.1K Followers",
+      name: "Viral Creator",
+      role: "Content Creator | 2.7M+ Views",
       quote: "Hit over 2.7M views using the viral content strategies from the program. The engagement tactics really work!",
-      image: "/lovable-uploads/eeade0df-9b63-4931-8239-487b84c7d70f.png"
+      image: "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png"
+    },
+    {
+      name: "Growth Expert",
+      role: "Social Media Influencer | 65K+ Followers",
+      quote: "Grew from 0 to 65K real followers using the community building strategies. The engagement has been incredible!",
+      image: "/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png"
+    },
+    {
+      name: "E-commerce Pro",
+      role: "Shopify Merchant | $10K+ Revenue",
+      quote: "Scaled to over $10,000 in monthly revenue using the sales funnel blueprint. The ROI has been amazing!",
+      image: "/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png"
     },
     {
       name: "JT Vendors",
-      role: "E-commerce Entrepreneur | 28.1K Followers",
-      quote: "Scaled to $5K+ monthly revenue in my store. The strategies and systems from Creator Blueprint really work!",
-      image: "/lovable-uploads/d621778c-3862-4e47-adf2-c5d7622c67a8.png"
+      role: "E-commerce Entrepreneur | 116K+ Sessions",
+      quote: "Scaled to $39.5K in total sales with a 1.94% conversion rate and 793% session growth. The strategies and systems really work!",
+      image: "/lovable-uploads/171f1432-c3ef-4494-bf8e-3de920255ad2.png"
     },
     {
-      name: "Kenny Witt",
-      role: "YouTuber | 9.6K Followers",
-      quote: "Grew my audience and hit over 1.1M views with the content strategies I learned. This program delivers results!",
-      image: "/lovable-uploads/d566d175-fcf0-446b-8574-fd48732ea0fe.png"
+      name: "JJ Vending",
+      role: "Shopify Merchant | 389+ Orders",
+      quote: "Hit $4,005.41 in sales with a 2.09% conversion rate in just 22 days. The growth strategies and support have been invaluable!",
+      image: "/lovable-uploads/fd4edd9c-d981-4a64-a1cd-31ac4b99e115.png"
     },
     {
       name: "Motivated Vendor",
-      role: "TikTok Creator | 30K+ Views",
-      quote: "Making $500/day consistently using the blueprint strategies. This program gave me everything I needed to succeed.",
-      image: "/lovable-uploads/54aed5d5-d93f-4968-ba06-a68d0ba3b3dc.png"
-    },
-    {
-      name: "Derek",
-      role: "Reseller | 65.9K Followers",
-      quote: "Grew from 2K to 65K followers in just months using the community building strategies. The engagement is amazing!",
-      image: "/lovable-uploads/e391df20-ee53-424b-8270-82a179dc0090.png"
+      role: "E-commerce Success Story | $5K+ Monthly",
+      quote: "Reached $5,000+ in monthly revenue with consistent growth. This program gave me the blueprint I needed to scale!",
+      image: "/lovable-uploads/ea5ac916-acb8-42e8-9695-e42bc31aede1.png"
     }
   ];
 
-  // TikTok screenshot images
-  const tiktokImages = [
-    {
-      image: "/lovable-uploads/d621778c-3862-4e47-adf2-c5d7622c67a8.png",
-      views: "2.7M",
-      caption: "going to the check out..."
-    },
-    {
-      image: "/lovable-uploads/54aed5d5-d93f-4968-ba06-a68d0ba3b3dc.png", 
-      views: "48.3K",
-      caption: "$500/day"
-    },
-    {
-      image: "/lovable-uploads/d566d175-fcf0-446b-8574-fd48732ea0fe.png",
-      views: "1.1M",
-      caption: "JT making"
-    },
-    {
-      image: "/lovable-uploads/e391df20-ee53-424b-8270-82a179dc0090.png",
-      views: "65.9K",
-      caption: "Sneaky strategy"
-    }
+  const testimonialImages = [
+    "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png", // 2.7M views
+    "/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png", // 65K followers
+    "/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png", // Shopify dashboard
+    "/lovable-uploads/171f1432-c3ef-4494-bf8e-3de920255ad2.png",
+    "/lovable-uploads/fd4edd9c-d981-4a64-a1cd-31ac4b99e115.png",
+    "/lovable-uploads/ea5ac916-acb8-42e8-9695-e42bc31aede1.png",
+    "/lovable-uploads/0d79d1cb-7250-40c9-b0bf-c6d6003a5c10.png",
+    "/lovable-uploads/1d23383f-2912-463f-9355-15c54d694e34.png",
+    "/lovable-uploads/d0cddb8d-dae4-4011-9f4b-93dc8b114512.png",
+    "/lovable-uploads/c4a4c75f-fefa-46b0-a89e-12d70f36b467.png",
+    "/lovable-uploads/4ed3fc31-8cbf-4bd2-95c9-618c54edba8b.png",
+    "/lovable-uploads/4ee30212-8722-4c54-b21c-13d3ead83a36.png",
+    "/lovable-uploads/67162bff-1d28-4fcf-9cea-b25419541e4c.png",
+    "/lovable-uploads/34464386-e73c-4de1-a744-f16a4b6b4b29.png",
+    "/lovable-uploads/9ac7752e-e8a9-4b1c-a151-45fbf20484bb.png",
+    "/lovable-uploads/6da00e19-deb3-43a3-9431-9b89ca44e15a.png",
+    "/lovable-uploads/51a943ac-c3fa-45e0-882c-0f2db5942a8a.png",
+    "/lovable-uploads/1c09b964-cc50-46b4-902a-9b28bea52ba8.png",
+    "/lovable-uploads/424b3593-d73e-43d2-9b3f-d5c8f6599283.png",
+    "/lovable-uploads/42e66244-bd3b-4ff8-b130-b3e9e75c8902.png"
   ];
 
-  // Next testimonial
-  const goToNextTestimonial = () => {
-    setActiveTestimonialIndex((prev) => 
-      (prev + 1) % writtenTestimonials.length
-    );
-  };
+  // Set up effect to update currentSlide when carousel changes
+  React.useEffect(() => {
+    if (testimonialCarouselApi) {
+      const updateTestimonialSlide = () => {
+        setCurrentTestimonialSlide(testimonialCarouselApi.selectedScrollSnap());
+      };
+      
+      testimonialCarouselApi.on("select", updateTestimonialSlide);
+      // Call once to set initial state
+      updateTestimonialSlide();
+      
+      return () => {
+        testimonialCarouselApi.off("select", updateTestimonialSlide);
+      };
+    }
+  }, [testimonialCarouselApi]);
 
-  // Previous testimonial
-  const goToPrevTestimonial = () => {
-    setActiveTestimonialIndex((prev) => 
-      (prev - 1 + writtenTestimonials.length) % writtenTestimonials.length
-    );
-  };
-
-  // Next success story
-  const goToNextSuccessStory = () => {
-    setActiveSuccessStoryIndex((prev) => 
-      (prev + 1) % tiktokImages.length
-    );
-  };
-
-  // Previous success story
-  const goToPrevSuccessStory = () => {
-    setActiveSuccessStoryIndex((prev) => 
-      (prev - 1 + tiktokImages.length) % tiktokImages.length
-    );
-  };
+  React.useEffect(() => {
+    if (imageCarouselApi) {
+      const updateImageSlide = () => {
+        setCurrentImageSlide(imageCarouselApi.selectedScrollSnap());
+      };
+      
+      imageCarouselApi.on("select", updateImageSlide);
+      // Call once to set initial state
+      updateImageSlide();
+      
+      return () => {
+        imageCarouselApi.off("select", updateImageSlide);
+      };
+    }
+  }, [imageCarouselApi]);
 
   return (
-    <section className="py-10 md:py-20 px-4 md:px-6 bg-white overflow-hidden">
+    <section className="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-base sm:text-lg md:text-2xl lg:text-4xl font-bold text-center mb-6 md:mb-12 text-black">
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-black"
+        >
           Real Results from Real Students 🚀
-        </h2>
+        </motion.h2>
 
-        {/* Text Testimonials Section - Simple Carousel */}
-        <div className="mb-4 md:mb-6">
-          <div className="relative py-4 md:py-10">
-            {/* Large decorative quotation mark */}
-            <div className="absolute top-0 left-0 text-6xl md:text-8xl text-purple-100 font-serif opacity-50 z-0">
-              "
-            </div>
-            
-            {/* Testimonial Slider */}
-            <div className="relative h-[280px] sm:h-[240px] md:h-[220px]">
+        {/* Written Testimonials Carousel */}
+        <div className="max-w-3xl mx-auto mb-8 md:mb-16">
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+            }}
+            setApi={setTestimonialCarouselApi}
+            className="w-full px-4 md:px-0"
+          >
+            <CarouselContent>
               {isLoading ? (
-                <div className="flex justify-center w-full px-4">
-                  <Skeleton className="w-full max-w-3xl h-[200px] rounded-lg" />
-                </div>
+                Array.from({ length: 3 }).map((_, index) => (
+                  <CarouselItem key={`skeleton-${index}`} className="md:basis-full">
+                    <div className="px-1 md:px-4">
+                      <TestimonialSkeleton />
+                    </div>
+                  </CarouselItem>
+                ))
               ) : (
-                <div className="flex justify-center">
-                  <div className="w-full max-w-3xl px-4">
-                    <TestimonialCard {...writtenTestimonials[activeTestimonialIndex]} />
-                  </div>
-                </div>
+                writtenTestimonials.map((testimonial, index) => (
+                  <CarouselItem key={index} className="md:basis-full">
+                    <div className="px-1 md:px-4">
+                      <TestimonialCard {...testimonial} />
+                    </div>
+                  </CarouselItem>
+                ))
               )}
+            </CarouselContent>
+            <div className="flex justify-center mt-4 gap-2 md:gap-4">
+              <CarouselPrevious className="static transform-none" />
+              <CarouselNext className="static transform-none" />
             </div>
-
-            {/* Navigation Controls - Arrows only for written testimonials */}
-            <div className="relative z-20 flex justify-between items-center max-w-3xl mx-auto px-4">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={goToPrevTestimonial}
-                className="bg-white/80 hover:bg-white shadow-sm"
-                disabled={isLoading}
-              >
-                <ChevronLeft className="h-5 w-5 text-purple-500" />
-                <span className="sr-only">Previous testimonial</span>
-              </Button>
-              
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={goToNextTestimonial}
-                className="bg-white/80 hover:bg-white shadow-sm"
-                disabled={isLoading}
-              >
-                <ChevronRight className="h-5 w-5 text-purple-500" />
-                <span className="sr-only">Next testimonial</span>
-              </Button>
-            </div>
-          </div>
+          </Carousel>
         </div>
 
-        {/* Image Carousel - Simple Version with arrows only */}
-        <div className="mt-6">
-          <div className="max-w-6xl mx-auto">
-            <div className="relative flex justify-center items-center h-[500px] md:h-[600px]">
+        {/* Success Stories Image Carousel */}
+        <div className="max-w-2xl mx-auto">
+          <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center">
+            Success Stories Showcase
+          </h3>
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+            }}
+            setApi={setImageCarouselApi}
+            className="w-full px-4 md:px-0"
+          >
+            <CarouselContent>
               {isLoading ? (
-                <div className="flex justify-center items-center h-full">
-                  <Skeleton className="w-[320px] md:w-[500px] lg:w-[600px] aspect-[9/16] rounded-lg" />
-                </div>
-              ) : (
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="overflow-hidden rounded-xl shadow-xl transition-all duration-300 ring-4 ring-purple-500/30">
-                    <img
-                      src={tiktokImages[activeSuccessStoryIndex].image}
-                      alt={`Success story ${activeSuccessStoryIndex + 1}`}
-                      className="w-[280px] sm:w-[320px] md:w-[400px] lg:w-[500px] object-cover rounded-xl"
-                      loading="lazy"
-                    />
-                    <div className="absolute bottom-3 left-3 bg-black/70 text-white px-2 py-1 rounded-full flex items-center text-xs sm:text-sm">
-                      <span className="mr-1">👁️</span> {tiktokImages[activeSuccessStoryIndex].views}
+                Array.from({ length: 5 }).map((_, index) => (
+                  <CarouselItem key={`image-skeleton-${index}`} className="basis-3/4 md:basis-1/2 lg:basis-1/3">
+                    <div className="aspect-[9/16] rounded-lg overflow-hidden px-1 md:px-2">
+                      <Skeleton className="w-full h-full" />
                     </div>
-                  </div>
-                </div>
+                  </CarouselItem>
+                ))
+              ) : (
+                testimonialImages.map((image, index) => (
+                  <CarouselItem key={index} className="basis-3/4 md:basis-1/2 lg:basis-1/3">
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 }}
+                      className="aspect-[9/16] rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 px-1 md:px-2"
+                    >
+                      <div className="w-full h-full bg-gray-100 flex items-center justify-center overflow-hidden rounded-lg">
+                        <img 
+                          src={image} 
+                          alt={`Success story ${index + 1}`}
+                          className="w-full h-full object-contain"
+                          loading="lazy"
+                        />
+                      </div>
+                    </motion.div>
+                  </CarouselItem>
+                ))
               )}
-
-              {/* Navigation Controls - Arrows only for image carousel */}
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={goToPrevSuccessStory}
-                className="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white shadow-md h-10 w-10 rounded-full z-10"
-                disabled={isLoading}
-              >
-                <ChevronLeft className="h-5 w-5 text-purple-500" />
-                <span className="sr-only">Previous image</span>
-              </Button>
-              
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={goToNextSuccessStory}
-                className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white shadow-md h-10 w-10 rounded-full z-10"
-                disabled={isLoading}
-              >
-                <ChevronRight className="h-5 w-5 text-purple-500" />
-                <span className="sr-only">Next image</span>
-              </Button>
+            </CarouselContent>
+            <div className="flex justify-center mt-4 gap-2 md:gap-4">
+              <CarouselPrevious className="static transform-none" />
+              <CarouselNext className="static transform-none" />
             </div>
-          </div>
+          </Carousel>
         </div>
       </div>
     </section>

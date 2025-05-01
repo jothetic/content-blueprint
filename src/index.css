@@ -43,27 +43,9 @@
   * {
     @apply border-border;
   }
-  
-  html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    touch-action: manipulation;
-    -webkit-overflow-scrolling: touch;
-  }
-  
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Poppins', sans-serif;
-    position: relative;
-  }
-  
-  #root {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
   }
 }
 
@@ -95,24 +77,6 @@
 
 .animate-slide-in {
   animation: slide-in 0.8s ease-out forwards;
-}
-
-/* Perspective Container for 3D Effects */
-.perspective-container {
-  perspective: 1000px;
-  position: relative;
-}
-
-/* Track to hold testimonials and create 3D space */
-.testimonial-track {
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-}
-
-/* Shadow for active success story */
-.story-shadow {
-  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.2);
 }
 
 .bg-deep-purple-gradient {
