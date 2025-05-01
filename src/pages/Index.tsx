@@ -35,13 +35,6 @@ const Index = () => {
     // Simulate loading state
     const timer = setTimeout(() => setIsLoading(false), 1500);
     
-    // iOS specific fix to ensure content is scrollable
-    const handleTouchMove = (e: TouchEvent) => {
-      // Don't stop propagation - allow the event to bubble naturally
-    };
-    
-    document.addEventListener('touchmove', handleTouchMove, { passive: true });
-    
     // Set up the viewport correctly for iOS
     const setViewportHeight = () => {
       document.documentElement.style.setProperty(
@@ -54,15 +47,29 @@ const Index = () => {
     setViewportHeight();
     window.addEventListener('resize', setViewportHeight);
     
+    // Make sure mobile Safari can scroll
+    document.body.style.position = "static";
+    document.body.style.overflow = "auto";
+    document.body.style.touchAction = "auto";
+    document.documentElement.style.overflow = "auto";
+    document.documentElement.style.touchAction = "auto";
+    
     return () => {
       clearTimeout(timer);
-      document.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('resize', setViewportHeight);
     };
   }, []);
 
   return (
-    <div className="min-h-[var(--vh,1vh)*100] overflow-x-hidden bg-deep-purple-gradient" style={{ touchAction: "auto" }}>
+    <div 
+      className="overflow-x-hidden bg-deep-purple-gradient" 
+      style={{ 
+        minHeight: "var(--vh, 1vh) * 100", 
+        touchAction: "pan-y", 
+        overscrollBehavior: "contain",
+        WebkitOverflowScrolling: "touch"
+      }}
+    >
       <Navbar />
       <BackToTop />
       
