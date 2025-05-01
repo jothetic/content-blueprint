@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -12,10 +13,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #3B82F6aa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #3B82F6aa);
 }
 
 @keyframes logo-spin {
@@ -39,4 +40,8 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.bg-deep-purple-gradient {
+  background: linear-gradient(to bottom, #0D001F 0%, #0D001F 100%);
 }

@@ -5,6 +5,7 @@ import TestimonialSkeleton from "@/components/TestimonialSkeleton";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { CarouselApi } from "@/components/ui/carousel";
+import CarouselIndicator from "@/components/CarouselIndicator";
 
 interface TestimonialsSectionProps {
   isLoading: boolean;
@@ -101,7 +102,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
   return (
     <section 
       id="testimonials-section" 
-      className="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-white pb-24"
+      className="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient"
       style={{ touchAction: "auto" }}
     >
       <div className="max-w-7xl mx-auto">
@@ -109,7 +110,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-black"
+          className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-white"
           style={{ touchAction: "auto" }}
         >
           Real Results from Real Students 🚀
@@ -145,15 +146,15 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
               )}
             </CarouselContent>
             <div className="flex justify-center mt-4 gap-2 md:gap-4">
-              <CarouselPrevious className="static transform-none bg-purple-500 text-white hover:bg-purple-700" />
-              <CarouselNext className="static transform-none bg-purple-500 text-white hover:bg-purple-700" />
+              <CarouselPrevious className="static transform-none bg-[#3B82F6] hover:bg-[#2563EB] text-white border-none" />
+              <CarouselNext className="static transform-none bg-[#3B82F6] hover:bg-[#2563EB] text-white border-none" />
             </div>
           </Carousel>
         </div>
 
         {/* Success Stories Image Carousel - Simple Square Images */}
         <div className="max-w-3xl mx-auto">
-          <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center">
+          <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center text-white">
             Success Stories Showcase
           </h3>
           <Carousel
@@ -194,9 +195,16 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 ))
               )}
             </CarouselContent>
-            <div className="flex justify-center mt-4 gap-2 md:gap-4 mb-8">
-              <CarouselPrevious className="static transform-none bg-purple-500 text-white hover:bg-purple-700" />
-              <CarouselNext className="static transform-none bg-purple-500 text-white hover:bg-purple-700" />
+            <div className="flex justify-center mt-2 gap-2 md:gap-4 mb-4">
+              <CarouselPrevious className="static transform-none bg-[#3B82F6] hover:bg-[#2563EB] text-white border-none shadow-md w-10 h-10" />
+              {!isLoading && (
+                <CarouselIndicator 
+                  totalSlides={testimonialImages.length} 
+                  currentSlide={currentImageSlide} 
+                  onSelect={(index) => imageCarouselApi?.scrollTo(index)} 
+                />
+              )}
+              <CarouselNext className="static transform-none bg-[#3B82F6] hover:bg-[#2563EB] text-white border-none shadow-md w-10 h-10" />
             </div>
           </Carousel>
         </div>
