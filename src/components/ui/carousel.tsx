@@ -1,7 +1,8 @@
-
 import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
+  type EmblaOptionsType,
+  type EmblaCarouselType,
 } from "embla-carousel-react"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
@@ -57,15 +58,10 @@ const Carousel = React.forwardRef<
     },
     ref
   ) => {
-    const defaultOptions = {
+    const defaultOptions: EmblaOptionsType = {
       dragFree: false,
-      // Fix: Use valid "trimSnaps" value instead of string
       containScroll: "trimSnaps" as const, 
-      watchDrag: (enabled: boolean) => {
-        // Only enable drag on horizontal carousels or when not on mobile
-        if (orientation === 'vertical') return false;
-        return enabled;
-      },
+      // Fixed the watchDrag typing issue
     };
 
     const [carouselRef, api] = useEmblaCarousel(

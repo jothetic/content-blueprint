@@ -33,23 +33,31 @@ const Index = () => {
     setViewportHeight();
     window.addEventListener('resize', setViewportHeight);
     
-    // Fix iOS Safari scrolling issues
+    // Enable passive touch events for better scrolling performance
     document.addEventListener('touchstart', function() {}, {passive: true});
     document.addEventListener('touchmove', function() {}, {passive: true});
     
-    // Remove animation styles that might interfere with scrolling
-    const cleanup = () => {
+    // Force iOS Safari to allow scrolling on the whole document
+    const preventIosOverscroll = () => {
+      document.body.style.overflow = 'auto';
+      document.body.style.WebkitOverflowScrolling = 'touch';
+      document.documentElement.style.overflow = 'auto';
+    };
+    
+    preventIosOverscroll();
+    
+    // Add a minimal timeout to allow initial animations to complete
+    setTimeout(() => {
+      // Force all motion-related elements to not interfere with scrolling
       const motionElements = document.querySelectorAll('[data-framer-motion-components], div[style*="transform"]');
       motionElements.forEach(el => {
         if (el instanceof HTMLElement) {
-          el.style.pointerEvents = 'none';
-          el.style.touchAction = 'none';
+          // Allow pointer events but enforce proper touch action
+          el.style.pointerEvents = 'auto';
+          el.style.touchAction = 'pan-y';
         }
       });
-    };
-    
-    // Run cleanup after animations finish
-    setTimeout(cleanup, 2000);
+    }, 1000);
     
     return () => {
       clearTimeout(timer);
@@ -62,7 +70,7 @@ const Index = () => {
       className="overflow-x-hidden bg-deep-purple-gradient" 
       style={{ 
         minHeight: "var(--vh, 1vh) * 100", 
-        touchAction: "auto",
+        touchAction: "pan-y",
         WebkitOverflowScrolling: "touch"
       }}
       data-ios-fix="true"
@@ -74,12 +82,12 @@ const Index = () => {
       <HeroSection visible={visible} />
 
       {/* Testimonials Section */}
-      <Element name="testimonials" style={{ touchAction: "auto" }}>
+      <Element name="testimonials" style={{ touchAction: "pan-y" }}>
         <TestimonialsSection isLoading={isLoading} />
       </Element>
 
       {/* Pricing Section */}
-      <Element name="pricing-section" style={{ touchAction: "auto" }}>
+      <Element name="pricing-section" style={{ touchAction: "pan-y" }}>
         <PricingSection 
           isAnnual={isAnnual} 
           setIsAnnual={setIsAnnual} 

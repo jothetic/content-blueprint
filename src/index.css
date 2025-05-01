@@ -140,13 +140,24 @@
 
 /* Enhanced iOS Safari scrolling fixes */
 section, div {
+  touch-action: pan-y;
+}
+
+/* Fix YouTube embed scrolling issues */
+iframe {
+  pointer-events: auto;
   touch-action: auto;
 }
 
-/* All animation elements should not interfere with page scrolling */
+/* When we detect scroll is happening, make iframes non-interactive */
+.scrolling-active iframe {
+  pointer-events: none;
+}
+
+/* All animation elements should still allow scrolling */
 .motion-div {
-  pointer-events: none; 
-  touch-action: none;
+  pointer-events: auto; 
+  touch-action: pan-y;
   position: relative;
   z-index: 1;
 }
@@ -164,7 +175,8 @@ section,
 [data-framer-motion-components], 
 div[style*="transform"], 
 div[style*="translate"] {
-  pointer-events: none;
+  pointer-events: auto;
+  touch-action: pan-y;
 }
 
 /* Fix for all carousel elements */
@@ -199,8 +211,15 @@ div[style*="translate"] {
   div[style*="transform"],
   div[style*="translate"],
   [data-framer-motion-components] {
-    pointer-events: none;
-    touch-action: none;
+    pointer-events: auto;
+    touch-action: pan-y;
+  }
+  
+  /* Fix for youtube embeds */
+  iframe {
+    touch-action: auto;
+    z-index: 2;
+    position: relative;
   }
   
   /* Fix for buttons and interactive elements */
