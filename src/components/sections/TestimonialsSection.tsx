@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -146,8 +147,8 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           </Carousel>
         </div>
 
-        {/* Success Stories Image Carousel */}
-        <div className="max-w-2xl mx-auto">
+        {/* Success Stories Image Carousel - Updated Styling */}
+        <div className="max-w-3xl mx-auto"> {/* Increased max-width for larger items */}
           <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center">
             Success Stories Showcase
           </h3>
@@ -162,7 +163,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
             <CarouselContent>
               {isLoading ? (
                 Array.from({ length: 5 }).map((_, index) => (
-                  <CarouselItem key={`image-skeleton-${index}`} className="basis-3/4 md:basis-1/2 lg:basis-1/3">
+                  <CarouselItem key={`image-skeleton-${index}`} className="basis-3/4 md:basis-1/2">
                     <div className="aspect-[9/16] rounded-lg overflow-hidden px-1 md:px-2">
                       <Skeleton className="w-full h-full" />
                     </div>
@@ -170,22 +171,21 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 ))
               ) : (
                 testimonialImages.map((image, index) => (
-                  <CarouselItem key={index} className="basis-3/4 md:basis-1/2 lg:basis-1/3">
+                  <CarouselItem key={index} className="basis-3/4 md:basis-1/2">
                     <motion.div
                       initial={{ opacity: 0, scale: 0.95 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.05 }}
                       className="aspect-[9/16] transition-transform duration-300 px-1 md:px-2"
+                      whileHover={{ scale: 1.03 }}
                     >
-                      <div className="w-full h-full bg-gray-100 flex items-center justify-center overflow-hidden">
-                        <img 
-                          src={image} 
-                          alt={`Success story ${index + 1}`}
-                          className="w-full h-full object-contain"
-                          loading="lazy"
-                        />
-                      </div>
+                      <img 
+                        src={image} 
+                        alt={`Success story ${index + 1}`}
+                        className="w-full h-full object-contain rounded-lg shadow-md"
+                        loading="lazy"
+                      />
                     </motion.div>
                   </CarouselItem>
                 ))
