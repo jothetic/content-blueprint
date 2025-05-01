@@ -1,413 +1,215 @@
-
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { scroller } from "react-scroll";
-import { useIsMobile } from "@/hooks/use-mobile";
-import Autoplay from "embla-carousel-autoplay";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { Card } from "@/components/ui/card";
 import TestimonialCard from "@/components/TestimonialCard";
-import CarouselIndicator from "@/components/CarouselIndicator";
+import TestimonialSkeleton from "@/components/TestimonialSkeleton";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Skeleton } from "@/components/ui/skeleton";
+import type { CarouselApi } from "@/components/ui/carousel";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface TestimonialsSectionProps {
   isLoading: boolean;
 }
 
-// Define more specific types for our testimonials
-interface TestimonialBase {
-  name: string;
-  role: string;
-  image: string;
-}
-
-interface MessageTestimonial extends TestimonialBase {
-  stats: {
-    posts: number;
-    followers: number;
-    following: number;
-  };
-  bio: string;
-  description: string;
-  contact: string;
-  messages: {
-    date: string;
-    content: string;
-    metrics: {
-      money?: number;
-      fire?: number;
-      heart?: number;
-    };
-    extra?: string;
-  }[];
-}
-
-interface QuoteTestimonial extends TestimonialBase {
-  stats: string;
-  quote: string;
-  videoImage?: string;
-}
-
-type Testimonial = MessageTestimonial | QuoteTestimonial;
-
 const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [carouselApi, setCarouselApi] = useState<any>(null);
-  const autoplayRef = useRef(Autoplay({ delay: 4000, stopOnInteraction: false }));
+  const [currentTestimonialSlide, setCurrentTestimonialSlide] = useState(0);
+  const [currentImageSlide, setCurrentImageSlide] = useState(0);
+  const [testimonialCarouselApi, setTestimonialCarouselApi] = useState<CarouselApi | null>(null);
+  const [imageCarouselApi, setImageCarouselApi] = useState<CarouselApi | null>(null);
   const isMobile = useIsMobile();
 
-  const testimonials: Testimonial[] = [
-    {
-      name: "Joe Lim",
-      role: "Digital Creator",
-      stats: {
-        posts: 1,
-        followers: 111,
-        following: 53
-      },
-      bio: "Quant trader turned propagandist",
-      description: "I create fan pages for personal brands and artists",
-      contact: "DM or Email Joe@overdist.com -> Let's work!",
-      messages: [
-        {
-          date: "04/16/2024 4:12 PM",
-          content: "closed my first client 😀",
-          metrics: {
-            money: 8
-          }
-        },
-        {
-          date: "05/17/2024 8:41 AM",
-          content: "closed 7.8k in sales yesterday 😊",
-          metrics: {
-            fire: 7,
-            heart: 2
-          },
-          extra: "and 2m views for my client in 8 or 9 days :O"
-        }
-      ],
-      image: "/lovable-uploads/c597c321-67d9-4df6-b5f5-1268e45abc71.png"
-    },
-    {
-      name: "JT",
-      role: "Digital Product Creator",
-      stats: "30k TikTok followers",
-      quote: "Grew my TikTok from 10k to 30k followers and built a profitable digital product business.",
-      image: "/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png",
-      videoImage: "/lovable-uploads/171f1432-c3ef-4494-bf8e-3de920255ad2.png"
-    },
+  // Sample data for testimonials
+  const writtenTestimonials = [
     {
       name: "Viral Creator",
-      role: "Content Creator",
-      stats: "2.7M+ Views",
-      quote: "Hit over 2.7M views using the viral content strategies from the program.",
-      image: "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png",
-      videoImage: "/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png"
+      role: "Content Creator | 2.7M+ Views",
+      quote: "Hit over 2.7M views using the viral content strategies from the program. The engagement tactics really work!",
+      image: "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png"
+    },
+    {
+      name: "Growth Expert",
+      role: "Social Media Influencer | 65K+ Followers",
+      quote: "Grew from 0 to 65K real followers using the community building strategies. The engagement has been incredible!",
+      image: "/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png"
+    },
+    {
+      name: "E-commerce Pro",
+      role: "Shopify Merchant | $10K+ Revenue",
+      quote: "Scaled to over $10,000 in monthly revenue using the sales funnel blueprint. The ROI has been amazing!",
+      image: "/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png"
+    },
+    {
+      name: "JT Vendors",
+      role: "E-commerce Entrepreneur | 116K+ Sessions",
+      quote: "Scaled to $39.5K in total sales with a 1.94% conversion rate and 793% session growth. The strategies and systems really work!",
+      image: "/lovable-uploads/171f1432-c3ef-4494-bf8e-3de920255ad2.png"
+    },
+    {
+      name: "JJ Vending",
+      role: "Shopify Merchant | 389+ Orders",
+      quote: "Hit $4,005.41 in sales with a 2.09% conversion rate in just 22 days. The growth strategies and support have been invaluable!",
+      image: "/lovable-uploads/fd4edd9c-d981-4a64-a1cd-31ac4b99e115.png"
+    },
+    {
+      name: "Motivated Vendor",
+      role: "E-commerce Success Story | $5K+ Monthly",
+      quote: "Reached $5,000+ in monthly revenue with consistent growth. This program gave me the blueprint I needed to scale!",
+      image: "/lovable-uploads/ea5ac916-acb8-42e8-9695-e42bc31aede1.png"
     }
   ];
-  
+
+  const testimonialImages = [
+    "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png", // 2.7M views
+    "/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png", // 65K followers
+    "/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png", // Shopify dashboard
+    "/lovable-uploads/171f1432-c3ef-4494-bf8e-3de920255ad2.png",
+    "/lovable-uploads/fd4edd9c-d981-4a64-a1cd-31ac4b99e115.png",
+    "/lovable-uploads/ea5ac916-acb8-42e8-9695-e42bc31aede1.png",
+    "/lovable-uploads/0d79d1cb-7250-40c9-b0bf-c6d6003a5c10.png",
+    "/lovable-uploads/1d23383f-2912-463f-9355-15c54d694e34.png",
+    "/lovable-uploads/d0cddb8d-dae4-4011-9f4b-93dc8b114512.png",
+    "/lovable-uploads/c4a4c75f-fefa-46b0-a89e-12d70f36b467.png",
+    "/lovable-uploads/4ed3fc31-8cbf-4bd2-95c9-618c54edba8b.png",
+    "/lovable-uploads/4ee30212-8722-4c54-b21c-13d3ead83a36.png",
+    "/lovable-uploads/67162bff-1d28-4fcf-9cea-b25419541e4c.png",
+    "/lovable-uploads/34464386-e73c-4de1-a744-f16a4b6b4b29.png",
+    "/lovable-uploads/9ac7752e-e8a9-4b1c-a151-45fbf20484bb.png",
+    "/lovable-uploads/6da00e19-deb3-43a3-9431-9b89ca44e15a.png",
+    "/lovable-uploads/51a943ac-c3fa-45e0-882c-0f2db5942a8a.png",
+    "/lovable-uploads/1c09b964-cc50-46b4-902a-9b28bea52ba8.png",
+    "/lovable-uploads/424b3593-d73e-43d2-9b3f-d5c8f6599283.png",
+    "/lovable-uploads/42e66244-bd3b-4ff8-b130-b3e9e75c8902.png"
+  ];
+
+  // Set up effect to update currentSlide when carousel changes
   React.useEffect(() => {
-    if (carouselApi) {
-      const updateSlide = () => {
-        setCurrentSlide(carouselApi.selectedScrollSnap());
+    if (testimonialCarouselApi) {
+      const updateTestimonialSlide = () => {
+        setCurrentTestimonialSlide(testimonialCarouselApi.selectedScrollSnap());
       };
       
-      carouselApi.on("select", updateSlide);
-      updateSlide();
+      testimonialCarouselApi.on("select", updateTestimonialSlide);
+      // Call once to set initial state
+      updateTestimonialSlide();
       
       return () => {
-        carouselApi.off("select", updateSlide);
+        testimonialCarouselApi.off("select", updateTestimonialSlide);
       };
     }
-  }, [carouselApi]);
+  }, [testimonialCarouselApi]);
 
-  const goToPreviousSlide = () => {
-    if (carouselApi) carouselApi.scrollPrev();
-  };
-
-  const goToNextSlide = () => {
-    if (carouselApi) carouselApi.scrollNext();
-  };
-
-  // Helper function to check if a testimonial is a MessageTestimonial
-  const isMessageTestimonial = (testimonial: Testimonial): testimonial is MessageTestimonial => {
-    return 'messages' in testimonial;
-  };
+  React.useEffect(() => {
+    if (imageCarouselApi) {
+      const updateImageSlide = () => {
+        setCurrentImageSlide(imageCarouselApi.selectedScrollSnap());
+      };
+      
+      imageCarouselApi.on("select", updateImageSlide);
+      // Call once to set initial state
+      updateImageSlide();
+      
+      return () => {
+        imageCarouselApi.off("select", updateImageSlide);
+      };
+    }
+  }, [imageCarouselApi]);
 
   return (
-    <section className="py-8 px-4 bg-white rounded-t-3xl -mt-4 relative z-20">
-      <div className="max-w-xl mx-auto">
-        <div className="text-center mb-6">
-          <h2 className="text-purple-500 uppercase text-sm font-medium tracking-wide mb-4">
-            STUDENT TESTIMONIALS
-          </h2>
-          
-          <h3 className="text-2xl font-bold mb-6">
-            We've helped <span className="text-purple-500">1,000+ creators</span> reach their goals on Instagram and TikTok.
-          </h3>
-        </div>
-        
-        {isLoading ? (
-          <div className="h-64 bg-gray-100 animate-pulse rounded-xl mb-10"></div>
-        ) : (
-          <div className="relative mb-6">
-            {/* Featured testimonial carousel */}
-            <Carousel
-              setApi={setCarouselApi}
-              plugins={[autoplayRef.current]}
-              className="w-full"
-              opts={{
-                align: "center",
-                loop: true,
-              }}
-            >
-              <CarouselContent>
-                {/* Joe Lim Testimonial */}
-                <CarouselItem key="joe" className="basis-full">
-                  <div className="bg-white rounded-xl">
-                    <div className="flex items-start mb-3">
-                      <div className="mr-3">
-                        <img 
-                          src={testimonials[0].image} 
-                          alt={testimonials[0].name}
-                          className="w-14 h-14 rounded-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-lg">{testimonials[0].name}</h4>
-                        {isMessageTestimonial(testimonials[0]) && (
-                          <div className="flex text-xs space-x-4 mb-1">
-                            <span><b>{testimonials[0].stats.posts}</b> post</span>
-                            <span><b>{testimonials[0].stats.followers}</b> followers</span>
-                            <span><b>{testimonials[0].stats.following}</b> following</span>
-                          </div>
-                        )}
-                        <p className="font-medium text-xs">
-                          {isMessageTestimonial(testimonials[0]) ? testimonials[0].bio : ''}
-                        </p>
-                        <p className="text-xs">
-                          {isMessageTestimonial(testimonials[0]) ? testimonials[0].description : ''}
-                        </p>
-                        <p className="text-xs">
-                          {isMessageTestimonial(testimonials[0]) ? testimonials[0].contact : ''}
-                        </p>
-                      </div>
-                    </div>
-                    
-                    {/* Messages */}
-                    {isMessageTestimonial(testimonials[0]) && (
-                      <div className="space-y-3">
-                        {testimonials[0].messages.map((message, idx) => (
-                          <div key={idx} className="bg-black rounded-lg p-3 text-white">
-                            <div className="flex items-center gap-2 mb-1">
-                              <img 
-                                src={testimonials[0].image} 
-                                alt={testimonials[0].name}
-                                className="w-6 h-6 rounded-full object-cover"
-                              />
-                              <span className="text-sm">{testimonials[0].name.toLowerCase()}</span>
-                              <span className="text-xs text-gray-400">{message.date}</span>
-                            </div>
-                            <p className="mb-2">{message.content}</p>
-                            <div className="flex gap-2">
-                              {message.metrics.money && (
-                                <span className="bg-blue-900/50 rounded-md px-2 py-1 text-sm">
-                                  💰 {message.metrics.money}
-                                </span>
-                              )}
-                              {message.metrics.fire && (
-                                <span className="bg-blue-900/50 rounded-md px-2 py-1 text-sm">
-                                  🔥 {message.metrics.fire}
-                                </span>
-                              )}
-                              {message.metrics.heart && (
-                                <span className="bg-blue-900/50 rounded-md px-2 py-1 text-sm">
-                                  ❤️ {message.metrics.heart}
-                                </span>
-                              )}
-                              <span className="bg-blue-900/50 rounded-md px-2 py-1 text-sm">
-                                😊
-                              </span>
-                            </div>
-                            {message.extra && (
-                              <p className="mt-2 text-sm">{message.extra}</p>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </CarouselItem>
+    <section className="py-6 md:py-16 px-2 md:px-6 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-base sm:text-lg md:text-2xl lg:text-4xl font-bold text-center mb-3 md:mb-8 text-black"
+        >
+          Real Results from Real Students 🚀
+        </motion.h2>
 
-                {/* JT Testimonial */}
-                <CarouselItem key="jt" className="basis-full">
-                  <div className="bg-white p-4 rounded-xl">
-                    <div className="flex items-center mb-3">
-                      <div className="mr-3">
-                        <img 
-                          src={testimonials[1].image} 
-                          alt={testimonials[1].name}
-                          className="w-14 h-14 rounded-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-lg">{testimonials[1].name}</h4>
-                        <p className="text-purple-500 text-sm">{testimonials[1].role}</p>
-                        <p className="text-purple-500 text-sm">
-                          {!isMessageTestimonial(testimonials[1]) ? testimonials[1].stats : ''}
-                        </p>
-                      </div>
-                    </div>
-                    
-                    {!isMessageTestimonial(testimonials[1]) && (
-                      <>
-                        <blockquote className="text-gray-800 mb-4">
-                          "{testimonials[1].quote}"
-                        </blockquote>
-                        
-                        {testimonials[1].videoImage && (
-                          <div className="relative rounded-lg overflow-hidden">
-                            <img 
-                              src={testimonials[1].videoImage}
-                              alt="Video thumbnail" 
-                              className="w-full h-auto rounded-lg"
-                            />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <div className="bg-black/70 rounded-full p-3">
-                                <div className="w-0 h-0 border-y-8 border-y-transparent border-l-12 border-l-white ml-1"></div>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </>
-                    )}
-                  </div>
-                </CarouselItem>
-
-                {/* Viral Creator Testimonial */}
-                <CarouselItem key="viral" className="basis-full">
-                  <div className="bg-white p-4 rounded-xl">
-                    <div className="flex items-center mb-3">
-                      <div className="mr-3">
-                        <img 
-                          src={testimonials[2].image} 
-                          alt={testimonials[2].name}
-                          className="w-14 h-14 rounded-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-lg">{testimonials[2].name}</h4>
-                        <p className="text-purple-500 text-sm">{testimonials[2].role}</p>
-                        <p className="text-purple-500 text-sm">
-                          {!isMessageTestimonial(testimonials[2]) ? testimonials[2].stats : ''}
-                        </p>
-                      </div>
-                    </div>
-                    
-                    {!isMessageTestimonial(testimonials[2]) && (
-                      <>
-                        <blockquote className="text-gray-800 mb-4">
-                          "{testimonials[2].quote}"
-                        </blockquote>
-                        
-                        {testimonials[2].videoImage && (
-                          <div className="relative rounded-lg overflow-hidden">
-                            <img 
-                              src={testimonials[2].videoImage}
-                              alt="Video thumbnail" 
-                              className="w-full h-auto rounded-lg"
-                            />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <div className="bg-black/70 rounded-full p-3">
-                                <div className="w-0 h-0 border-y-8 border-y-transparent border-l-12 border-l-white ml-1"></div>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </>
-                    )}
-                  </div>
-                </CarouselItem>
-              </CarouselContent>
-            </Carousel>
-
-            {/* Navigation Buttons */}
-            <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between pointer-events-none px-2">
-              <button 
-                onClick={goToPreviousSlide} 
-                className="bg-white/30 hover:bg-white/40 rounded-full w-8 h-8 flex items-center justify-center pointer-events-auto"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft className="w-5 h-5 text-gray-800" />
-              </button>
-              <button 
-                onClick={goToNextSlide} 
-                className="bg-white/30 hover:bg-white/40 rounded-full w-8 h-8 flex items-center justify-center pointer-events-auto"
-                aria-label="Next slide"
-              >
-                <ChevronRight className="w-5 h-5 text-gray-800" />
-              </button>
-            </div>
-          </div>
-        )}
-        
-        {/* Horizontal testimonials stacked as per reference */}
-        {!isLoading && (
-          <div className="mb-8">
-            <div className="grid gap-4">
-              <TestimonialCard
-                name="JT"
-                role="Digital Product Creator"
-                quote="Went from 10k to 30k TikTok followers and built a profitable digital product business."
-                image="/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png"
-              />
-              <TestimonialCard
-                name="Viral Creator"
-                role="Content Creator"
-                quote="Hit over 2.7M views using the viral content strategies from the program."
-                image="/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png"
-              />
-              <TestimonialCard
-                name="Growth Expert"
-                role="Brand Consultant"
-                quote="The strategy helped me double my client's engagement rate in just two weeks."
-                image="/lovable-uploads/c597c321-67d9-4df6-b5f5-1268e45abc71.png"
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Dots Indicator */}
-        <CarouselIndicator
-          totalSlides={3}
-          currentSlide={currentSlide}
-          onSelect={(idx) => carouselApi?.scrollTo(idx)}
-        />
-        
-        <div className="text-center">
-          <Button
-            className="bg-purple-500 hover:bg-purple-600 text-white rounded-full py-6 px-8 text-lg font-medium w-full mb-20"
-            onClick={() => {
-              scroller.scrollTo('pricing-section', {
-                duration: 800,
-                smooth: true,
-                offset: -50,
-                spy: true
-              });
+        {/* Written Testimonials Carousel */}
+        <div className="max-w-3xl mx-auto mb-4 md:mb-10">
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
             }}
+            setApi={setTestimonialCarouselApi}
+            className="w-full"
           >
-            Start my personal brand <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-          
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-white mb-2">
-              Start your personal<br />branding journey<br />today
-            </h2>
-            <p className="text-white/80 text-lg mb-8">
-              Join the program that fits<br />your needs
-            </p>
-          </div>
+            <CarouselContent>
+              {isLoading ? (
+                Array.from({ length: 3 }).map((_, index) => (
+                  <CarouselItem key={`skeleton-${index}`} className="md:basis-full">
+                    <div className="px-0 md:px-2">
+                      <TestimonialSkeleton />
+                    </div>
+                  </CarouselItem>
+                ))
+              ) : (
+                writtenTestimonials.map((testimonial, index) => (
+                  <CarouselItem key={index} className="md:basis-full">
+                    <TestimonialCard {...testimonial} />
+                  </CarouselItem>
+                ))
+              )}
+            </CarouselContent>
+            <div className="flex justify-center mt-2 gap-1 sm:gap-2">
+              <CarouselPrevious className="static transform-none h-6 w-6 sm:h-8 sm:w-8" />
+              <CarouselNext className="static transform-none h-6 w-6 sm:h-8 sm:w-8" />
+            </div>
+          </Carousel>
+        </div>
+
+        {/* Success Stories Image Carousel - Smaller for mobile */}
+        <div className="max-w-lg mx-auto">
+          <h3 className="text-xs sm:text-sm md:text-xl font-semibold mb-2 md:mb-4 text-center">
+            Success Stories Showcase
+          </h3>
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+            }}
+            setApi={setImageCarouselApi}
+            className="w-full"
+          >
+            <CarouselContent>
+              {isLoading ? (
+                Array.from({ length: 5 }).map((_, index) => (
+                  <CarouselItem key={`image-skeleton-${index}`} className="basis-1/3 md:basis-1/4">
+                    <div className="aspect-square rounded-lg overflow-hidden px-0.5 md:px-1">
+                      <Skeleton className="w-full h-full" />
+                    </div>
+                  </CarouselItem>
+                ))
+              ) : (
+                testimonialImages.map((image, index) => (
+                  <CarouselItem key={index} className="basis-1/3 md:basis-1/4">
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.03 }}
+                      className="aspect-square rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 px-0.5 md:px-1"
+                    >
+                      <div className="w-full h-full bg-gray-100 flex items-center justify-center overflow-hidden rounded-lg">
+                        <img 
+                          src={image} 
+                          alt={`Success story ${index + 1}`}
+                          className="w-full h-full object-contain"
+                          loading="lazy"
+                        />
+                      </div>
+                    </motion.div>
+                  </CarouselItem>
+                ))
+              )}
+            </CarouselContent>
+            <div className="flex justify-center mt-2 gap-1">
+              <CarouselPrevious className="static transform-none h-5 w-5 sm:h-7 sm:w-7" />
+              <CarouselNext className="static transform-none h-5 w-5 sm:h-7 sm:w-7" />
+            </div>
+          </Carousel>
         </div>
       </div>
     </section>
