@@ -1,5 +1,5 @@
 
-import { CircleDot } from 'lucide-react';
+import { Circle } from 'lucide-react';
 import { Button } from './ui/button';
 
 interface CarouselIndicatorProps {
@@ -23,7 +23,7 @@ const CarouselIndicator = ({ totalSlides, currentSlide, onSelect }: CarouselIndi
           aria-label={`Go to slide ${index + 1}`}
           aria-current={currentSlide === index}
         >
-          <CircleDot className="w-3 h-3" />
+          <Circle className={`w-2 h-2 ${currentSlide === index ? 'fill-current' : ''}`} />
         </Button>
       ))}
     </div>

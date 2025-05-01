@@ -17,6 +17,8 @@ interface TestimonialsSectionProps {
 const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) => {
   const [currentTestimonialSlide, setCurrentTestimonialSlide] = useState(0);
   const [testimonialCarouselApi, setTestimonialCarouselApi] = useState<CarouselApi | null>(null);
+  const [currentSuccessStorySlide, setCurrentSuccessStorySlide] = useState(0);
+  const [successStoryCarouselApi, setSuccessStoryCarouselApi] = useState<CarouselApi | null>(null);
   const isMobile = useIsMobile();
 
   // Sample data for testimonials
@@ -51,15 +53,6 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
       quote: "Grew from 2K to 65K followers in just months using the community building strategies. The engagement is amazing!",
       image: "/lovable-uploads/e391df20-ee53-424b-8270-82a179dc0090.png"
     }
-  ];
-
-  // Social proof images for the carousel
-  const successStoryImages = [
-    "/lovable-uploads/eeade0df-9b63-4931-8239-487b84c7d70f.png",
-    "/lovable-uploads/d621778c-3862-4e47-adf2-c5d7622c67a8.png",
-    "/lovable-uploads/d566d175-fcf0-446b-8574-fd48732ea0fe.png",
-    "/lovable-uploads/54aed5d5-d93f-4968-ba06-a68d0ba3b3dc.png",
-    "/lovable-uploads/e391df20-ee53-424b-8270-82a179dc0090.png"
   ];
 
   // TikTok screenshot images
@@ -103,9 +96,31 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
     }
   }, [testimonialCarouselApi]);
 
+  // Set up effect for success story carousel
+  React.useEffect(() => {
+    if (successStoryCarouselApi) {
+      const updateSuccessStorySlide = () => {
+        setCurrentSuccessStorySlide(successStoryCarouselApi.selectedScrollSnap());
+      };
+      
+      successStoryCarouselApi.on("select", updateSuccessStorySlide);
+      updateSuccessStorySlide();
+      
+      return () => {
+        successStoryCarouselApi.off("select", updateSuccessStorySlide);
+      };
+    }
+  }, [successStoryCarouselApi]);
+
   const handleSelectSlide = (index: number) => {
     if (testimonialCarouselApi) {
       testimonialCarouselApi.scrollTo(index);
+    }
+  };
+
+  const handleSelectSuccessStorySlide = (index: number) => {
+    if (successStoryCarouselApi) {
+      successStoryCarouselApi.scrollTo(index);
     }
   };
 
@@ -160,95 +175,65 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           </Carousel>
         </div>
 
-        {/* Success Stories Image Showcase */}
+        {/* Success Stories Carousel - For both desktop and mobile */}
         <div className="max-w-5xl mx-auto">
           <h3 className="text-xs sm:text-sm md:text-xl font-semibold mb-2 md:mb-4 text-center">
             Success Stories Showcase
           </h3>
           
-          {/* Desktop/Tablet View - Image Grid */}
-          <div className="hidden sm:grid grid-cols-2 md:grid-cols-3 gap-3 mx-auto">
-            {isLoading ? (
-              Array.from({ length: 6 }).map((_, index) => (
-                <Skeleton 
-                  key={`grid-skeleton-${index}`} 
-                  className="w-full aspect-[3/4] rounded-lg"
-                />
-              ))
-            ) : (
-              tiktokImages.map((item, index) => (
-                <motion.div 
-                  key={`grid-image-${index}`}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
-                >
-                  <img 
-                    src={item.image} 
-                    alt={`Success story ${index + 1}`}
-                    className="w-full h-auto object-cover rounded-lg"
-                    loading="lazy"
-                  />
-                  <div className="absolute bottom-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded-full flex items-center">
-                    <span className="mr-1">👁️</span> {item.views}
-                  </div>
-                </motion.div>
-              ))
-            )}
-          </div>
-          
-          {/* Mobile View - Small Carousel */}
-          <div className="block sm:hidden">
-            <Carousel
-              opts={{
-                align: "center",
-                loop: true,
-              }}
-              className="w-full"
-            >
-              <CarouselContent>
-                {isLoading ? (
-                  Array.from({ length: 5 }).map((_, index) => (
-                    <CarouselItem key={`mobile-skeleton-${index}`} className="basis-2/3 sm:basis-1/2">
-                      <div className="p-1">
-                        <Skeleton className="w-full aspect-[3/4] rounded-lg" />
-                      </div>
-                    </CarouselItem>
-                  ))
-                ) : (
-                  tiktokImages.map((item, index) => (
-                    <CarouselItem key={`mobile-image-${index}`} className="basis-2/3 sm:basis-1/2">
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.03 }}
-                        className="p-1"
-                      >
-                        <div className="relative overflow-hidden rounded-lg shadow-sm">
-                          <img 
-                            src={item.image} 
-                            alt={`Success story ${index + 1}`}
-                            className="w-full h-auto object-cover rounded-lg"
-                            loading="lazy"
-                          />
-                          <div className="absolute bottom-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded-full flex items-center">
-                            <span className="mr-1">👁️</span> {item.views}
-                          </div>
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+            }}
+            setApi={setSuccessStoryCarouselApi}
+            className="w-full"
+          >
+            <CarouselContent>
+              {isLoading ? (
+                Array.from({ length: 4 }).map((_, index) => (
+                  <CarouselItem key={`success-skeleton-${index}`} className={`${isMobile ? 'basis-2/3' : 'basis-1/3'} sm:basis-1/3 md:basis-1/4`}>
+                    <div className="p-1">
+                      <Skeleton className="w-full aspect-[3/4] rounded-lg" />
+                    </div>
+                  </CarouselItem>
+                ))
+              ) : (
+                tiktokImages.map((item, index) => (
+                  <CarouselItem key={`success-image-${index}`} className={`${isMobile ? 'basis-2/3' : 'basis-1/3'} sm:basis-1/3 md:basis-1/4`}>
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.03 }}
+                      className="p-1"
+                    >
+                      <div className="relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                        <img 
+                          src={item.image} 
+                          alt={`Success story ${index + 1}`}
+                          className="w-full h-auto object-cover rounded-lg"
+                          loading="lazy"
+                        />
+                        <div className="absolute bottom-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded-full flex items-center">
+                          <span className="mr-1">👁️</span> {item.views}
                         </div>
-                      </motion.div>
-                    </CarouselItem>
-                  ))
-                )}
-              </CarouselContent>
-              <div className="flex justify-center mt-2 gap-1">
-                <CarouselPrevious className="static transform-none h-5 w-5 sm:h-7 sm:w-7" />
-                <CarouselNext className="static transform-none h-5 w-5 sm:h-7 sm:w-7" />
-              </div>
-            </Carousel>
-          </div>
+                      </div>
+                    </motion.div>
+                  </CarouselItem>
+                ))
+              )}
+            </CarouselContent>
+            <div className="flex justify-center mt-2 gap-1 sm:gap-2">
+              <CarouselPrevious className="static transform-none h-5 w-5 sm:h-7 sm:w-7" />
+              <CarouselIndicator 
+                totalSlides={tiktokImages.length}
+                currentSlide={currentSuccessStorySlide}
+                onSelect={handleSelectSuccessStorySlide}
+              />
+              <CarouselNext className="static transform-none h-5 w-5 sm:h-7 sm:w-7" />
+            </div>
+          </Carousel>
         </div>
       </div>
     </section>
