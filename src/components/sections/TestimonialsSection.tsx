@@ -5,7 +5,6 @@ import TestimonialCard from "@/components/TestimonialCard";
 import TestimonialSkeleton from "@/components/TestimonialSkeleton";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Card } from "@/components/ui/card";
 import type { CarouselApi } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
 import CarouselIndicator from "@/components/CarouselIndicator";
@@ -175,7 +174,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           </Carousel>
         </div>
 
-        {/* Success Stories Carousel - For both desktop and mobile */}
+        {/* Success Stories Carousel - One item at a time */}
         <div className="max-w-5xl mx-auto">
           <h3 className="text-xs sm:text-sm md:text-xl font-semibold mb-2 md:mb-4 text-center">
             Success Stories Showcase
@@ -191,24 +190,22 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           >
             <CarouselContent>
               {isLoading ? (
-                Array.from({ length: 4 }).map((_, index) => (
-                  <CarouselItem key={`success-skeleton-${index}`} className={`${isMobile ? 'basis-2/3' : 'basis-1/3'} sm:basis-1/3 md:basis-1/4`}>
-                    <div className="p-1">
-                      <Skeleton className="w-full aspect-[3/4] rounded-lg" />
-                    </div>
-                  </CarouselItem>
-                ))
+                <CarouselItem className="basis-full">
+                  <div className="p-1 flex justify-center">
+                    <Skeleton className="w-60 md:w-72 aspect-[3/4] rounded-lg" />
+                  </div>
+                </CarouselItem>
               ) : (
                 tiktokImages.map((item, index) => (
-                  <CarouselItem key={`success-image-${index}`} className={`${isMobile ? 'basis-2/3' : 'basis-1/3'} sm:basis-1/3 md:basis-1/4`}>
+                  <CarouselItem key={`success-image-${index}`} className="basis-full">
                     <motion.div
                       initial={{ opacity: 0, scale: 0.95 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.03 }}
-                      className="p-1"
+                      className="p-1 flex justify-center"
                     >
-                      <div className="relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                      <div className="relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-all duration-300 w-60 md:w-72">
                         <img 
                           src={item.image} 
                           alt={`Success story ${index + 1}`}
