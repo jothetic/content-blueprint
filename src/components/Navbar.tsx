@@ -29,6 +29,18 @@ const Navbar = () => {
                   type: "spring",
                   stiffness: 100
                 }}
+                whileHover={{ scale: 1.1 }}
+                // Adding bobbing animation
+                animate={{
+                  y: [0, -5, 0],
+                  scale: [1, 1.05, 1]
+                }}
+                transition={{
+                  duration: 2,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
               >
                 <FileTerminal className="h-8 w-8 text-white" />
               </motion.div>
