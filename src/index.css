@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -53,9 +52,9 @@
     height: -webkit-fill-available;
     min-height: 100%;
     touch-action: manipulation;
-    overflow-y: auto;
+    overflow-y: auto !important;
     scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
   }
   
   body {
@@ -69,15 +68,16 @@
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: auto !important;
     overscroll-behavior-y: none;
-    -webkit-overflow-scrolling: touch;
   }
 
   #root {
     min-height: 100vh;
     min-height: -webkit-fill-available;
     touch-action: manipulation;
+    position: relative;
+    overflow-y: visible !important;
   }
 }
 
@@ -146,12 +146,12 @@ section, div {
 /* Fix YouTube embed scrolling issues */
 iframe {
   pointer-events: auto;
-  touch-action: auto;
+  touch-action: pan-y;
 }
 
 /* When we detect scroll is happening, make iframes non-interactive */
 .scrolling-active iframe {
-  pointer-events: none;
+  pointer-events: none !important;
 }
 
 /* All animation elements should still allow scrolling */
@@ -168,15 +168,17 @@ section,
 .pricing-section,
 .hero-section {
   touch-action: pan-y;
-  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
+  position: relative;
 }
 
 /* Global fix for all motion elements */
 [data-framer-motion-components], 
 div[style*="transform"], 
 div[style*="translate"] {
-  pointer-events: auto;
-  touch-action: pan-y;
+  pointer-events: auto !important;
+  touch-action: pan-y !important;
+  position: relative;
 }
 
 /* Fix for all carousel elements */
@@ -184,7 +186,6 @@ div[style*="translate"] {
 .embla-carousel__container,
 .carousel-item {
   touch-action: pan-y;
-  -webkit-overflow-scrolling: touch;
   pointer-events: auto;
 }
 
@@ -192,8 +193,7 @@ div[style*="translate"] {
 @supports (-webkit-touch-callout: none) {
   html, body {
     height: -webkit-fill-available;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-y: auto !important;
     overscroll-behavior-y: none;
     position: relative;
   }
@@ -205,19 +205,26 @@ div[style*="translate"] {
 
   #root {
     min-height: -webkit-fill-available;
+    overflow-y: visible !important;
+  }
+  
+  /* Fix overlay issues */
+  .absolute {
+    position: absolute;
+    touch-action: pan-y;
   }
   
   /* Ensure elements don't interfere with scrolling */
   div[style*="transform"],
   div[style*="translate"],
   [data-framer-motion-components] {
-    pointer-events: auto;
-    touch-action: pan-y;
+    pointer-events: auto !important;
+    touch-action: pan-y !important;
   }
   
   /* Fix for youtube embeds */
   iframe {
-    touch-action: auto;
+    touch-action: pan-y;
     z-index: 2;
     position: relative;
   }
@@ -228,5 +235,26 @@ div[style*="translate"] {
     touch-action: manipulation;
     position: relative;
     z-index: 10;
+  }
+  
+  /* New rule to prevent drag behavior on images */
+  img {
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  
+  /* New rule for scrollable containers */
+  .scroll-container {
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    touch-action: pan-y;
+    position: relative;
+  }
+  
+  /* Fix for scrollable sections on iOS */
+  section {
+    touch-action: pan-y !important;
+    position: relative;
   }
 }

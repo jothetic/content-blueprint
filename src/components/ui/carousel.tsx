@@ -1,8 +1,6 @@
 import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
-  type EmblaOptionsType,
-  type EmblaCarouselType,
 } from "embla-carousel-react"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
@@ -58,10 +56,9 @@ const Carousel = React.forwardRef<
     },
     ref
   ) => {
-    const defaultOptions: EmblaOptionsType = {
+    const defaultOptions = {
       dragFree: false,
-      containScroll: "trimSnaps" as const, 
-      // Fixed the watchDrag typing issue
+      containScroll: "trimSnaps" as const,
     };
 
     const [carouselRef, api] = useEmblaCarousel(
@@ -147,7 +144,7 @@ const Carousel = React.forwardRef<
           className={cn("relative", className, "embla-carousel")}
           role="region"
           aria-roledescription="carousel"
-          style={{ touchAction: "auto" }}
+          style={{ touchAction: "pan-y" }}
           {...props}
         >
           {children}
@@ -165,7 +162,7 @@ const CarouselContent = React.forwardRef<
   const { carouselRef, orientation } = useCarousel()
 
   return (
-    <div ref={carouselRef} className="overflow-hidden" style={{ touchAction: "auto" }}>
+    <div ref={carouselRef} className="overflow-hidden" style={{ touchAction: "pan-y" }}>
       <div
         ref={ref}
         className={cn(
