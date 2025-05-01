@@ -19,7 +19,7 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
     <div className="flex flex-col items-center justify-center mb-12">
       <div className="flex items-center justify-center mb-4">
         <span 
-          className={`text-lg font-medium mr-3 cursor-pointer transition-all duration-300 ${isAnnual ? 'text-headline-text scale-110' : 'text-muted-text scale-90'}`}
+          className={`text-lg font-medium mr-3 cursor-pointer transition-all duration-300 ${isAnnual ? 'text-white scale-110' : 'text-gray-400 scale-90'}`}
           onClick={() => {
             setIsAnnual(true);
             onToggle(true);
@@ -27,18 +27,18 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
         >
           Yearly
           {isAnnual && (
-            <div className="text-success-accent text-sm mt-1">
+            <div className="text-green-400 text-sm mt-1">
               Save 50%
             </div>
           )}
         </span>
         <motion.div 
-          className="w-16 h-8 bg-neutral-bg rounded-full p-1 cursor-pointer flex relative overflow-hidden"
+          className="w-16 h-8 bg-white/20 rounded-full p-1 cursor-pointer flex relative overflow-hidden"
           onClick={handleToggle}
-          whileHover={{ boxShadow: "0 0 15px rgba(59, 130, 246, 0.5)" }}
+          whileHover={{ boxShadow: "0 0 15px rgba(177, 151, 255, 0.5)" }}
         >
           <motion.div 
-            className="w-6 h-6 rounded-full bg-primary-blue shadow-lg shadow-primary-blue/50"
+            className="w-6 h-6 rounded-full bg-soft-purple shadow-lg shadow-soft-purple/50"
             animate={{ 
               x: isAnnual ? 0 : 32,
             }}
@@ -50,7 +50,7 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
           />
         </motion.div>
         <span 
-          className={`text-lg font-medium ml-3 cursor-pointer transition-all duration-300 ${!isAnnual ? 'text-headline-text scale-110' : 'text-muted-text scale-90'}`}
+          className={`text-lg font-medium ml-3 cursor-pointer transition-all duration-300 ${!isAnnual ? 'text-white scale-110' : 'text-gray-400 scale-90'}`}
           onClick={() => {
             setIsAnnual(false);
             onToggle(false);

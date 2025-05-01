@@ -11,10 +11,10 @@ interface PricingSectionProps {
 
 const PricingSection: React.FC<PricingSectionProps> = ({ isAnnual, setIsAnnual }) => {
   return (
-    <section className="py-10 md:py-20 px-4 md:px-6 lg:px-8 bg-white">
+    <section className="py-10 md:py-20 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
       <div className="max-w-6xl mx-auto">
         <motion.h2 
-          className="text-2xl md:text-4xl font-bold text-center mb-2 md:mb-4 text-headline-text"
+          className="text-2xl md:text-4xl font-bold text-center mb-2 md:mb-4 text-white"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -23,7 +23,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ isAnnual, setIsAnnual }
           Choose Your Blueprint
         </motion.h2>
         <motion.p 
-          className="text-center text-primary-blue mb-8 md:mb-12 text-sm md:text-base"
+          className="text-center text-soft-purple mb-8 md:mb-12 text-sm md:text-base"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
