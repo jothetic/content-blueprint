@@ -62,7 +62,18 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Custom colors based on the new color scheme
+				'sky-blue': '#0A84FF',
+				'off-white': '#F5F7FA',
+				'charcoal': '#111827',
+				'slate-gray': '#1F2937',
+				'muted-gray': '#6B7280',
+				'success-green': '#10B981',
+				'warning-amber': '#F59E0B',
+				'danger-red': '#EF4444',
+				'dark-blue': '#006CD2',
+				'light-gray': '#E5E7EB',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -134,6 +145,7 @@ export default {
 			},
 			backgroundImage: {
 				'shimmer': 'linear-gradient(to right, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0))',
+				'blue-gradient': 'linear-gradient(135deg, #0A84FF, #4FC3F7)',
 			}
 		}
 	},

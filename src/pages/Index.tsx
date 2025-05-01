@@ -38,7 +38,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-deep-purple-gradient">
+    <div className="min-h-screen bg-white">
       <Navbar />
       <BackToTop />
       
