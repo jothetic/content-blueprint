@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -147,8 +146,8 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           </Carousel>
         </div>
 
-        {/* Success Stories Image Carousel - Updated Styling */}
-        <div className="max-w-3xl mx-auto"> {/* Increased max-width for larger items */}
+        {/* Success Stories Image Carousel - Simple Square Images */}
+        <div className="max-w-3xl mx-auto">
           <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center">
             Success Stories Showcase
           </h3>
@@ -164,7 +163,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
               {isLoading ? (
                 Array.from({ length: 5 }).map((_, index) => (
                   <CarouselItem key={`image-skeleton-${index}`} className="basis-3/4 md:basis-1/2">
-                    <div className="aspect-[9/16] rounded-lg overflow-hidden px-1 md:px-2">
+                    <div className="aspect-[9/16] overflow-hidden px-1 md:px-2">
                       <Skeleton className="w-full h-full" />
                     </div>
                   </CarouselItem>
@@ -177,13 +176,12 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.05 }}
-                      className="aspect-[9/16] transition-transform duration-300 px-1 md:px-2"
-                      whileHover={{ scale: 1.03 }}
+                      className="aspect-[9/16] px-1 md:px-2"
                     >
                       <img 
                         src={image} 
                         alt={`Success story ${index + 1}`}
-                        className="w-full h-full object-contain rounded-lg shadow-md"
+                        className="w-full h-full object-contain"
                         loading="lazy"
                       />
                     </motion.div>
