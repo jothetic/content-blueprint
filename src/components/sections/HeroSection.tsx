@@ -149,6 +149,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
           </motion.div>
         </motion.div>
       </motion.div>
+      
+      {/* Extra padding at bottom of page */}
+      <div className="h-20 md:h-32 lg:h-48"></div>
     </section>
   );
 };
