@@ -176,9 +176,9 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.05 }}
-                      className="aspect-[9/16] rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 px-1 md:px-2"
+                      className="aspect-[9/16] transition-transform duration-300 px-1 md:px-2"
                     >
-                      <div className="w-full h-full bg-gray-100 flex items-center justify-center overflow-hidden rounded-lg">
+                      <div className="w-full h-full bg-gray-100 flex items-center justify-center overflow-hidden">
                         <img 
                           src={image} 
                           alt={`Success story ${index + 1}`}
