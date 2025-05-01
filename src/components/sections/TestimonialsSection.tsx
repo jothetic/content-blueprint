@@ -7,10 +7,49 @@ import { scroller } from "react-scroll";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Autoplay from "embla-carousel-autoplay";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { Card } from "@/components/ui/card";
+import TestimonialCard from "@/components/TestimonialCard";
+import CarouselIndicator from "@/components/CarouselIndicator";
 
 interface TestimonialsSectionProps {
   isLoading: boolean;
 }
+
+// Define more specific types for our testimonials
+interface TestimonialBase {
+  name: string;
+  role: string;
+  image: string;
+}
+
+interface MessageTestimonial extends TestimonialBase {
+  stats: {
+    posts: number;
+    followers: number;
+    following: number;
+  };
+  bio: string;
+  description: string;
+  contact: string;
+  messages: {
+    date: string;
+    content: string;
+    metrics: {
+      money?: number;
+      fire?: number;
+      heart?: number;
+    };
+    extra?: string;
+  }[];
+}
+
+interface QuoteTestimonial extends TestimonialBase {
+  stats: string;
+  quote: string;
+  videoImage?: string;
+}
+
+type Testimonial = MessageTestimonial | QuoteTestimonial;
 
 const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -18,7 +57,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
   const autoplayRef = useRef(Autoplay({ delay: 4000, stopOnInteraction: false }));
   const isMobile = useIsMobile();
 
-  const testimonials = [
+  const testimonials: Testimonial[] = [
     {
       name: "Joe Lim",
       role: "Digital Creator",
@@ -91,6 +130,11 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
     if (carouselApi) carouselApi.scrollNext();
   };
 
+  // Helper function to check if a testimonial is a MessageTestimonial
+  const isMessageTestimonial = (testimonial: Testimonial): testimonial is MessageTestimonial => {
+    return 'messages' in testimonial;
+  };
+
   return (
     <section className="py-8 px-4 bg-white rounded-t-3xl -mt-4 relative z-20">
       <div className="max-w-xl mx-auto">
@@ -107,7 +151,8 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
         {isLoading ? (
           <div className="h-64 bg-gray-100 animate-pulse rounded-xl mb-10"></div>
         ) : (
-          <div className="relative mb-10">
+          <div className="relative mb-6">
+            {/* Featured testimonial carousel */}
             <Carousel
               setApi={setCarouselApi}
               plugins={[autoplayRef.current]}
@@ -131,57 +176,67 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                       </div>
                       <div>
                         <h4 className="font-bold text-lg">{testimonials[0].name}</h4>
-                        <div className="flex text-xs space-x-4 mb-1">
-                          <span><b>{testimonials[0].stats.posts}</b> post</span>
-                          <span><b>{testimonials[0].stats.followers}</b> followers</span>
-                          <span><b>{testimonials[0].stats.following}</b> following</span>
-                        </div>
-                        <p className="font-medium text-xs">{testimonials[0].bio}</p>
-                        <p className="text-xs">{testimonials[0].description}</p>
-                        <p className="text-xs">{testimonials[0].contact}</p>
+                        {isMessageTestimonial(testimonials[0]) && (
+                          <div className="flex text-xs space-x-4 mb-1">
+                            <span><b>{testimonials[0].stats.posts}</b> post</span>
+                            <span><b>{testimonials[0].stats.followers}</b> followers</span>
+                            <span><b>{testimonials[0].stats.following}</b> following</span>
+                          </div>
+                        )}
+                        <p className="font-medium text-xs">
+                          {isMessageTestimonial(testimonials[0]) ? testimonials[0].bio : ''}
+                        </p>
+                        <p className="text-xs">
+                          {isMessageTestimonial(testimonials[0]) ? testimonials[0].description : ''}
+                        </p>
+                        <p className="text-xs">
+                          {isMessageTestimonial(testimonials[0]) ? testimonials[0].contact : ''}
+                        </p>
                       </div>
                     </div>
                     
                     {/* Messages */}
-                    <div className="space-y-3">
-                      {testimonials[0].messages.map((message, idx) => (
-                        <div key={idx} className="bg-black rounded-lg p-3 text-white">
-                          <div className="flex items-center gap-2 mb-1">
-                            <img 
-                              src={testimonials[0].image} 
-                              alt={testimonials[0].name}
-                              className="w-6 h-6 rounded-full object-cover"
-                            />
-                            <span className="text-sm">{testimonials[0].name.toLowerCase()}</span>
-                            <span className="text-xs text-gray-400">{message.date}</span>
+                    {isMessageTestimonial(testimonials[0]) && (
+                      <div className="space-y-3">
+                        {testimonials[0].messages.map((message, idx) => (
+                          <div key={idx} className="bg-black rounded-lg p-3 text-white">
+                            <div className="flex items-center gap-2 mb-1">
+                              <img 
+                                src={testimonials[0].image} 
+                                alt={testimonials[0].name}
+                                className="w-6 h-6 rounded-full object-cover"
+                              />
+                              <span className="text-sm">{testimonials[0].name.toLowerCase()}</span>
+                              <span className="text-xs text-gray-400">{message.date}</span>
+                            </div>
+                            <p className="mb-2">{message.content}</p>
+                            <div className="flex gap-2">
+                              {message.metrics.money && (
+                                <span className="bg-blue-900/50 rounded-md px-2 py-1 text-sm">
+                                  💰 {message.metrics.money}
+                                </span>
+                              )}
+                              {message.metrics.fire && (
+                                <span className="bg-blue-900/50 rounded-md px-2 py-1 text-sm">
+                                  🔥 {message.metrics.fire}
+                                </span>
+                              )}
+                              {message.metrics.heart && (
+                                <span className="bg-blue-900/50 rounded-md px-2 py-1 text-sm">
+                                  ❤️ {message.metrics.heart}
+                                </span>
+                              )}
+                              <span className="bg-blue-900/50 rounded-md px-2 py-1 text-sm">
+                                😊
+                              </span>
+                            </div>
+                            {message.extra && (
+                              <p className="mt-2 text-sm">{message.extra}</p>
+                            )}
                           </div>
-                          <p className="mb-2">{message.content}</p>
-                          <div className="flex gap-2">
-                            {message.metrics.money && (
-                              <span className="bg-blue-900/50 rounded-md px-2 py-1 text-sm">
-                                💰 {message.metrics.money}
-                              </span>
-                            )}
-                            {message.metrics.fire && (
-                              <span className="bg-blue-900/50 rounded-md px-2 py-1 text-sm">
-                                🔥 {message.metrics.fire}
-                              </span>
-                            )}
-                            {message.metrics.heart && (
-                              <span className="bg-blue-900/50 rounded-md px-2 py-1 text-sm">
-                                ❤️ {message.metrics.heart}
-                              </span>
-                            )}
-                            <span className="bg-blue-900/50 rounded-md px-2 py-1 text-sm">
-                              😊
-                            </span>
-                          </div>
-                          {message.extra && (
-                            <p className="mt-2 text-sm">{message.extra}</p>
-                          )}
-                        </div>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </CarouselItem>
 
@@ -199,26 +254,34 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                       <div>
                         <h4 className="font-bold text-lg">{testimonials[1].name}</h4>
                         <p className="text-purple-500 text-sm">{testimonials[1].role}</p>
-                        <p className="text-purple-500 text-sm">{testimonials[1].stats}</p>
+                        <p className="text-purple-500 text-sm">
+                          {!isMessageTestimonial(testimonials[1]) ? testimonials[1].stats : ''}
+                        </p>
                       </div>
                     </div>
                     
-                    <blockquote className="text-gray-800 mb-4">
-                      "{testimonials[1].quote}"
-                    </blockquote>
-                    
-                    <div className="relative rounded-lg overflow-hidden">
-                      <img 
-                        src={testimonials[1].videoImage}
-                        alt="Video thumbnail" 
-                        className="w-full h-auto rounded-lg"
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="bg-black/70 rounded-full p-3">
-                          <div className="w-0 h-0 border-y-8 border-y-transparent border-l-12 border-l-white ml-1"></div>
-                        </div>
-                      </div>
-                    </div>
+                    {!isMessageTestimonial(testimonials[1]) && (
+                      <>
+                        <blockquote className="text-gray-800 mb-4">
+                          "{testimonials[1].quote}"
+                        </blockquote>
+                        
+                        {testimonials[1].videoImage && (
+                          <div className="relative rounded-lg overflow-hidden">
+                            <img 
+                              src={testimonials[1].videoImage}
+                              alt="Video thumbnail" 
+                              className="w-full h-auto rounded-lg"
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="bg-black/70 rounded-full p-3">
+                                <div className="w-0 h-0 border-y-8 border-y-transparent border-l-12 border-l-white ml-1"></div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    )}
                   </div>
                 </CarouselItem>
 
@@ -236,26 +299,34 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                       <div>
                         <h4 className="font-bold text-lg">{testimonials[2].name}</h4>
                         <p className="text-purple-500 text-sm">{testimonials[2].role}</p>
-                        <p className="text-purple-500 text-sm">{testimonials[2].stats}</p>
+                        <p className="text-purple-500 text-sm">
+                          {!isMessageTestimonial(testimonials[2]) ? testimonials[2].stats : ''}
+                        </p>
                       </div>
                     </div>
                     
-                    <blockquote className="text-gray-800 mb-4">
-                      "{testimonials[2].quote}"
-                    </blockquote>
-                    
-                    <div className="relative rounded-lg overflow-hidden">
-                      <img 
-                        src={testimonials[2].videoImage}
-                        alt="Video thumbnail" 
-                        className="w-full h-auto rounded-lg"
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="bg-black/70 rounded-full p-3">
-                          <div className="w-0 h-0 border-y-8 border-y-transparent border-l-12 border-l-white ml-1"></div>
-                        </div>
-                      </div>
-                    </div>
+                    {!isMessageTestimonial(testimonials[2]) && (
+                      <>
+                        <blockquote className="text-gray-800 mb-4">
+                          "{testimonials[2].quote}"
+                        </blockquote>
+                        
+                        {testimonials[2].videoImage && (
+                          <div className="relative rounded-lg overflow-hidden">
+                            <img 
+                              src={testimonials[2].videoImage}
+                              alt="Video thumbnail" 
+                              className="w-full h-auto rounded-lg"
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="bg-black/70 rounded-full p-3">
+                                <div className="w-0 h-0 border-y-8 border-y-transparent border-l-12 border-l-white ml-1"></div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    )}
                   </div>
                 </CarouselItem>
               </CarouselContent>
@@ -281,19 +352,38 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           </div>
         )}
         
+        {/* Horizontal testimonials stacked as per reference */}
+        {!isLoading && (
+          <div className="mb-8">
+            <div className="grid gap-4">
+              <TestimonialCard
+                name="JT"
+                role="Digital Product Creator"
+                quote="Went from 10k to 30k TikTok followers and built a profitable digital product business."
+                image="/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png"
+              />
+              <TestimonialCard
+                name="Viral Creator"
+                role="Content Creator"
+                quote="Hit over 2.7M views using the viral content strategies from the program."
+                image="/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png"
+              />
+              <TestimonialCard
+                name="Growth Expert"
+                role="Brand Consultant"
+                quote="The strategy helped me double my client's engagement rate in just two weeks."
+                image="/lovable-uploads/c597c321-67d9-4df6-b5f5-1268e45abc71.png"
+              />
+            </div>
+          </div>
+        )}
+
         {/* Dots Indicator */}
-        <div className="flex justify-center gap-2 mb-8">
-          {[0, 1, 2].map((idx) => (
-            <button
-              key={idx}
-              className={`w-2 h-2 rounded-full ${
-                currentSlide === idx ? "bg-gray-600" : "bg-gray-300"
-              }`}
-              onClick={() => carouselApi?.scrollTo(idx)}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
-        </div>
+        <CarouselIndicator
+          totalSlides={3}
+          currentSlide={currentSlide}
+          onSelect={(idx) => carouselApi?.scrollTo(idx)}
+        />
         
         <div className="text-center">
           <Button

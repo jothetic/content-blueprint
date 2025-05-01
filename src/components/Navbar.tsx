@@ -29,7 +29,7 @@ const Navbar = () => {
               duration={500} 
               className="text-blue-400 hover:text-white transition-colors duration-200 text-sm md:text-base cursor-pointer"
             >
-              Does this work?
+              Testimonials
             </Link>
             
             <Link 
