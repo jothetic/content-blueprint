@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-scroll";
-import { Palette } from "lucide-react";
+import { FileTerminal } from "lucide-react";
 
 const Navbar = () => {
   const { scrollY } = useScroll();
@@ -20,9 +20,9 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
           >
-            <div className="flex items-center gap-2">
-              <Palette className="h-6 w-6 text-white" />
-              <span className="text-white font-bold text-xl">Creator Blueprint</span>
+            <div className="flex items-center gap-3">
+              <FileTerminal className="h-7 w-7 text-white" />
+              <span className="text-white font-bold text-2xl">Creator Blueprint</span>
             </div>
           </motion.div>
         </div>
