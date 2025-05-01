@@ -1,23 +1,19 @@
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import TestimonialCard from "@/components/TestimonialCard";
-import TestimonialSkeleton from "@/components/TestimonialSkeleton";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import type { CarouselApi } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
-import CarouselIndicator from "@/components/CarouselIndicator";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface TestimonialsSectionProps {
   isLoading: boolean;
 }
 
 const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) => {
-  const [currentTestimonialSlide, setCurrentTestimonialSlide] = useState(0);
-  const [testimonialCarouselApi, setTestimonialCarouselApi] = useState<CarouselApi | null>(null);
-  const [currentSuccessStorySlide, setCurrentSuccessStorySlide] = useState(0);
-  const [successStoryCarouselApi, setSuccessStoryCarouselApi] = useState<CarouselApi | null>(null);
+  const [activeTestimonialIndex, setActiveTestimonialIndex] = useState(0);
+  const [activeSuccessStoryIndex, setActiveSuccessStoryIndex] = useState(0);
   const isMobile = useIsMobile();
 
   // Sample data for testimonials
@@ -77,160 +73,267 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
       caption: "Sneaky strategy"
     }
   ];
-  
-  // Set up effect to update currentSlide when carousel changes
-  React.useEffect(() => {
-    if (testimonialCarouselApi) {
-      const updateTestimonialSlide = () => {
-        setCurrentTestimonialSlide(testimonialCarouselApi.selectedScrollSnap());
-      };
-      
-      testimonialCarouselApi.on("select", updateTestimonialSlide);
-      // Call once to set initial state
-      updateTestimonialSlide();
-      
-      return () => {
-        testimonialCarouselApi.off("select", updateTestimonialSlide);
-      };
-    }
-  }, [testimonialCarouselApi]);
 
-  // Set up effect for success story carousel
-  React.useEffect(() => {
-    if (successStoryCarouselApi) {
-      const updateSuccessStorySlide = () => {
-        setCurrentSuccessStorySlide(successStoryCarouselApi.selectedScrollSnap());
-      };
-      
-      successStoryCarouselApi.on("select", updateSuccessStorySlide);
-      updateSuccessStorySlide();
-      
-      return () => {
-        successStoryCarouselApi.off("select", updateSuccessStorySlide);
-      };
-    }
-  }, [successStoryCarouselApi]);
-
-  const handleSelectSlide = (index: number) => {
-    if (testimonialCarouselApi) {
-      testimonialCarouselApi.scrollTo(index);
-    }
+  // Next testimonial
+  const goToNextTestimonial = () => {
+    setActiveTestimonialIndex((prev) => 
+      (prev + 1) % writtenTestimonials.length
+    );
   };
 
-  const handleSelectSuccessStorySlide = (index: number) => {
-    if (successStoryCarouselApi) {
-      successStoryCarouselApi.scrollTo(index);
-    }
+  // Previous testimonial
+  const goToPrevTestimonial = () => {
+    setActiveTestimonialIndex((prev) => 
+      (prev - 1 + writtenTestimonials.length) % writtenTestimonials.length
+    );
   };
+
+  // Next success story
+  const goToNextSuccessStory = () => {
+    setActiveSuccessStoryIndex((prev) => 
+      (prev + 1) % tiktokImages.length
+    );
+  };
+
+  // Previous success story
+  const goToPrevSuccessStory = () => {
+    setActiveSuccessStoryIndex((prev) => 
+      (prev - 1 + tiktokImages.length) % tiktokImages.length
+    );
+  };
+
+  // Auto-advance testimonials every 5 seconds
+  useEffect(() => {
+    if (isLoading) return;
+    
+    const interval = setInterval(() => {
+      goToNextTestimonial();
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [isLoading]);
+
+  // Testimonial indicator dots
+  const TestimonialDots = () => (
+    <div className="flex justify-center gap-2 mt-4">
+      {writtenTestimonials.map((_, index) => (
+        <button
+          key={`testimonial-dot-${index}`}
+          className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+            activeTestimonialIndex === index 
+              ? "bg-purple-500 scale-110" 
+              : "bg-gray-300"
+          }`}
+          onClick={() => setActiveTestimonialIndex(index)}
+          aria-label={`Go to testimonial ${index + 1}`}
+        />
+      ))}
+    </div>
+  );
+
+  // Success story indicator dots
+  const SuccessStoryDots = () => (
+    <div className="flex justify-center gap-2 mt-4">
+      {tiktokImages.map((_, index) => (
+        <button
+          key={`success-dot-${index}`}
+          className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+            activeSuccessStoryIndex === index 
+              ? "bg-purple-500 scale-110" 
+              : "bg-gray-300"
+          }`}
+          onClick={() => setActiveSuccessStoryIndex(index)}
+          aria-label={`Go to success story ${index + 1}`}
+        />
+      ))}
+    </div>
+  );
 
   return (
-    <section className="py-6 md:py-16 px-2 md:px-6 bg-white">
+    <section className="py-10 md:py-20 px-4 md:px-6 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-base sm:text-lg md:text-2xl lg:text-4xl font-bold text-center mb-3 md:mb-8 text-black"
+          className="text-base sm:text-lg md:text-2xl lg:text-4xl font-bold text-center mb-6 md:mb-12 text-black"
         >
           Real Results from Real Students 🚀
         </motion.h2>
 
-        {/* Written Testimonials Carousel */}
-        <div className="max-w-3xl mx-auto mb-4 md:mb-10">
-          <Carousel
-            opts={{
-              align: "center",
-              loop: true,
-            }}
-            setApi={setTestimonialCarouselApi}
-            className="w-full"
-          >
-            <CarouselContent>
-              {isLoading ? (
-                Array.from({ length: 3 }).map((_, index) => (
-                  <CarouselItem key={`skeleton-${index}`} className="md:basis-full">
-                    <div className="px-0 md:px-2">
-                      <TestimonialSkeleton />
-                    </div>
-                  </CarouselItem>
-                ))
-              ) : (
-                writtenTestimonials.map((testimonial, index) => (
-                  <CarouselItem key={index} className="md:basis-full">
-                    <TestimonialCard {...testimonial} />
-                  </CarouselItem>
-                ))
-              )}
-            </CarouselContent>
-            <div className="flex justify-center mt-2 gap-1 sm:gap-2">
-              <CarouselPrevious className="static transform-none h-6 w-6 sm:h-8 sm:w-8" />
-              <CarouselIndicator 
-                totalSlides={writtenTestimonials.length}
-                currentSlide={currentTestimonialSlide}
-                onSelect={handleSelectSlide}
-              />
-              <CarouselNext className="static transform-none h-6 w-6 sm:h-8 sm:w-8" />
+        {/* Text Testimonials Section - Perspective Slider */}
+        <div className="mb-16 md:mb-24">
+          <div className="relative py-4 md:py-10">
+            {/* Large decorative quotation mark */}
+            <div className="absolute top-0 left-0 text-6xl md:text-8xl text-purple-100 font-serif opacity-50 z-0">
+              "
             </div>
-          </Carousel>
+            
+            {/* Testimonial Slider */}
+            <div className="relative perspective-container h-[280px] sm:h-[240px] md:h-[220px]">
+              <div 
+                className="absolute inset-x-0 testimonial-track flex items-center justify-center"
+                style={{ 
+                  transform: `translateX(${-activeTestimonialIndex * 100}%)`,
+                  transition: "transform 0.5s ease-out"
+                }}
+              >
+                {isLoading ? (
+                  <div className="flex justify-center w-full px-4">
+                    <Skeleton className="w-full max-w-3xl h-[200px] rounded-lg" />
+                  </div>
+                ) : (
+                  writtenTestimonials.map((testimonial, index) => {
+                    // Calculate distance from active
+                    const distance = Math.abs(activeTestimonialIndex - index);
+                    const isActive = activeTestimonialIndex === index;
+                    
+                    // Transform values based on position
+                    const scale = isActive ? 1 : Math.max(0.85, 1 - distance * 0.1);
+                    const translateX = (index - activeTestimonialIndex) * (isMobile ? 100 : 75) + "%";
+                    const opacity = isActive ? 1 : Math.max(0.5, 1 - distance * 0.3);
+                    const zIndex = isActive ? 10 : 10 - distance;
+                    const blur = isActive ? 0 : distance * 2;
+                    
+                    return (
+                      <div 
+                        key={`testimonial-${index}`}
+                        className="testimonial-slide absolute w-full max-w-3xl px-4"
+                        style={{ 
+                          transform: `translateX(${translateX}) scale(${scale})`,
+                          opacity,
+                          zIndex,
+                          filter: `blur(${blur}px)`,
+                          transition: "all 0.5s ease-out",
+                          pointerEvents: isActive ? "auto" : "none"
+                        }}
+                      >
+                        <TestimonialCard {...testimonial} />
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            </div>
+
+            {/* Navigation Controls */}
+            <div className="relative z-20 flex justify-between items-center mt-4 max-w-3xl mx-auto px-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={goToPrevTestimonial}
+                className="bg-white/80 hover:bg-white shadow-sm"
+                disabled={isLoading}
+              >
+                <ChevronLeft className="h-5 w-5 text-purple-500" />
+                <span className="sr-only">Previous testimonial</span>
+              </Button>
+              
+              <TestimonialDots />
+              
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={goToNextTestimonial}
+                className="bg-white/80 hover:bg-white shadow-sm"
+                disabled={isLoading}
+              >
+                <ChevronRight className="h-5 w-5 text-purple-500" />
+                <span className="sr-only">Next testimonial</span>
+              </Button>
+            </div>
+          </div>
         </div>
 
-        {/* Success Stories Carousel - One item at a time */}
-        <div className="max-w-5xl mx-auto">
-          <h3 className="text-xs sm:text-sm md:text-xl font-semibold mb-2 md:mb-4 text-center">
+        {/* Success Stories Showcase - 3D Gallery */}
+        <div className="mt-16">
+          <h3 className="text-sm sm:text-base md:text-xl font-semibold mb-4 md:mb-8 text-center">
             Success Stories Showcase
           </h3>
           
-          <Carousel
-            opts={{
-              align: "center",
-              loop: true,
-            }}
-            setApi={setSuccessStoryCarouselApi}
-            className="w-full"
-          >
-            <CarouselContent>
-              {isLoading ? (
-                <CarouselItem className="basis-full">
-                  <div className="p-1 flex justify-center">
-                    <Skeleton className="w-[280px] md:w-[320px] lg:w-[360px] aspect-[3/4] rounded-lg" />
-                  </div>
-                </CarouselItem>
-              ) : (
-                tiktokImages.map((item, index) => (
-                  <CarouselItem key={`success-image-${index}`} className="basis-full">
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.03 }}
-                      className="p-1 flex justify-center"
+          <div className="relative max-w-5xl mx-auto h-[500px] md:h-[600px]">
+            {isLoading ? (
+              <div className="flex justify-center items-center h-full">
+                <Skeleton className="w-[300px] md:w-[350px] lg:w-[400px] aspect-[3/5] rounded-lg" />
+              </div>
+            ) : (
+              <div className="relative h-full flex items-center justify-center">
+                {tiktokImages.map((item, index) => {
+                  // Calculate distance from active
+                  const distance = Math.abs(activeSuccessStoryIndex - index);
+                  const isActive = activeSuccessStoryIndex === index;
+                  
+                  // Calculate angle in the "circle"
+                  const angle = ((index - activeSuccessStoryIndex) / tiktokImages.length) * Math.PI * 2;
+                  const radiusX = isMobile ? 120 : 200;
+                  
+                  // Position based on angle
+                  const zPosition = isActive ? 0 : -100 - distance * 50; // Z position for depth
+                  const xPosition = isActive ? 0 : Math.sin(angle) * radiusX; // X position in circle
+                  
+                  // Visual properties based on position
+                  const scale = isActive ? 1 : Math.max(0.7, 0.9 - distance * 0.1);
+                  const opacity = isActive ? 1 : Math.max(0.5, 0.7 - distance * 0.2);
+                  const blur = isActive ? 0 : distance * 2;
+                  const zIndex = isActive ? 10 : 10 - distance;
+                  
+                  return (
+                    <div
+                      key={`success-story-${index}`}
+                      className={`absolute transition-all duration-500 ease-out cursor-pointer
+                              ${isActive ? 'story-shadow' : ''}`}
+                      style={{
+                        transform: `translateX(${xPosition}px) translateZ(${zPosition}px) scale(${scale})`,
+                        opacity,
+                        zIndex,
+                        filter: `blur(${blur}px)`,
+                      }}
+                      onClick={() => setActiveSuccessStoryIndex(index)}
                     >
-                      <div className="relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-all duration-300 w-[280px] md:w-[320px] lg:w-[360px]">
-                        <img 
-                          src={item.image} 
+                      <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <img
+                          src={item.image}
                           alt={`Success story ${index + 1}`}
-                          className="w-full h-auto object-cover rounded-lg"
+                          className="w-[300px] md:w-[350px] lg:w-[400px] object-cover rounded-lg"
                           loading="lazy"
                         />
-                        <div className="absolute bottom-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded-full flex items-center">
+                        <div className="absolute bottom-3 left-3 bg-black/70 text-white text-xs px-2 py-1 rounded-full flex items-center">
                           <span className="mr-1">👁️</span> {item.views}
                         </div>
                       </div>
-                    </motion.div>
-                  </CarouselItem>
-                ))
-              )}
-            </CarouselContent>
-            <div className="flex justify-center mt-2 gap-1 sm:gap-2">
-              <CarouselPrevious className="static transform-none h-5 w-5 sm:h-7 sm:w-7" />
-              <CarouselIndicator 
-                totalSlides={tiktokImages.length}
-                currentSlide={currentSuccessStorySlide}
-                onSelect={handleSelectSuccessStorySlide}
-              />
-              <CarouselNext className="static transform-none h-5 w-5 sm:h-7 sm:w-7" />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Navigation Controls */}
+            <div className="absolute bottom-4 left-0 right-0 z-20 flex justify-center items-center gap-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={goToPrevSuccessStory}
+                className="bg-white/80 hover:bg-white shadow-sm"
+                disabled={isLoading}
+              >
+                <ChevronLeft className="h-4 w-4 mr-1 text-purple-500" />
+                <span>Prev</span>
+              </Button>
+              
+              <SuccessStoryDots />
+              
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={goToNextSuccessStory}
+                className="bg-white/80 hover:bg-white shadow-sm"
+                disabled={isLoading}
+              >
+                <span>Next</span>
+                <ChevronRight className="h-4 w-4 ml-1 text-purple-500" />
+              </Button>
             </div>
-          </Carousel>
+          </div>
         </div>
       </div>
     </section>
