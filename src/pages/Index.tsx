@@ -1,27 +1,13 @@
 
-import React, { useState, useEffect } from "react";
-import { Element, scroller } from 'react-scroll';
-import { Button } from "@/components/ui/button";
+import React, { useEffect, useState } from "react";
+import { Element } from 'react-scroll';
 import Navbar from "@/components/Navbar";
-import TestimonialCard from "@/components/TestimonialCard";
-import PricingCard from "@/components/PricingCard";
-import PricingToggle from "@/components/PricingToggle";
-import { ArrowRight, ArrowLeft, ArrowRight as ArrowRightIcon, Star } from "lucide-react";
-import { motion } from "framer-motion";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { AnimatePresence } from "framer-motion";
-import YouTubeEmbed from "@/components/YouTubeEmbed";
 import BackToTop from "@/components/BackToTop";
-import CarouselIndicator from "@/components/CarouselIndicator";
-import TestimonialSkeleton from "@/components/TestimonialSkeleton";
-import { Skeleton } from "@/components/ui/skeleton";
 import HeroSection from "@/components/sections/HeroSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import PricingSection from "@/components/sections/PricingSection";
 
 const Index = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
   const [isAnnual, setIsAnnual] = useState(true);
   const [visible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -47,12 +33,23 @@ const Index = () => {
     setViewportHeight();
     window.addEventListener('resize', setViewportHeight);
     
-    // Make sure mobile Safari can scroll
-    document.body.style.position = "static";
-    document.body.style.overflow = "auto";
-    document.body.style.touchAction = "auto";
-    document.documentElement.style.overflow = "auto";
-    document.documentElement.style.touchAction = "auto";
+    // Fix iOS Safari scrolling issues
+    document.addEventListener('touchstart', function() {}, {passive: true});
+    document.addEventListener('touchmove', function() {}, {passive: true});
+    
+    // Remove animation styles that might interfere with scrolling
+    const cleanup = () => {
+      const motionElements = document.querySelectorAll('[data-framer-motion-components], div[style*="transform"]');
+      motionElements.forEach(el => {
+        if (el instanceof HTMLElement) {
+          el.style.pointerEvents = 'none';
+          el.style.touchAction = 'none';
+        }
+      });
+    };
+    
+    // Run cleanup after animations finish
+    setTimeout(cleanup, 2000);
     
     return () => {
       clearTimeout(timer);
@@ -65,10 +62,10 @@ const Index = () => {
       className="overflow-x-hidden bg-deep-purple-gradient" 
       style={{ 
         minHeight: "var(--vh, 1vh) * 100", 
-        touchAction: "pan-y", 
-        overscrollBehavior: "contain",
+        touchAction: "auto",
         WebkitOverflowScrolling: "touch"
       }}
+      data-ios-fix="true"
     >
       <Navbar />
       <BackToTop />

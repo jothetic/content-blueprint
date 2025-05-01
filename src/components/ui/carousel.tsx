@@ -59,7 +59,8 @@ const Carousel = React.forwardRef<
   ) => {
     const defaultOptions = {
       dragFree: false,
-      containScroll: "trimSnaps",
+      // Fix: Use valid "trimSnaps" value instead of string
+      containScroll: "trimSnaps" as const, 
       watchDrag: (enabled: boolean) => {
         // Only enable drag on horizontal carousels or when not on mobile
         if (orientation === 'vertical') return false;
@@ -150,7 +151,7 @@ const Carousel = React.forwardRef<
           className={cn("relative", className, "embla-carousel")}
           role="region"
           aria-roledescription="carousel"
-          style={{ touchAction: "pan-y" }}
+          style={{ touchAction: "auto" }}
           {...props}
         >
           {children}
@@ -168,7 +169,7 @@ const CarouselContent = React.forwardRef<
   const { carouselRef, orientation } = useCarousel()
 
   return (
-    <div ref={carouselRef} className="overflow-hidden" style={{ touchAction: "pan-y" }}>
+    <div ref={carouselRef} className="overflow-hidden" style={{ touchAction: "auto" }}>
       <div
         ref={ref}
         className={cn(
@@ -200,7 +201,7 @@ const CarouselItem = React.forwardRef<
         orientation === "horizontal" ? "pl-4" : "pt-4",
         className
       )}
-      style={{ touchAction: "pan-y" }}
+      style={{ touchAction: "auto" }}
       {...props}
     />
   )

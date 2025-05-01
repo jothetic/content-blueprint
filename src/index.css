@@ -47,40 +47,41 @@
   * {
     @apply border-border;
     -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
   }
   
   html {
-    height: 100%;
+    height: -webkit-fill-available;
+    min-height: 100%;
     touch-action: manipulation;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
     overflow-y: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
   
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Poppins', sans-serif;
-    touch-action: manipulation;
-    position: static;
-    overscroll-behavior-y: contain;
-    overflow-y: auto;
-    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
     width: 100%;
     height: auto;
-    min-height: 100vh;
     margin: 0;
     padding: 0;
-    /* Critical for iOS scroll */
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: none;
     -webkit-overflow-scrolling: touch;
   }
 
   #root {
     min-height: 100vh;
+    min-height: -webkit-fill-available;
     touch-action: manipulation;
   }
 }
 
+/* Animation keyframes and other utility classes */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -137,75 +138,76 @@
   background-color: #F5F5F7;
 }
 
-/* Ensure carousel doesn't interfere with page scrolling on touch devices */
-.embla-carousel {
-  touch-action: pan-y;
-}
-
-/* Fix for mobile scroll issues */
-.embla-carousel .embla-carousel__container {
-  touch-action: pan-x;
-}
-
-/* Make sure elements don't prevent scrolling */
+/* Enhanced iOS Safari scrolling fixes */
 section, div {
   touch-action: auto;
 }
 
-/* All motion elements should not block touch */
+/* All animation elements should not interfere with page scrolling */
 .motion-div {
-  touch-action: auto !important;
+  pointer-events: none; 
+  touch-action: none;
+  position: relative;
+  z-index: 1;
 }
 
-/* All framer-motion elements */
+/* All sections and scrollable containers */
+section, 
+.testimonials-section,
+.pricing-section,
+.hero-section {
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Global fix for all motion elements */
 [data-framer-motion-components], 
 div[style*="transform"], 
 div[style*="translate"] {
-  touch-action: pan-y !important;
+  pointer-events: none;
 }
 
-/* iOS Safari fixes */
+/* Fix for all carousel elements */
+.embla-carousel,
+.embla-carousel__container,
+.carousel-item {
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  pointer-events: auto;
+}
+
+/* iOS Safari specific fixes */
 @supports (-webkit-touch-callout: none) {
   html, body {
-    height: auto;
-    min-height: 100%;
+    height: -webkit-fill-available;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+    position: relative;
   }
   
-  body {
-    position: static;
-    height: auto;
+  .bg-deep-purple-gradient {
     min-height: 100vh;
-    overflow-y: auto;
-  }
-  
-  #root {
-    min-height: 100vh;
-    height: auto;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    min-height: -webkit-fill-available;
   }
 
-  /* Fix for ensuring touch scrolling works everywhere on iOS */
-  * {
-    touch-action: manipulation;
+  #root {
+    min-height: -webkit-fill-available;
   }
   
-  /* Fix specifically for framer-motion elements */
+  /* Ensure elements don't interfere with scrolling */
   div[style*="transform"],
   div[style*="translate"],
   [data-framer-motion-components] {
-    pointer-events: auto;
-    touch-action: pan-y !important;
+    pointer-events: none;
+    touch-action: none;
   }
   
-  /* Ensure scroll gestures work across all elements */
-  section,
-  .motion-div,
-  [data-framer-motion-components],
-  .embla-carousel,
-  .carousel-item {
-    touch-action: pan-y !important;
+  /* Fix for buttons and interactive elements */
+  button, a, [role="button"] {
+    pointer-events: auto;
+    touch-action: manipulation;
+    position: relative;
+    z-index: 10;
   }
 }
