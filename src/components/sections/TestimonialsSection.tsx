@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TestimonialCard from "@/components/TestimonialCard";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -110,7 +110,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
         </h2>
 
         {/* Text Testimonials Section - Simple Carousel */}
-        <div className="mb-6 md:mb-8">
+        <div className="mb-4 md:mb-6">
           <div className="relative py-4 md:py-10">
             {/* Large decorative quotation mark */}
             <div className="absolute top-0 left-0 text-6xl md:text-8xl text-purple-100 font-serif opacity-50 z-0">
@@ -132,8 +132,8 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
               )}
             </div>
 
-            {/* Navigation Controls */}
-            <div className="relative z-20 flex justify-between items-center mt-4 max-w-3xl mx-auto px-4">
+            {/* Navigation Controls - Arrows only for written testimonials */}
+            <div className="relative z-20 flex justify-between items-center max-w-3xl mx-auto px-4">
               <Button
                 variant="ghost"
                 size="icon"
@@ -144,12 +144,6 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 <ChevronLeft className="h-5 w-5 text-purple-500" />
                 <span className="sr-only">Previous testimonial</span>
               </Button>
-              
-              <CarouselIndicator 
-                totalSlides={writtenTestimonials.length} 
-                currentSlide={activeTestimonialIndex} 
-                onSelect={setActiveTestimonialIndex} 
-              />
               
               <Button
                 variant="ghost"
@@ -165,7 +159,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           </div>
         </div>
 
-        {/* Image Carousel - Simple Version */}
+        {/* Image Carousel - Simple Version with arrows only */}
         <div className="mt-6">
           <div className="max-w-6xl mx-auto">
             <div className="relative flex justify-center items-center h-[500px] md:h-[600px]">
@@ -189,7 +183,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 </div>
               )}
 
-              {/* Navigation Controls */}
+              {/* Navigation Controls - Arrows only for image carousel */}
               <Button
                 variant="outline"
                 size="icon"
@@ -211,14 +205,6 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 <ChevronRight className="h-5 w-5 text-purple-500" />
                 <span className="sr-only">Next image</span>
               </Button>
-              
-              <div className="absolute bottom-4 left-0 right-0 z-30 flex justify-center">
-                <CarouselIndicator 
-                  totalSlides={tiktokImages.length} 
-                  currentSlide={activeSuccessStoryIndex} 
-                  onSelect={setActiveSuccessStoryIndex} 
-                />
-              </div>
             </div>
           </div>
         </div>
