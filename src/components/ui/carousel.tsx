@@ -1,7 +1,7 @@
-
 import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
+  type EmblaOptionsType,
 } from "embla-carousel-react"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
@@ -61,20 +61,6 @@ const Carousel = React.forwardRef<
       {
         ...opts,
         axis: orientation === "horizontal" ? "x" : "y",
-        draggableClass: "embla-carousel-draggable", // Add custom class for styling
-        dragThreshold: 10, // More responsive dragging
-        watchDrag: (_, event) => {
-          // Allow vertical page scroll when in horizontal carousel
-          if (orientation === "horizontal") {
-            const { deltaX, deltaY } = event as any;
-            const absoluteX = Math.abs(deltaX || 0);
-            const absoluteY = Math.abs(deltaY || 0);
-            
-            // Prioritize page scroll when movement is more vertical than horizontal
-            return absoluteX > absoluteY;
-          }
-          return true;
-        },
       },
       plugins
     )
@@ -150,7 +136,7 @@ const Carousel = React.forwardRef<
         <div
           ref={ref}
           onKeyDownCapture={handleKeyDown}
-          className={cn("relative", className)}
+          className={cn("relative", className, "embla-carousel")}
           role="region"
           aria-roledescription="carousel"
           {...props}
@@ -174,7 +160,7 @@ const CarouselContent = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "flex",
+          "flex embla-carousel-draggable",
           orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
           className
         )}
