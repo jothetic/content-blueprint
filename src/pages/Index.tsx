@@ -12,7 +12,6 @@ const Index = () => {
   const [visible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fix iOS Safari scrolling
   useEffect(() => {
     // Reset scroll position on initial load
     window.scrollTo(0, 0);
@@ -21,7 +20,7 @@ const Index = () => {
     // Simulate loading state
     const timer = setTimeout(() => setIsLoading(false), 1500);
     
-    // Set up the viewport correctly for iOS
+    // Set viewport height for mobile devices
     const setViewportHeight = () => {
       document.documentElement.style.setProperty(
         '--vh', 
@@ -29,22 +28,8 @@ const Index = () => {
       );
     };
     
-    // Call it initially and on resize
     setViewportHeight();
     window.addEventListener('resize', setViewportHeight);
-    
-    // Force document to be scrollable 
-    document.body.style.position = 'relative';
-    document.body.style.overflow = 'auto';
-    document.body.style.height = 'auto';
-    document.documentElement.style.overflow = 'auto';
-    document.documentElement.style.height = 'auto';
-    document.documentElement.style.position = 'relative';
-    
-    // Add passive listeners for better scroll performance
-    document.addEventListener('touchstart', function() {}, {passive: true});
-    document.addEventListener('touchmove', function() {}, {passive: true});
-    document.addEventListener('wheel', function() {}, {passive: true});
     
     return () => {
       clearTimeout(timer);
@@ -53,26 +38,16 @@ const Index = () => {
   }, []);
 
   return (
-    <div 
-      className="min-h-screen bg-deep-purple-gradient"
-      style={{ 
-        height: "auto",
-        position: "relative",
-        touchAction: "pan-y",
-      }}
-    >
+    <div className="min-h-screen bg-deep-purple-gradient">
       <Navbar />
       <BackToTop />
       
-      {/* Hero Section */}
       <HeroSection visible={visible} />
 
-      {/* Testimonials Section */}
       <Element name="testimonials">
         <TestimonialsSection isLoading={isLoading} />
       </Element>
 
-      {/* Pricing Section */}
       <Element name="pricing-section">
         <PricingSection 
           isAnnual={isAnnual} 

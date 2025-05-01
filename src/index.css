@@ -48,18 +48,17 @@
   padding: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
 }
 
-/* Critical mobile scrolling fixes */
+/* Core scrolling fixes */
 html, body {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
-  overflow-y: auto;
   position: relative;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: none;
+  touch-action: manipulation;
 }
 
 body {
@@ -67,8 +66,6 @@ body {
   background-color: #0D001F;
   color: #fff;
   min-height: 100vh;
-  min-height: -webkit-fill-available;
-  touch-action: pan-y;
 }
 
 #root {
@@ -78,16 +75,13 @@ body {
 
 /* Prevent image dragging */
 img, video, iframe {
-  pointer-events: auto;
   user-select: none;
   -webkit-user-drag: none;
-  touch-action: manipulation;
 }
 
-/* Make sure buttons have enough touch area */
+/* Ensure buttons have enough touch area */
 button, a, [role="button"] {
   cursor: pointer;
-  touch-action: manipulation;
   min-height: 44px;
   min-width: 44px;
 }
@@ -139,21 +133,14 @@ button, a, [role="button"] {
 
 /* iOS Safari specific fixes */
 @supports (-webkit-touch-callout: none) {
-  html, body {
-    height: -webkit-fill-available;
+  body, html {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   
-  .bg-deep-purple-gradient {
-    min-height: -webkit-fill-available;
-  }
-  
-  /* Ensure ALL elements permit scrolling */
-  div, section, main, article, nav, aside, header, footer {
-    touch-action: pan-y;
-  }
-  
-  /* Make sure fixed elements don't block scrolling */
-  .fixed, [style*="position: fixed"] {
-    pointer-events: auto;
+  .fixed {
+    position: fixed;
+    width: 100%;
   }
 }
