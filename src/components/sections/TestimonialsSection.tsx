@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -102,7 +101,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
   return (
     <section 
       id="testimonials-section" 
-      className="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-off-white pb-24"
+      className="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-purple-50 pb-24"
       style={{ touchAction: "auto" }}
     >
       <div className="max-w-7xl mx-auto">
@@ -110,7 +109,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-charcoal"
+          className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-black"
           style={{ touchAction: "auto" }}
         >
           Real Results from Real Students 🚀
@@ -146,15 +145,15 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
               )}
             </CarouselContent>
             <div className="flex justify-center mt-4 gap-2 md:gap-4">
-              <CarouselPrevious className="static transform-none bg-sky-blue text-white hover:bg-dark-blue border border-sky-blue/20" />
-              <CarouselNext className="static transform-none bg-sky-blue text-white hover:bg-dark-blue border border-sky-blue/20" />
+              <CarouselPrevious className="static transform-none bg-white text-purple-500 hover:bg-gray-100 border border-purple-200" />
+              <CarouselNext className="static transform-none bg-white text-purple-500 hover:bg-gray-100 border border-purple-200" />
             </div>
           </Carousel>
         </div>
 
         {/* Success Stories Image Carousel - Simple Square Images */}
         <div className="max-w-3xl mx-auto">
-          <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center text-charcoal">
+          <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center">
             Success Stories Showcase
           </h3>
           <Carousel
@@ -196,8 +195,8 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
               )}
             </CarouselContent>
             <div className="flex justify-center mt-4 gap-2 md:gap-4 mb-8">
-              <CarouselPrevious className="static transform-none bg-sky-blue text-white hover:bg-dark-blue border border-sky-blue/20" />
-              <CarouselNext className="static transform-none bg-sky-blue text-white hover:bg-dark-blue border border-sky-blue/20" />
+              <CarouselPrevious className="static transform-none bg-white text-purple-500 hover:bg-gray-100 border border-purple-200" />
+              <CarouselNext className="static transform-none bg-white text-purple-500 hover:bg-gray-100 border border-purple-200" />
             </div>
           </Carousel>
         </div>
