@@ -192,7 +192,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
               {isLoading ? (
                 <CarouselItem className="basis-full">
                   <div className="p-1 flex justify-center">
-                    <Skeleton className="w-60 md:w-72 aspect-[3/4] rounded-lg" />
+                    <Skeleton className="w-[280px] md:w-[320px] lg:w-[360px] aspect-[3/4] rounded-lg" />
                   </div>
                 </CarouselItem>
               ) : (
@@ -205,7 +205,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                       transition={{ delay: index * 0.03 }}
                       className="p-1 flex justify-center"
                     >
-                      <div className="relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-all duration-300 w-60 md:w-72">
+                      <div className="relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-all duration-300 w-[280px] md:w-[320px] lg:w-[360px]">
                         <img 
                           src={item.image} 
                           alt={`Success story ${index + 1}`}
