@@ -146,8 +146,8 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           </Carousel>
         </div>
 
-        {/* Success Stories Image Carousel - Updated to show 2 items on desktop */}
-        <div className="max-w-3xl mx-auto"> {/* Increased max-width for slightly larger images */}
+        {/* Success Stories Image Carousel */}
+        <div className="max-w-2xl mx-auto">
           <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center">
             Success Stories Showcase
           </h3>
@@ -162,15 +162,15 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
             <CarouselContent>
               {isLoading ? (
                 Array.from({ length: 5 }).map((_, index) => (
-                  <CarouselItem key={`image-skeleton-${index}`} className="basis-3/4 md:basis-1/2 lg:basis-1/2">
-                    <div className="aspect-[9/16] overflow-hidden px-1 md:px-2">
+                  <CarouselItem key={`image-skeleton-${index}`} className="basis-3/4 md:basis-1/2 lg:basis-1/3">
+                    <div className="aspect-[9/16] rounded-lg overflow-hidden px-1 md:px-2">
                       <Skeleton className="w-full h-full" />
                     </div>
                   </CarouselItem>
                 ))
               ) : (
                 testimonialImages.map((image, index) => (
-                  <CarouselItem key={index} className="basis-3/4 md:basis-1/2 lg:basis-1/2"> {/* Changed lg:basis-1/3 to lg:basis-1/2 */}
+                  <CarouselItem key={index} className="basis-3/4 md:basis-1/2 lg:basis-1/3">
                     <motion.div
                       initial={{ opacity: 0, scale: 0.95 }}
                       whileInView={{ opacity: 1, scale: 1 }}
@@ -178,7 +178,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                       transition={{ delay: index * 0.05 }}
                       className="aspect-[9/16] transition-transform duration-300 px-1 md:px-2"
                     >
-                      <div className="w-full h-full flex items-center justify-center overflow-hidden">
+                      <div className="w-full h-full bg-gray-100 flex items-center justify-center overflow-hidden">
                         <img 
                           src={image} 
                           alt={`Success story ${index + 1}`}
