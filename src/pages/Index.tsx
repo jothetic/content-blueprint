@@ -40,7 +40,7 @@ const Index = () => {
     // Force iOS Safari to allow scrolling on the whole document
     const preventIosOverscroll = () => {
       document.body.style.overflow = 'auto';
-      document.documentElement.style.overflowScrolling = 'touch';
+      // Removed the problematic line causing the TypeScript error
       document.documentElement.style.overflow = 'auto';
     };
     
@@ -71,7 +71,6 @@ const Index = () => {
       style={{ 
         minHeight: "var(--vh, 1vh) * 100", 
         touchAction: "pan-y",
-        WebkitOverflowScrolling: "touch" as any, // TypeScript workaround
         overflowY: "auto",
       }}
       data-ios-fix="true"
