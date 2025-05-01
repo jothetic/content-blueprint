@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -57,28 +56,13 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
     }
   ];
 
-  // Updated testimonial images with new uploads
+  // Updated testimonial images - only keeping the ones you uploaded
   const testimonialImages = [
-    // New uploaded images
     "/lovable-uploads/52f12300-ac22-47c8-84d3-45cf87da4e5f.png", // JT Vendors profile
     "/lovable-uploads/6852ec17-2622-4bf6-959f-8ae9d6f60fe0.png", // Pinned video
     "/lovable-uploads/5ffa9307-ef60-4441-bdbd-2ebc1ef3d332.png", // Needed some chrome
     "/lovable-uploads/7007967c-7847-4694-9e2b-1faffaaa70f7.png", // Need some denim tears
     "/lovable-uploads/e821eee0-de19-4fc1-ba54-9d8908178f38.png", // 5k this month
-    "/lovable-uploads/c4a4c75f-fefa-46b0-a89e-12d70f36b467.png", // Shopify dashboard
-    "/lovable-uploads/34464386-e73c-4de1-a744-f16a4b6b4b29.png", // Shopify sessions data
-    "/lovable-uploads/9ac7752e-e8a9-4b1c-a151-45fbf20484bb.png", // Shopify stats mobile 1
-    "/lovable-uploads/6da00e19-deb3-43a3-9431-9b89ca44e15a.png", // Shopify stats mobile 2
-    // TikTok videos
-    "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png", // Person with hoodie 1
-    "/lovable-uploads/d0cddb8d-dae4-4011-9f4b-93dc8b114512.png", // Person with hoodie 2
-    "/lovable-uploads/1d23383f-2912-463f-9355-15c54d694e34.png", // Range Rover key
-    "/lovable-uploads/4ed3fc31-8cbf-4bd2-95c9-618c54edba8b.png", // $500/day
-    "/lovable-uploads/4ee30212-8722-4c54-b21c-13d3ead83a36.png", // 13 through 20
-    "/lovable-uploads/67162bff-1d28-4fcf-9cea-b25419541e4c.png", // Kenny Witt profile
-    "/lovable-uploads/1c09b964-cc50-46b4-902a-9b28bea52ba8.png", // At making
-    "/lovable-uploads/424b3593-d73e-43d2-9b3f-d5c8f6599283.png", // I actually won
-    "/lovable-uploads/42e66244-bd3b-4ff8-b130-b3e9e75c8902.png"  // Sneaky strategy
   ];
 
   // Set up effect to update currentSlide when carousel changes
