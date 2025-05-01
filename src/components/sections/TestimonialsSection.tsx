@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -116,7 +117,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
         </motion.h2>
 
         {/* Written Testimonials Carousel */}
-        <div className="max-w-3xl mx-auto mb-6 md:mb-10">
+        <div className="max-w-3xl mx-auto mb-8 md:mb-16">
           <Carousel
             opts={{
               align: "center",
@@ -144,7 +145,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 ))
               )}
             </CarouselContent>
-            <div className="flex justify-center mt-2 gap-2 md:gap-4">
+            <div className="flex justify-center mt-4 gap-2 md:gap-4">
               <CarouselPrevious className="static transform-none bg-sky-blue text-white hover:bg-dark-blue border border-sky-blue/20" />
               <CarouselNext className="static transform-none bg-sky-blue text-white hover:bg-dark-blue border border-sky-blue/20" />
             </div>
@@ -153,7 +154,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
 
         {/* Success Stories Image Carousel - Simple Square Images */}
         <div className="max-w-3xl mx-auto">
-          <h3 className="text-lg md:text-2xl font-semibold mb-3 md:mb-4 text-center text-charcoal">
+          <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center text-charcoal">
             Success Stories Showcase
           </h3>
           <Carousel
@@ -194,7 +195,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 ))
               )}
             </CarouselContent>
-            <div className="flex justify-center mt-2 gap-2 md:gap-4 mb-6">
+            <div className="flex justify-center mt-4 gap-2 md:gap-4 mb-8">
               <CarouselPrevious className="static transform-none bg-sky-blue text-white hover:bg-dark-blue border border-sky-blue/20" />
               <CarouselNext className="static transform-none bg-sky-blue text-white hover:bg-dark-blue border border-sky-blue/20" />
             </div>
