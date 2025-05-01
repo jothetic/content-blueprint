@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -6,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import CarouselIndicator from "@/components/CarouselIndicator";
 
 interface TestimonialsSectionProps {
   isLoading: boolean;
@@ -113,42 +113,6 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
     return () => clearInterval(interval);
   }, [isLoading]);
 
-  // Testimonial indicator dots
-  const TestimonialDots = () => (
-    <div className="flex justify-center gap-2 mt-4">
-      {writtenTestimonials.map((_, index) => (
-        <button
-          key={`testimonial-dot-${index}`}
-          className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-            activeTestimonialIndex === index 
-              ? "bg-purple-500 scale-110" 
-              : "bg-gray-300"
-          }`}
-          onClick={() => setActiveTestimonialIndex(index)}
-          aria-label={`Go to testimonial ${index + 1}`}
-        />
-      ))}
-    </div>
-  );
-
-  // Success story indicator dots
-  const SuccessStoryDots = () => (
-    <div className="flex justify-center gap-2 mt-4">
-      {tiktokImages.map((_, index) => (
-        <button
-          key={`success-dot-${index}`}
-          className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-            activeSuccessStoryIndex === index 
-              ? "bg-purple-500 scale-110" 
-              : "bg-gray-300"
-          }`}
-          onClick={() => setActiveSuccessStoryIndex(index)}
-          aria-label={`Go to success story ${index + 1}`}
-        />
-      ))}
-    </div>
-  );
-
   return (
     <section className="py-10 md:py-20 px-4 md:px-6 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -161,8 +125,8 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           Real Results from Real Students 🚀
         </motion.h2>
 
-        {/* Text Testimonials Section - Perspective Slider */}
-        <div className="mb-16 md:mb-24">
+        {/* Text Testimonials Section - Keep existing carousel */}
+        <div className="mb-8 md:mb-12">
           <div className="relative py-4 md:py-10">
             {/* Large decorative quotation mark */}
             <div className="absolute top-0 left-0 text-6xl md:text-8xl text-purple-100 font-serif opacity-50 z-0">
@@ -229,7 +193,11 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 <span className="sr-only">Previous testimonial</span>
               </Button>
               
-              <TestimonialDots />
+              <CarouselIndicator 
+                totalSlides={writtenTestimonials.length} 
+                currentSlide={activeTestimonialIndex} 
+                onSelect={setActiveTestimonialIndex} 
+              />
               
               <Button
                 variant="ghost"
@@ -245,93 +213,116 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           </div>
         </div>
 
-        {/* Success Stories Showcase - 3D Gallery */}
-        <div className="mt-16">
-          <h3 className="text-sm sm:text-base md:text-xl font-semibold mb-4 md:mb-8 text-center">
-            Success Stories Showcase
-          </h3>
-          
-          <div className="relative max-w-5xl mx-auto h-[500px] md:h-[600px]">
-            {isLoading ? (
-              <div className="flex justify-center items-center h-full">
-                <Skeleton className="w-[300px] md:w-[350px] lg:w-[400px] aspect-[3/5] rounded-lg" />
-              </div>
-            ) : (
-              <div className="relative h-full flex items-center justify-center">
-                {tiktokImages.map((item, index) => {
-                  // Calculate distance from active
-                  const distance = Math.abs(activeSuccessStoryIndex - index);
-                  const isActive = activeSuccessStoryIndex === index;
-                  
-                  // Calculate angle in the "circle"
-                  const angle = ((index - activeSuccessStoryIndex) / tiktokImages.length) * Math.PI * 2;
-                  const radiusX = isMobile ? 120 : 200;
-                  
-                  // Position based on angle
-                  const zPosition = isActive ? 0 : -100 - distance * 50; // Z position for depth
-                  const xPosition = isActive ? 0 : Math.sin(angle) * radiusX; // X position in circle
-                  
-                  // Visual properties based on position
-                  const scale = isActive ? 1 : Math.max(0.7, 0.9 - distance * 0.1);
-                  const opacity = isActive ? 1 : Math.max(0.5, 0.7 - distance * 0.2);
-                  const blur = isActive ? 0 : distance * 2;
-                  const zIndex = isActive ? 10 : 10 - distance;
-                  
-                  return (
-                    <div
-                      key={`success-story-${index}`}
-                      className={`absolute transition-all duration-500 ease-out cursor-pointer
-                              ${isActive ? 'story-shadow' : ''}`}
-                      style={{
-                        transform: `translateX(${xPosition}px) translateZ(${zPosition}px) scale(${scale})`,
-                        opacity,
-                        zIndex,
-                        filter: `blur(${blur}px)`,
-                      }}
-                      onClick={() => setActiveSuccessStoryIndex(index)}
-                    >
-                      <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <img
-                          src={item.image}
-                          alt={`Success story ${index + 1}`}
-                          className="w-[300px] md:w-[350px] lg:w-[400px] object-cover rounded-lg"
-                          loading="lazy"
-                        />
-                        <div className="absolute bottom-3 left-3 bg-black/70 text-white text-xs px-2 py-1 rounded-full flex items-center">
-                          <span className="mr-1">👁️</span> {item.views}
+        {/* Image Carousel - Redesigned */}
+        <div className="mt-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="relative h-[500px] md:h-[600px]">
+              {isLoading ? (
+                <div className="flex justify-center items-center h-full">
+                  <Skeleton className="w-[320px] md:w-[500px] lg:w-[600px] aspect-[9/16] rounded-lg" />
+                </div>
+              ) : (
+                <div className="relative w-full h-full flex items-center justify-center">
+                  {tiktokImages.map((item, index) => {
+                    // Calculate if active or nearby
+                    const isActive = activeSuccessStoryIndex === index;
+                    const isPrev = (activeSuccessStoryIndex === 0 && index === tiktokImages.length - 1) || 
+                                  (activeSuccessStoryIndex !== 0 && index === activeSuccessStoryIndex - 1);
+                    const isNext = (activeSuccessStoryIndex === tiktokImages.length - 1 && index === 0) || 
+                                  (activeSuccessStoryIndex !== tiktokImages.length - 1 && index === activeSuccessStoryIndex + 1);
+                    const isHidden = !isActive && !isPrev && !isNext;
+                    
+                    // Determine position and style
+                    let xPosition = 0;
+                    let scale = 1;
+                    let opacity = 1;
+                    let zIndex = 10;
+                    let blur = 0;
+                    
+                    if (isPrev) {
+                      xPosition = isMobile ? -160 : -300;
+                      scale = 0.85;
+                      opacity = 0.5;
+                      zIndex = 5;
+                      blur = 3;
+                    } else if (isNext) {
+                      xPosition = isMobile ? 160 : 300;
+                      scale = 0.85;
+                      opacity = 0.5;
+                      zIndex = 5;
+                      blur = 3;
+                    } else if (!isActive) {
+                      opacity = 0;
+                      zIndex = 0;
+                    }
+                    
+                    return (
+                      <motion.div
+                        key={`image-${index}`}
+                        initial={{ opacity: 0 }}
+                        animate={{ 
+                          opacity: isHidden ? 0 : opacity,
+                          x: xPosition,
+                          scale,
+                          filter: `blur(${blur}px)`
+                        }}
+                        transition={{ duration: 0.6, ease: "easeInOut" }}
+                        className="absolute cursor-pointer"
+                        style={{
+                          zIndex,
+                          display: isHidden ? 'none' : 'block'
+                        }}
+                        onClick={() => isHidden ? null : setActiveSuccessStoryIndex(index)}
+                      >
+                        <div className={`overflow-hidden rounded-xl shadow-xl transition-all duration-300 ${
+                          isActive ? 'ring-4 ring-purple-500/30' : ''
+                        }`}>
+                          <img
+                            src={item.image}
+                            alt={`Success story ${index + 1}`}
+                            className="w-[280px] sm:w-[320px] md:w-[400px] lg:w-[500px] object-cover rounded-xl"
+                            loading="lazy"
+                          />
+                          <div className="absolute bottom-3 left-3 bg-black/70 text-white px-2 py-1 rounded-full flex items-center text-xs sm:text-sm">
+                            <span className="mr-1">👁️</span> {item.views}
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              )}
 
-            {/* Navigation Controls */}
-            <div className="absolute bottom-4 left-0 right-0 z-20 flex justify-center items-center gap-4">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={goToPrevSuccessStory}
-                className="bg-white/80 hover:bg-white shadow-sm"
-                disabled={isLoading}
-              >
-                <ChevronLeft className="h-4 w-4 mr-1 text-purple-500" />
-                <span>Prev</span>
-              </Button>
-              
-              <SuccessStoryDots />
-              
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={goToNextSuccessStory}
-                className="bg-white/80 hover:bg-white shadow-sm"
-                disabled={isLoading}
-              >
-                <span>Next</span>
-                <ChevronRight className="h-4 w-4 ml-1 text-purple-500" />
-              </Button>
+              {/* Navigation Controls */}
+              <div className="absolute bottom-4 left-0 right-0 z-30 flex justify-center gap-4 items-center">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={goToPrevSuccessStory}
+                  className="bg-white/90 hover:bg-white shadow-md h-10 w-10 rounded-full"
+                  disabled={isLoading}
+                >
+                  <ChevronLeft className="h-5 w-5 text-purple-500" />
+                  <span className="sr-only">Previous image</span>
+                </Button>
+                
+                <CarouselIndicator 
+                  totalSlides={tiktokImages.length} 
+                  currentSlide={activeSuccessStoryIndex} 
+                  onSelect={setActiveSuccessStoryIndex} 
+                />
+                
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={goToNextSuccessStory}
+                  className="bg-white/90 hover:bg-white shadow-md h-10 w-10 rounded-full"
+                  disabled={isLoading}
+                >
+                  <ChevronRight className="h-5 w-5 text-purple-500" />
+                  <span className="sr-only">Next image</span>
+                </Button>
+              </div>
             </div>
           </div>
         </div>

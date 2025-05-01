@@ -12,7 +12,7 @@ const CarouselIndicator = ({ totalSlides, currentSlide, onSelect }: CarouselIndi
   if (totalSlides <= 1) return null;
   
   return (
-    <div className="flex justify-center gap-1.5 mt-1 flex-wrap">
+    <div className="flex justify-center gap-1.5 flex-wrap">
       {Array.from({ length: totalSlides }).map((_, index) => (
         <Button
           key={index}
