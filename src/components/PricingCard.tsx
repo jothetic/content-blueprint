@@ -49,20 +49,6 @@ const PricingCard = ({
           ? 'bg-white/15 border-soft-purple/50' 
           : 'bg-white/10 border-white/20'
         } backdrop-blur-sm border shadow-xl relative overflow-hidden h-full flex flex-col`}>
-        {highlighted && (
-          <motion.div 
-            className="absolute top-0 right-0 bg-soft-purple text-white px-4 py-1 rounded-bl-lg text-sm font-medium"
-            initial={{ x: 100 }}
-            animate={{ x: 0 }}
-            transition={{ 
-              type: "spring",
-              stiffness: 200,
-              damping: 20
-            }}
-          >
-            Recommended
-          </motion.div>
-        )}
         
         <motion.div
           className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"
