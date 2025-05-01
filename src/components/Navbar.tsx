@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <nav className="fixed w-full top-0 z-50 bg-transparent hidden md:block">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-center items-center h-16">
           <motion.div
             className="flex items-center"
             style={{ opacity, y: translateY }}
@@ -25,24 +25,6 @@ const Navbar = () => {
               <span className="text-white font-bold text-xl">Creator Blueprint</span>
             </div>
           </motion.div>
-
-          <div className="flex items-center space-x-6">
-            <motion.div
-              style={{ opacity, y: translateY }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              <Link 
-                to="testimonials" 
-                smooth={true} 
-                duration={500} 
-                className="text-light-blue hover:text-white transition-colors duration-200 text-lg md:text-xl cursor-pointer"
-              >
-                Does this work?
-              </Link>
-            </motion.div>
-          </div>
         </div>
       </div>
     </nav>
