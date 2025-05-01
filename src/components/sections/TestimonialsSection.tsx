@@ -57,27 +57,18 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
     }
   ];
 
+  // Updated testimonial images with the new ones
   const testimonialImages = [
-    "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png", // 2.7M views
-    "/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png", // 65K followers
-    "/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png", // Shopify dashboard
+    "/lovable-uploads/2156139e-bacc-4a7d-ae5d-71c30cfbad9b.png", // TikTok profile
+    "/lovable-uploads/f405efd5-31a6-437a-b331-835abdf2a01b.png", // TikTok post with 2.7M views
+    "/lovable-uploads/bad4d3ab-d08a-4448-b836-8faa2fb14d18.png", // TikTok post with 204.8K views
+    "/lovable-uploads/8da72c5e-3602-4b1b-84da-46714b14dbb4.png", // Mobile screenshots showing 5k this month
+    "/lovable-uploads/014ae057-c57f-4716-81f9-0daa2cdac9af.png", // Kenny Witt YouTuber profile and videos
+    "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png", 
+    "/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png", 
+    "/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png",
     "/lovable-uploads/171f1432-c3ef-4494-bf8e-3de920255ad2.png",
-    "/lovable-uploads/fd4edd9c-d981-4a64-a1cd-31ac4b99e115.png",
-    "/lovable-uploads/ea5ac916-acb8-42e8-9695-e42bc31aede1.png",
-    "/lovable-uploads/0d79d1cb-7250-40c9-b0bf-c6d6003a5c10.png",
-    "/lovable-uploads/1d23383f-2912-463f-9355-15c54d694e34.png",
-    "/lovable-uploads/d0cddb8d-dae4-4011-9f4b-93dc8b114512.png",
-    "/lovable-uploads/c4a4c75f-fefa-46b0-a89e-12d70f36b467.png",
-    "/lovable-uploads/4ed3fc31-8cbf-4bd2-95c9-618c54edba8b.png",
-    "/lovable-uploads/4ee30212-8722-4c54-b21c-13d3ead83a36.png",
-    "/lovable-uploads/67162bff-1d28-4fcf-9cea-b25419541e4c.png",
-    "/lovable-uploads/34464386-e73c-4de1-a744-f16a4b6b4b29.png",
-    "/lovable-uploads/9ac7752e-e8a9-4b1c-a151-45fbf20484bb.png",
-    "/lovable-uploads/6da00e19-deb3-43a3-9431-9b89ca44e15a.png",
-    "/lovable-uploads/51a943ac-c3fa-45e0-882c-0f2db5942a8a.png",
-    "/lovable-uploads/1c09b964-cc50-46b4-902a-9b28bea52ba8.png",
-    "/lovable-uploads/424b3593-d73e-43d2-9b3f-d5c8f6599283.png",
-    "/lovable-uploads/42e66244-bd3b-4ff8-b130-b3e9e75c8902.png"
+    "/lovable-uploads/fd4edd9c-d981-4a64-a1cd-31ac4b99e115.png"
   ];
 
   // Set up effect to update currentSlide when carousel changes
@@ -126,7 +117,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
         </motion.h2>
 
         {/* Written Testimonials Carousel */}
-        <div className="max-w-3xl mx-auto mb-8 md:mb-16">
+        <div className="max-w-3xl mx-auto mb-6 md:mb-10">
           <Carousel
             opts={{
               align: "center",
@@ -163,9 +154,6 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
 
         {/* Success Stories Image Carousel */}
         <div className="max-w-2xl mx-auto">
-          <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center">
-            Success Stories Showcase
-          </h3>
           <Carousel
             opts={{
               align: "center",
@@ -177,27 +165,27 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
             <CarouselContent>
               {isLoading ? (
                 Array.from({ length: 5 }).map((_, index) => (
-                  <CarouselItem key={`image-skeleton-${index}`} className="basis-3/4 md:basis-1/2 lg:basis-1/3">
-                    <div className="aspect-[9/16] rounded-lg overflow-hidden px-1 md:px-2">
+                  <CarouselItem key={`image-skeleton-${index}`} className="basis-full md:basis-full">
+                    <div className="aspect-auto rounded-lg overflow-hidden px-1 md:px-2">
                       <Skeleton className="w-full h-full" />
                     </div>
                   </CarouselItem>
                 ))
               ) : (
                 testimonialImages.map((image, index) => (
-                  <CarouselItem key={index} className="basis-3/4 md:basis-1/2 lg:basis-1/3">
+                  <CarouselItem key={index} className="basis-full md:basis-full">
                     <motion.div
                       initial={{ opacity: 0, scale: 0.95 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.05 }}
-                      className="aspect-[9/16] rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 px-1 md:px-2"
+                      className="aspect-auto rounded-lg overflow-hidden transition-transform duration-300 px-1 md:px-2"
                     >
-                      <div className="w-full h-full bg-gray-100 flex items-center justify-center overflow-hidden rounded-lg">
+                      <div className="w-full h-full flex items-center justify-center overflow-hidden rounded-lg">
                         <img 
                           src={image} 
                           alt={`Success story ${index + 1}`}
-                          className="w-full h-full object-contain"
+                          className="w-full object-contain"
                           loading="lazy"
                         />
                       </div>
