@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -117,7 +118,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
         </motion.h2>
 
         {/* Written Testimonials Carousel */}
-        <div className="max-w-3xl mx-auto mb-8 md:mb-16 relative">
+        <div className="max-w-3xl mx-auto mb-8 md:mb-16">
           <Carousel
             opts={{
               align: "center",
@@ -145,13 +146,15 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 ))
               )}
             </CarouselContent>
-            <CarouselPrevious className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 md:-ml-5 lg:-ml-6 bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
-            <CarouselNext className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 md:-mr-5 lg:-mr-6 bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
+            <div className="flex justify-center mt-4 gap-2 md:gap-4">
+              <CarouselPrevious className="static transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
+              <CarouselNext className="static transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
+            </div>
           </Carousel>
         </div>
 
         {/* Success Stories Image Carousel - Simple Square Images */}
-        <div className="max-w-3xl mx-auto relative">
+        <div className="max-w-3xl mx-auto">
           <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center text-white">
             Success Stories Showcase
           </h3>
@@ -193,8 +196,10 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 ))
               )}
             </CarouselContent>
-            <CarouselPrevious className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 md:-ml-5 lg:-ml-6 bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
-            <CarouselNext className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 md:-mr-5 lg:-mr-6 bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
+            <div className="flex justify-center mt-4 gap-2 md:gap-4">
+              <CarouselPrevious className="static transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
+              <CarouselNext className="static transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
+            </div>
           </Carousel>
         </div>
       </div>
