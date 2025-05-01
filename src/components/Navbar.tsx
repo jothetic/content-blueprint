@@ -21,8 +21,28 @@ const Navbar = () => {
             transition={{ delay: 0.1 }}
           >
             <div className="flex items-center gap-3">
-              <FileTerminal className="h-7 w-7 text-white" />
-              <span className="text-white font-bold text-2xl">Creator Blueprint</span>
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ 
+                  duration: 0.5,
+                  type: "spring",
+                  stiffness: 100
+                }}
+              >
+                <FileTerminal className="h-8 w-8 text-white" />
+              </motion.div>
+              <motion.span 
+                className="text-white font-bold text-2xl"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.2,
+                  duration: 0.5
+                }}
+              >
+                Creator Blueprint
+              </motion.span>
             </div>
           </motion.div>
         </div>
