@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -42,22 +41,23 @@
 @layer base {
   * {
     @apply border-border;
+    -webkit-tap-highlight-color: transparent;
   }
+  
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin: 0;
+    padding: 0;
+  }
+  
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Poppins', sans-serif;
-    overscroll-behavior-y: contain;
-    overflow-x: hidden;
-    width: 100%;
-    height: 100%;
-    min-height: 100vh;
     position: relative;
-  }
-  
-  html {
-    height: 100%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: auto;
   }
 }
 
@@ -130,4 +130,15 @@
 /* Make sure elements don't prevent scrolling */
 section, div {
   touch-action: auto;
+}
+
+/* iOS Safari fixes */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+  
+  html {
+    height: -webkit-fill-available;
+  }
 }

@@ -26,16 +26,30 @@ const Index = () => {
   const [visible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Fix iOS Safari initial scroll position
   useEffect(() => {
+    // Reset scroll position
     window.scrollTo(0, 0);
     setVisible(true);
+    
     // Simulate loading state
     const timer = setTimeout(() => setIsLoading(false), 1500);
-    return () => clearTimeout(timer);
+    
+    // iOS specific fix to ensure content is scrollable
+    const handleTouchMove = (e: TouchEvent) => {
+      e.stopPropagation();
+    };
+    
+    document.addEventListener('touchmove', handleTouchMove, { passive: true });
+    
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('touchmove', handleTouchMove);
+    };
   }, []);
 
   return (
-    <div className="min-h-screen bg-deep-purple-gradient overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden bg-deep-purple-gradient">
       <Navbar />
       <BackToTop />
       
