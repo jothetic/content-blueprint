@@ -116,6 +116,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
             opts={{
               align: "center",
               loop: true,
+              dragFree: true, // Makes dragging more responsive
             }}
             setApi={setTestimonialCarouselApi}
             className="w-full px-4 md:px-0"
@@ -155,6 +156,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
             opts={{
               align: "center",
               loop: true,
+              dragFree: true, // Makes dragging more responsive
             }}
             setApi={setImageCarouselApi}
             className="w-full px-4 md:px-0"
