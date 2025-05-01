@@ -18,9 +18,9 @@ const CarouselIndicator = ({ totalSlides, currentSlide, onSelect }: CarouselIndi
           key={index}
           variant="ghost"
           size="icon"
-          className={`w-6 h-6 p-0 transition-all duration-300 ${
+          className={`w-6 h-6 p-0 transition-colors ${
             currentSlide === index 
-              ? 'text-purple-500 scale-110' 
+              ? 'text-purple-500' 
               : 'text-gray-300'
           }`}
           onClick={() => onSelect(index)}
@@ -28,7 +28,7 @@ const CarouselIndicator = ({ totalSlides, currentSlide, onSelect }: CarouselIndi
           aria-current={currentSlide === index}
         >
           <Circle 
-            className={`w-2.5 h-2.5 transition-all duration-300 ${
+            className={`w-2.5 h-2.5 ${
               currentSlide === index ? 'fill-current' : ''
             }`} 
           />
