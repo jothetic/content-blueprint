@@ -101,7 +101,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
   return (
     <section 
       id="testimonials-section" 
-      className="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-white pb-24"
+      className="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-purple-50 pb-24"
       style={{ touchAction: "auto" }}
     >
       <div className="max-w-7xl mx-auto">
@@ -145,8 +145,8 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
               )}
             </CarouselContent>
             <div className="flex justify-center mt-4 gap-2 md:gap-4">
-              <CarouselPrevious className="static transform-none bg-purple-500 text-white hover:bg-purple-700" />
-              <CarouselNext className="static transform-none bg-purple-500 text-white hover:bg-purple-700" />
+              <CarouselPrevious className="static transform-none bg-white text-purple-500 hover:bg-gray-100 border border-purple-200" />
+              <CarouselNext className="static transform-none bg-white text-purple-500 hover:bg-gray-100 border border-purple-200" />
             </div>
           </Carousel>
         </div>
@@ -195,8 +195,8 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
               )}
             </CarouselContent>
             <div className="flex justify-center mt-4 gap-2 md:gap-4 mb-8">
-              <CarouselPrevious className="static transform-none bg-purple-500 text-white hover:bg-purple-700" />
-              <CarouselNext className="static transform-none bg-purple-500 text-white hover:bg-purple-700" />
+              <CarouselPrevious className="static transform-none bg-white text-purple-500 hover:bg-gray-100 border border-purple-200" />
+              <CarouselNext className="static transform-none bg-white text-purple-500 hover:bg-gray-100 border border-purple-200" />
             </div>
           </Carousel>
         </div>
