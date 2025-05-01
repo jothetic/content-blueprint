@@ -26,9 +26,9 @@ const TestimonialCard = ({ name, role, quote, image }: TestimonialCardProps) => 
       onHoverEnd={() => setHovered(false)}
       className="px-2"
     >
-      <Card className="p-6 bg-white shadow-md border-none h-full relative overflow-hidden group">
+      <Card className="p-6 bg-white shadow-md border-border-color h-full relative overflow-hidden group">
         <motion.div 
-          className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10"
+          className="absolute inset-0 bg-gradient-to-br from-primary-blue/5 to-success-accent/5"
           initial={{ opacity: 0 }}
           animate={{ opacity: hovered ? 1 : 0 }}
           transition={{ duration: 0.3 }}
@@ -60,7 +60,7 @@ const TestimonialCard = ({ name, role, quote, image }: TestimonialCardProps) => 
                   onLoad={() => setImageLoaded(true)}
                   className={`transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                 />
-                <AvatarFallback className="bg-soft-purple/10 text-soft-purple">{name[0]}</AvatarFallback>
+                <AvatarFallback className="bg-primary-blue/10 text-primary-blue">{name[0]}</AvatarFallback>
               </Avatar>
             </motion.div>
             <motion.div
@@ -68,12 +68,12 @@ const TestimonialCard = ({ name, role, quote, image }: TestimonialCardProps) => 
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <h3 className="font-bold text-black">{name}</h3>
-              <p className="text-gray-600 text-sm">{role}</p>
+              <h3 className="font-bold text-headline-text">{name}</h3>
+              <p className="text-muted-text text-sm">{role}</p>
             </motion.div>
           </div>
           <motion.p 
-            className="text-gray-700 leading-relaxed"
+            className="text-body-text leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -82,7 +82,7 @@ const TestimonialCard = ({ name, role, quote, image }: TestimonialCardProps) => 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className="text-soft-purple text-xl font-serif"
+              className="text-primary-blue text-xl font-serif"
             >
               &ldquo;
             </motion.span>
@@ -91,7 +91,7 @@ const TestimonialCard = ({ name, role, quote, image }: TestimonialCardProps) => 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className="text-soft-purple text-xl font-serif"
+              className="text-primary-blue text-xl font-serif"
             >
               &rdquo;
             </motion.span>

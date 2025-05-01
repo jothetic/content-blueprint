@@ -23,7 +23,7 @@ const Navbar = () => {
                 to="testimonials" 
                 smooth={true} 
                 duration={500} 
-                className="text-light-blue hover:text-white transition-colors duration-200 text-lg md:text-xl cursor-pointer"
+                className="text-primary-blue hover:text-headline-text transition-colors duration-200 text-lg md:text-xl cursor-pointer"
               >
                 Does this work?
               </Link>
