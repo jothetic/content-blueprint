@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation, useMotionValue, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -71,13 +70,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
   };
 
   return (
-    <section className="pt-24 md:pt-32 pb-10 md:pb-16 px-4 md:px-6 lg:px-8 overflow-hidden">
+    <section className="pt-24 md:pt-32 pb-10 md:pb-16 px-4 md:px-6 lg:px-8 overflow-hidden touch-auto">
       <motion.div
         initial="hidden"
         animate={controls}
         variants={heroVariants}
         className="max-w-4xl mx-auto text-center relative"
         onMouseMove={handleMouseMove}
+        style={{ touchAction: "auto" }}
       >
         {/* Animated background elements */}
         <motion.div
@@ -116,11 +116,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            style={{ touchAction: "auto" }}
           >
             <motion.span
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 2.5, repeat: Infinity, repeatType: "reverse" }}
               className="inline-block"
+              style={{ touchAction: "auto" }}
             >
               🚀
             </motion.span>{" "}
@@ -131,6 +133,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
+            style={{ touchAction: "auto" }}
           >
             and Monetize Your Audience.
           </motion.h1>

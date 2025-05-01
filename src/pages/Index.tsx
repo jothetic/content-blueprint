@@ -26,9 +26,9 @@ const Index = () => {
   const [visible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fix iOS Safari initial scroll position
+  // Fix iOS Safari scrolling
   useEffect(() => {
-    // Reset scroll position
+    // Reset scroll position on initial load
     window.scrollTo(0, 0);
     setVisible(true);
     
@@ -37,19 +37,32 @@ const Index = () => {
     
     // iOS specific fix to ensure content is scrollable
     const handleTouchMove = (e: TouchEvent) => {
-      e.stopPropagation();
+      // Don't stop propagation - allow the event to bubble naturally
     };
     
     document.addEventListener('touchmove', handleTouchMove, { passive: true });
     
+    // Set up the viewport correctly for iOS
+    const setViewportHeight = () => {
+      document.documentElement.style.setProperty(
+        '--vh', 
+        `${window.innerHeight * 0.01}px`
+      );
+    };
+    
+    // Call it initially and on resize
+    setViewportHeight();
+    window.addEventListener('resize', setViewportHeight);
+    
     return () => {
       clearTimeout(timer);
       document.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('resize', setViewportHeight);
     };
   }, []);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-deep-purple-gradient">
+    <div className="min-h-[var(--vh,1vh)*100] overflow-x-hidden bg-deep-purple-gradient" style={{ touchAction: "auto" }}>
       <Navbar />
       <BackToTop />
       
@@ -57,12 +70,12 @@ const Index = () => {
       <HeroSection visible={visible} />
 
       {/* Testimonials Section */}
-      <Element name="testimonials">
+      <Element name="testimonials" style={{ touchAction: "auto" }}>
         <TestimonialsSection isLoading={isLoading} />
       </Element>
 
       {/* Pricing Section */}
-      <Element name="pricing-section">
+      <Element name="pricing-section" style={{ touchAction: "auto" }}>
         <PricingSection 
           isAnnual={isAnnual} 
           setIsAnnual={setIsAnnual} 

@@ -35,22 +35,24 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.75rem;
+    
+    /* Custom viewport height variable */
+    --vh: 1vh;
   }
 }
 
+/* Improve scrolling behavior, especially on iOS */
 @layer base {
   * {
     @apply border-border;
     -webkit-tap-highlight-color: transparent;
   }
   
-  html, body {
+  html {
     height: 100%;
-    width: 100%;
-    overflow-x: hidden;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    margin: 0;
-    padding: 0;
+    scroll-behavior: smooth;
   }
   
   body {
@@ -58,6 +60,14 @@
     font-family: 'Poppins', sans-serif;
     position: relative;
     overscroll-behavior-y: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    /* Critical for iOS scroll */
+    touch-action: manipulation;
   }
 }
 
@@ -132,13 +142,40 @@ section, div {
   touch-action: auto;
 }
 
+/* All motion elements should not block touch */
+.motion-div {
+  touch-action: auto !important;
+}
+
+/* All framer-motion elements */
+[data-framer-motion-components], 
+div[style*="transform"], 
+div[style*="translate"] {
+  touch-action: auto !important;
+}
+
 /* iOS Safari fixes */
 @supports (-webkit-touch-callout: none) {
   .min-h-screen {
     min-height: -webkit-fill-available;
+    height: -webkit-fill-available;
   }
   
-  html {
+  html, body {
     height: -webkit-fill-available;
+  }
+  
+  /* Fix for iOS bounce effect */
+  body {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+  }
+  
+  #root {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
