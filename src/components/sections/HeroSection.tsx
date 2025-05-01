@@ -59,85 +59,25 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
   };
 
   return (
-    <section 
-      className="hero-section pt-24 md:pt-32 pb-10 md:pb-16 px-4 md:px-6 lg:px-8 overflow-hidden" 
-      style={{ touchAction: "auto" }}
-    >
+    <section className="pt-24 md:pt-32 pb-10 md:pb-16 px-4 md:px-6 lg:px-8">
       <motion.div
         initial="hidden"
         animate={controls}
         variants={heroVariants}
         className="max-w-4xl mx-auto text-center relative"
-        style={{ touchAction: "auto" }}
       >
-        {/* Animated background elements */}
-        <motion.div
-          className="absolute top-20 -left-20 w-40 h-40 rounded-full bg-purple-500/10 blur-3xl motion-div"
-          animate={{ 
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-            x: [0, 10, 0],
-            y: [0, -10, 0]
-          }}
-          transition={{ 
-            duration: 8,
-            repeat: Infinity,
-            repeatType: "reverse" 
-          }}
-          style={{ 
-            pointerEvents: "none",
-            touchAction: "none",
-            position: "absolute",
-            zIndex: 1
-          }}
-        />
-        
-        <motion.div
-          className="absolute bottom-0 -right-20 w-60 h-60 rounded-full bg-blue-500/10 blur-3xl motion-div"
-          animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0.2, 0.4, 0.2],
-            x: [0, -15, 0],
-            y: [0, 15, 0]
-          }}
-          transition={{ 
-            duration: 10,
-            repeat: Infinity,
-            repeatType: "reverse" 
-          }}
-          style={{ 
-            pointerEvents: "none",
-            touchAction: "none",
-            position: "absolute",
-            zIndex: 1
-          }}
-        />
+        {/* Animated background elements - simplified for better performance */}
+        <div className="absolute top-20 -left-20 w-40 h-40 rounded-full bg-purple-500/10 blur-3xl"></div>
+        <div className="absolute bottom-0 -right-20 w-60 h-60 rounded-full bg-blue-500/10 blur-3xl"></div>
 
-        <motion.div 
-          variants={titleVariants}
-          style={{ 
-            touchAction: "auto",
-            position: "relative",
-            zIndex: 2
-          }}
-          className="relative z-10"
-        >
+        <motion.div variants={titleVariants} className="relative z-10">
           <motion.h1 
             className="text-3xl md:text-5xl lg:text-6xl font-bold mb-2 text-white tracking-tight"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            style={{ touchAction: "auto", position: "relative", zIndex: 2 }}
           >
-            <span
-              className="inline-block"
-              style={{ 
-                touchAction: "auto",
-                pointerEvents: "none" 
-              }}
-            >
-              🚀
-            </span>{" "}
+            <span className="inline-block">🚀</span>{" "}
             Master the Blueprint to Grow
           </motion.h1>
           <motion.h1 
@@ -145,7 +85,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            style={{ touchAction: "auto", position: "relative", zIndex: 2 }}
           >
             and Monetize Your Audience.
           </motion.h1>
@@ -154,32 +93,16 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
         <motion.p 
           variants={fadeUpVariant}
           className="text-base md:text-lg text-white mb-6 md:mb-8 max-w-2xl mx-auto font-medium"
-          style={{ touchAction: "auto", position: "relative", zIndex: 2 }}
         >
           Turn views into income with proven systems, live coaching, and exclusive tools—built by a creator who made $100K at 15.
         </motion.p>
         
-        {/* Video Section */}
+        {/* Video Section - simplified for better performance */}
         <motion.div
           variants={fadeUpVariant}
           className="relative max-w-4xl mx-auto mb-8 md:mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          style={{ touchAction: "auto", position: "relative", zIndex: 2 }}
         >
-          <motion.div 
-            className="absolute -inset-1 bg-gradient-to-r from-purple-500/30 via-blue-500/30 to-purple-500/30 rounded-lg blur-sm motion-div"
-            style={{ 
-              pointerEvents: "none",
-              touchAction: "none",
-              position: "absolute"
-            }}
-          />
-          <div 
-            className="rounded-lg overflow-hidden shadow-2xl border border-white/10 relative z-10"
-            style={{ touchAction: "auto", position: "relative", zIndex: 3 }}
-          >
+          <div className="relative rounded-lg overflow-hidden shadow-2xl border border-white/10">
             <YouTubeEmbed 
               videoId="7EHqhKXjzzs"
               className="w-full"
@@ -190,12 +113,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
         <motion.div
           variants={fadeUpVariant}
           className="flex flex-col items-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          style={{ touchAction: "auto", position: "relative", zIndex: 5 }}
         >
-          <div style={{ touchAction: "auto", position: "relative", zIndex: 5 }}>
+          <div>
             <Button 
               className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden mb-4"
               onClick={() => {
@@ -206,26 +125,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
                   spy: true
                 });
               }}
-              style={{ touchAction: "auto", position: "relative", zIndex: 5 }}
             >
-              <motion.span
-                className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent motion-div"
-                animate={{
-                  x: ["-100%", "100%"],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  ease: "easeInOut",
-                  repeatDelay: 1
-                }}
-                style={{ 
-                  pointerEvents: "none",
-                  touchAction: "none",
-                  position: "absolute"
-                }}
-              />
               <span className="relative z-10 flex items-center">
                 → Start Your Journey <ArrowRightIcon className="ml-1 w-4 h-4 md:w-5 md:h-5" />
               </span>
@@ -237,9 +137,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            style={{ touchAction: "auto", position: "relative", zIndex: 5 }}
           >
-            <div className="flex" style={{ touchAction: "auto" }}>
+            <div className="flex">
               {[1, 2, 3, 4, 5].map(i => (
                 <Star key={i} className="w-3 h-3 md:w-4 md:h-4 fill-yellow-400 text-yellow-400" />
               ))}

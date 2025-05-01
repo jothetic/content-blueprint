@@ -33,31 +33,18 @@ const Index = () => {
     setViewportHeight();
     window.addEventListener('resize', setViewportHeight);
     
-    // Enable passive touch events for better scrolling performance
+    // Force document to be scrollable 
+    document.body.style.position = 'relative';
+    document.body.style.overflow = 'auto';
+    document.body.style.height = 'auto';
+    document.documentElement.style.overflow = 'auto';
+    document.documentElement.style.height = 'auto';
+    document.documentElement.style.position = 'relative';
+    
+    // Add passive listeners for better scroll performance
     document.addEventListener('touchstart', function() {}, {passive: true});
     document.addEventListener('touchmove', function() {}, {passive: true});
-    
-    // Force iOS Safari to allow scrolling on the whole document
-    const preventIosOverscroll = () => {
-      document.body.style.overflow = 'auto';
-      // Removed the problematic line causing the TypeScript error
-      document.documentElement.style.overflow = 'auto';
-    };
-    
-    preventIosOverscroll();
-    
-    // Add a minimal timeout to allow initial animations to complete
-    setTimeout(() => {
-      // Force all motion-related elements to not interfere with scrolling
-      const motionElements = document.querySelectorAll('[data-framer-motion-components], div[style*="transform"]');
-      motionElements.forEach(el => {
-        if (el instanceof HTMLElement) {
-          // Allow pointer events but enforce proper touch action
-          el.style.pointerEvents = 'auto';
-          el.style.touchAction = 'pan-y';
-        }
-      });
-    }, 1000);
+    document.addEventListener('wheel', function() {}, {passive: true});
     
     return () => {
       clearTimeout(timer);
@@ -67,13 +54,12 @@ const Index = () => {
 
   return (
     <div 
-      className="overflow-x-hidden bg-deep-purple-gradient" 
+      className="min-h-screen bg-deep-purple-gradient"
       style={{ 
-        minHeight: "var(--vh, 1vh) * 100", 
+        height: "auto",
+        position: "relative",
         touchAction: "pan-y",
-        overflowY: "auto",
       }}
-      data-ios-fix="true"
     >
       <Navbar />
       <BackToTop />
@@ -82,12 +68,12 @@ const Index = () => {
       <HeroSection visible={visible} />
 
       {/* Testimonials Section */}
-      <Element name="testimonials" style={{ touchAction: "pan-y" }}>
+      <Element name="testimonials">
         <TestimonialsSection isLoading={isLoading} />
       </Element>
 
       {/* Pricing Section */}
-      <Element name="pricing-section" style={{ touchAction: "pan-y" }}>
+      <Element name="pricing-section">
         <PricingSection 
           isAnnual={isAnnual} 
           setIsAnnual={setIsAnnual} 
