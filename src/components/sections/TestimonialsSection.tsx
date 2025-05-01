@@ -99,7 +99,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
   }, [imageCarouselApi]);
 
   return (
-    <section className="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-white">
+    <section className="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-white touch-auto">
       <div className="max-w-7xl mx-auto">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
@@ -116,7 +116,6 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
             opts={{
               align: "center",
               loop: true,
-              dragFree: true, // Makes dragging more responsive
             }}
             setApi={setTestimonialCarouselApi}
             className="w-full px-4 md:px-0"
@@ -156,7 +155,6 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
             opts={{
               align: "center",
               loop: true,
-              dragFree: true, // Makes dragging more responsive
             }}
             setApi={setImageCarouselApi}
             className="w-full px-4 md:px-0"

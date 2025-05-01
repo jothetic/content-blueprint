@@ -1,5 +1,4 @@
 
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -45,9 +44,20 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased overflow-x-hidden touch-pan-y;
+    @apply bg-background text-foreground antialiased;
     font-family: 'Poppins', sans-serif;
     overscroll-behavior-y: contain;
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  html {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -83,6 +93,7 @@
 
 .bg-deep-purple-gradient {
   background: linear-gradient(to bottom, #1A0033 0%, #0D001F 100%);
+  min-height: 100vh;
 }
 
 .bg-soft-purple {
@@ -107,6 +118,16 @@
 }
 
 /* Ensure carousel doesn't interfere with page scrolling on touch devices */
-.embla-carousel-draggable {
+.embla-carousel {
+  touch-action: pan-y;
+}
+
+/* Fix for mobile scroll issues */
+.embla-carousel .embla-carousel__container {
   touch-action: pan-x;
+}
+
+/* Make sure elements don't prevent scrolling */
+section, div {
+  touch-action: auto;
 }
