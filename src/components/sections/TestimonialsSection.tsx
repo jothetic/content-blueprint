@@ -103,7 +103,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
   return (
     <section 
       id="testimonials-section" 
-      className="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient"
+      className="py-6 md:py-12 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient"
       style={{ touchAction: "auto" }}
     >
       <div className="max-w-7xl mx-auto">
