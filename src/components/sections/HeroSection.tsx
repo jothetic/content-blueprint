@@ -94,7 +94,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
           variants={fadeUpVariant}
           className="text-base md:text-lg text-white mb-6 md:mb-8 max-w-2xl mx-auto font-medium"
         >
-          Turn views into income with proven systems, live coaching, and exclusive tools—built by a creator who made $100K at 15.
+          Watch this complete guide to grow your fan base on Instagram and TikTok in 2025.
         </motion.p>
         
         {/* Video Section - simplified for better performance */}
