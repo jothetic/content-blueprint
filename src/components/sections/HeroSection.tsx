@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
   }, [visible, hasShownInitialAnimation, controls]);
 
   const scrollToPricing = () => {
+    console.log("Scroll to pricing clicked");
     scroller.scrollTo('pricing-section', {
       duration: 800,
       smooth: true,
@@ -128,6 +130,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
             <Button 
               className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden mb-4"
               onClick={scrollToPricing}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  scrollToPricing();
+                }
+              }}
+              aria-label="Start your journey - go to pricing section"
             >
               <span className="relative z-10 flex items-center">
                 → Start Your Journey <ArrowRightIcon className="ml-1 w-4 h-4 md:w-5 md:h-5" />
