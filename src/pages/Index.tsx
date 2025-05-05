@@ -39,11 +39,11 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-deep-purple-gradient flex flex-col">
+    <div className="flex flex-col min-h-screen bg-deep-purple-gradient">
       <Navbar />
       <BackToTop />
       
-      <div className="flex-grow">
+      <main className="flex-grow">
         <HeroSection visible={visible} />
 
         <Element name="testimonials">
@@ -56,7 +56,7 @@ const Index = () => {
             setIsAnnual={setIsAnnual} 
           />
         </Element>
-      </div>
+      </main>
       
       <Footer />
     </div>
