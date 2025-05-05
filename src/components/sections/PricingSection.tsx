@@ -20,7 +20,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ isAnnual, setIsAnnual }
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          14+ hours of live learning
+          Choose Your Blueprint
         </motion.h2>
         <motion.p 
           className="text-center text-soft-purple mb-8 md:mb-12 text-sm md:text-base"
@@ -48,7 +48,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ isAnnual, setIsAnnual }
               monthlyPrice={isAnnual ? "15" : "30"}
               upfrontPrice={isAnnual ? "179" : null}
               features={[
-                "3 Weekly Live Calls with Maddox",
+                "14+ hours of live learning",
                 "Private Discord Community",
                 "Exclusive Vendor Resources",
                 "Real Templates and Files",
