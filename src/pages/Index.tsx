@@ -43,7 +43,7 @@ const Index = () => {
       <Navbar />
       <BackToTop />
       
-      <main className="flex-grow pb-8">
+      <main className="flex-grow">
         <HeroSection visible={visible} />
 
         <Element name="testimonials">
