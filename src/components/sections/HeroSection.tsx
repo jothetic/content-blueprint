@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -26,6 +25,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
   const scrollToPricing = () => {
     console.log("Scroll to pricing clicked");
     try {
+      // First try with react-scroll
       scroller.scrollTo('pricing-section', {
         duration: 800,
         delay: 0,
@@ -34,12 +34,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
       });
     } catch (error) {
       console.error("Scroll error:", error);
-      // Fallback scrolling mechanism if scroller fails
+    }
+    
+    // Add a direct fallback method that will work even if react-scroll fails
+    setTimeout(() => {
       const pricingSection = document.getElementById('pricing-section');
       if (pricingSection) {
         pricingSection.scrollIntoView({ behavior: 'smooth' });
       }
-    }
+    }, 100);
   };
 
   const heroVariants = {
@@ -137,7 +140,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
         >
           <div className="mb-4">
             <Button 
-              className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer relative z-50"
+              className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer relative z-50 pointer-events-auto"
               onClick={scrollToPricing}
               tabIndex={0}
               role="button"

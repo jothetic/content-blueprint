@@ -50,7 +50,7 @@ const Index = () => {
           <TestimonialsSection isLoading={isLoading} />
         </Element>
 
-        <Element name="pricing-section" id="pricing-section" className="scroll-mt-16">
+        <Element name="pricing-section" id="pricing-section" className="scroll-mt-20">
           <PricingSection 
             isAnnual={isAnnual} 
             setIsAnnual={setIsAnnual} 
