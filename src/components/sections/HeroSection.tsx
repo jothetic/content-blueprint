@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -25,12 +24,21 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
 
   const scrollToPricing = () => {
     console.log("Scroll to pricing clicked");
-    scroller.scrollTo('pricing-section', {
-      duration: 800,
-      smooth: true,
-      offset: -50,
-      spy: true
-    });
+    try {
+      scroller.scrollTo('pricing-section', {
+        duration: 800,
+        delay: 0,
+        smooth: 'easeInOutQuart',
+        offset: -50
+      });
+    } catch (error) {
+      console.error("Scroll error:", error);
+      // Fallback scrolling mechanism if scroller fails
+      const pricingSection = document.getElementById('pricing-section');
+      if (pricingSection) {
+        pricingSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   const heroVariants = {
@@ -130,11 +138,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
             <Button 
               className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden mb-4"
               onClick={scrollToPricing}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  scrollToPricing();
-                }
-              }}
+              tabIndex={0}
+              role="button"
               aria-label="Start your journey - go to pricing section"
             >
               <span className="relative z-10 flex items-center">
