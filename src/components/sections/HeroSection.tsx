@@ -23,12 +23,33 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
   }, [visible, hasShownInitialAnimation, controls]);
 
   const scrollToPricing = () => {
-    scroller.scrollTo('pricing-section', {
-      duration: 800,
-      smooth: true,
-      offset: -50,
-      spy: true
-    });
+    console.log("Scroll to pricing triggered");
+    
+    if (isMobile) {
+      const pricingSection = document.getElementById('pricing-section');
+      if (pricingSection) {
+        console.log("Found pricing section, scrolling to it directly");
+        pricingSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      } else {
+        console.log("Pricing section not found, using react-scroll");
+        scroller.scrollTo('pricing-section', {
+          duration: 800,
+          smooth: true,
+          offset: -20,
+          spy: true
+        });
+      }
+    } else {
+      scroller.scrollTo('pricing-section', {
+        duration: 800,
+        smooth: true,
+        offset: -50,
+        spy: true
+      });
+    }
   };
 
   const heroVariants = {
@@ -76,7 +97,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
         variants={heroVariants}
         className="max-w-4xl mx-auto text-center relative"
       >
-        {/* Animated background elements - simplified for better performance */}
         <div className="absolute top-20 -left-20 w-40 h-40 rounded-full bg-purple-500/10 blur-3xl"></div>
         <div className="absolute bottom-0 -right-20 w-60 h-60 rounded-full bg-blue-500/10 blur-3xl"></div>
 
@@ -107,7 +127,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
           Watch this complete guide to grow your fan base on Instagram and TikTok in 2025.
         </motion.p>
         
-        {/* Video Section - simplified for better performance */}
         <motion.div
           variants={fadeUpVariant}
           className="relative max-w-4xl mx-auto mb-8 md:mb-12"
@@ -128,6 +147,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
             <Button 
               className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden mb-4"
               onClick={scrollToPricing}
+              onTouchStart={() => console.log("Button touch started")}
+              onTouchEnd={() => console.log("Button touch ended")}
+              role="button"
+              aria-label="Go to pricing section"
+              style={{ touchAction: 'manipulation' }}
             >
               <span className="relative z-10 flex items-center">
                 → Start Your Journey <ArrowRightIcon className="ml-1 w-4 h-4 md:w-5 md:h-5" />
