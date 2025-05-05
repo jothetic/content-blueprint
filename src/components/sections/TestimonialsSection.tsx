@@ -21,19 +21,19 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
   // Sample data for testimonials
   const writtenTestimonials = [
     {
-      name: "Viral Creator",
+      name: "JT",
       role: "Content Creator | 2.7M+ Views",
       quote: "Hit over 2.7M views using the viral content strategies from the program. The engagement tactics really work!",
       image: "/lovable-uploads/2124a9ca-5b47-4407-bc1d-3e0426632f0c.png"
     },
     {
-      name: "Growth Expert",
+      name: "@derekflips",
       role: "Social Media Influencer | 65K+ Followers",
       quote: "Grew from 0 to 65K real followers using the community building strategies. The engagement has been incredible!",
       image: "/lovable-uploads/926dd0ff-9b19-4738-bdb1-8ba1a92a7fc8.png"
     },
     {
-      name: "E-commerce Pro",
+      name: "derek flips",
       role: "Shopify Merchant | $10K+ Revenue",
       quote: "Scaled to over $10,000 in monthly revenue using the sales funnel blueprint. The ROI has been amazing!",
       image: "/lovable-uploads/f0e0f1dd-3cdb-42b6-81aa-6e31b25c2612.png"
@@ -51,7 +51,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
       image: "/lovable-uploads/fd4edd9c-d981-4a64-a1cd-31ac4b99e115.png"
     },
     {
-      name: "Motivated Vendor",
+      name: "MoneyWise",
       role: "E-commerce Success Story | $5K+ Monthly",
       quote: "Reached $5,000+ in monthly revenue with consistent growth. This program gave me the blueprint I needed to scale!",
       image: "/lovable-uploads/ea5ac916-acb8-42e8-9695-e42bc31aede1.png"
