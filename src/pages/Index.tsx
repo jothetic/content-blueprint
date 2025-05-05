@@ -6,6 +6,7 @@ import BackToTop from "@/components/BackToTop";
 import HeroSection from "@/components/sections/HeroSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import PricingSection from "@/components/sections/PricingSection";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   const [isAnnual, setIsAnnual] = useState(true);
@@ -38,22 +39,26 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-deep-purple-gradient">
+    <div className="min-h-screen bg-deep-purple-gradient flex flex-col">
       <Navbar />
       <BackToTop />
       
-      <HeroSection visible={visible} />
+      <div className="flex-grow">
+        <HeroSection visible={visible} />
 
-      <Element name="testimonials">
-        <TestimonialsSection isLoading={isLoading} />
-      </Element>
+        <Element name="testimonials">
+          <TestimonialsSection isLoading={isLoading} />
+        </Element>
 
-      <Element name="pricing-section" id="pricing-section">
-        <PricingSection 
-          isAnnual={isAnnual} 
-          setIsAnnual={setIsAnnual} 
-        />
-      </Element>
+        <Element name="pricing-section" id="pricing-section">
+          <PricingSection 
+            isAnnual={isAnnual} 
+            setIsAnnual={setIsAnnual} 
+          />
+        </Element>
+      </div>
+      
+      <Footer />
     </div>
   );
 };
