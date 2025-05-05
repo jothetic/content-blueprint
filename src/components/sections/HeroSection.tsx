@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -90,6 +91,20 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
         <div className="absolute top-20 -left-20 w-40 h-40 rounded-full bg-purple-500/10 blur-3xl"></div>
         <div className="absolute bottom-0 -right-20 w-60 h-60 rounded-full bg-blue-500/10 blur-3xl"></div>
 
+        <motion.div variants={fadeUpVariant} className="relative z-20 mb-6 md:mb-8">
+          <Button 
+            className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+            onClick={scrollToPricing}
+            tabIndex={0}
+            role="button"
+            aria-label="Start your journey - go to pricing section"
+          >
+            <span className="relative z-10 flex items-center">
+              → Start Your Journey <ArrowRightIcon className="ml-1 w-4 h-4 md:w-5 md:h-5" />
+            </span>
+          </Button>
+        </motion.div>
+
         <motion.div variants={titleVariants} className="relative z-10">
           <motion.h1 
             className="text-3xl md:text-5xl lg:text-6xl font-bold mb-2 text-white tracking-tight"
@@ -134,20 +149,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
           variants={fadeUpVariant}
           className="flex flex-col items-center"
         >
-          <div>
-            <Button 
-              className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden mb-4"
-              onClick={scrollToPricing}
-              tabIndex={0}
-              role="button"
-              aria-label="Start your journey - go to pricing section"
-            >
-              <span className="relative z-10 flex items-center">
-                → Start Your Journey <ArrowRightIcon className="ml-1 w-4 h-4 md:w-5 md:h-5" />
-              </span>
-            </Button>
-          </div>
-          
           <motion.div 
             className="flex items-center text-gray-400 text-xs md:text-sm mt-2"
             initial={{ opacity: 0 }}
