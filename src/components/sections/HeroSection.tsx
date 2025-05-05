@@ -1,10 +1,10 @@
-
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight as ArrowRightIcon, Star } from "lucide-react";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { scroller } from 'react-scroll';
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface HeroSectionProps {
   visible: boolean;
@@ -13,6 +13,7 @@ interface HeroSectionProps {
 const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
   const [hasShownInitialAnimation, setHasShownInitialAnimation] = useState(false);
   const controls = useAnimation();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (visible && !hasShownInitialAnimation) {
@@ -20,6 +21,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
       setHasShownInitialAnimation(true);
     }
   }, [visible, hasShownInitialAnimation, controls]);
+
+  const scrollToPricing = () => {
+    scroller.scrollTo('pricing-section', {
+      duration: 800,
+      smooth: true,
+      offset: -50,
+      spy: true
+    });
+  };
 
   const heroVariants = {
     hidden: { opacity: 0 },
@@ -117,14 +127,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
           <div>
             <Button 
               className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden mb-4"
-              onClick={() => {
-                scroller.scrollTo('pricing-section', {
-                  duration: 800,
-                  smooth: true,
-                  offset: -50,
-                  spy: true
-                });
-              }}
+              onClick={scrollToPricing}
             >
               <span className="relative z-10 flex items-center">
                 → Start Your Journey <ArrowRightIcon className="ml-1 w-4 h-4 md:w-5 md:h-5" />
