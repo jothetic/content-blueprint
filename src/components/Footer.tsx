@@ -6,9 +6,9 @@ import { Separator } from "@/components/ui/separator";
 
 const Footer = () => {
   return (
-    <footer className="w-full py-6 px-6 bg-[#0A001A] border-t border-purple-900/30 sticky bottom-0 z-10">
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="text-lg font-medium text-white/90">
+    <footer className="w-full py-3 px-6 bg-[#0A001A] border-t border-purple-900/30 sticky bottom-0 z-10">
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
+        <div className="text-sm font-medium text-white/90">
           Viral Content Academy
         </div>
         
@@ -16,29 +16,29 @@ const Footer = () => {
           <Button 
             variant="ghost" 
             size="icon"
-            className="text-white/80 hover:text-white hover:bg-purple-900/30"
+            className="h-8 w-8 text-white/80 hover:text-white hover:bg-purple-900/30"
             asChild
           >
             <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-              <Youtube />
+              <Youtube className="h-4 w-4" />
             </a>
           </Button>
           
           <Button 
             variant="ghost" 
             size="icon"
-            className="text-white/80 hover:text-white hover:bg-purple-900/30"
+            className="h-8 w-8 text-white/80 hover:text-white hover:bg-purple-900/30"
             asChild
           >
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Instagram />
+              <Instagram className="h-4 w-4" />
             </a>
           </Button>
         </div>
         
-        <Separator className="md:hidden my-2 bg-purple-900/30" />
+        <Separator className="md:hidden my-1 bg-purple-900/30" />
         
-        <div className="text-sm text-white/60">
+        <div className="text-xs text-white/60">
           Built by Dubowsky Web Solutions
         </div>
       </div>
