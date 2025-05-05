@@ -20,7 +20,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ isAnnual, setIsAnnual }
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Choose Your Blueprint
+          14+ hours of live learning
         </motion.h2>
         <motion.p 
           className="text-center text-soft-purple mb-8 md:mb-12 text-sm md:text-base"
