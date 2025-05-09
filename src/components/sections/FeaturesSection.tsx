@@ -35,15 +35,20 @@ const FeaturesSection: React.FC = () => {
   return (
     <section className="py-16 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
       <div className="max-w-3xl mx-auto">
-        <motion.h2 
-          className="text-2xl md:text-4xl font-bold text-center mb-4 md:mb-8 text-white"
+        <motion.div 
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Here's what you'll get
-        </motion.h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-white">
+              Here's What You'll Get
+            </span>
+          </h2>
+          <div className="w-24 h-1 bg-soft-purple mx-auto rounded-full mt-2 mb-4"></div>
+        </motion.div>
 
         <div className="space-y-4">
           {features.map((feature, index) => (
@@ -54,9 +59,9 @@ const FeaturesSection: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 * index }}
             >
-              <Card className="bg-black/70 border-gray-800 p-4">
+              <Card className="bg-black/70 border-gray-800 p-6 hover:border-purple-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-900/20">
                 <div>
-                  <h3 className="text-white font-semibold mb-1">{feature.title}</h3>
+                  <h3 className="text-white text-lg font-semibold mb-1">{feature.title}</h3>
                   <p className="text-gray-400 text-sm">{feature.description}</p>
                 </div>
               </Card>

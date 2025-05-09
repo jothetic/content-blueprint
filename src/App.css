@@ -45,3 +45,45 @@
 .bg-deep-purple-gradient {
   background: linear-gradient(to bottom, #0D001F 0%, #0D001F 100%);
 }
+
+/* Enhanced heading styles */
+.heading-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, #fff, #B197FF, #fff);
+}
+
+/* Enhanced card styles */
+.enhanced-card {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+.enhanced-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+/* Subtle animations */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s infinite ease-in-out;
+}
+
+/* Decorative elements */
+.section-divider {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #B197FF, transparent);
+  margin: 0 auto;
+}
