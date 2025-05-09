@@ -108,6 +108,7 @@ const FeaturesSection: React.FC = () => {
                         offset={-70} 
                         duration={500}
                         className="group inline-flex items-center font-semibold text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
+                        activeClass="active"
                       >
                         Explore
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
