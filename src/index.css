@@ -66,6 +66,7 @@ body {
   background-color: #0D001F;
   color: #fff;
   min-height: 100vh;
+  padding-bottom: env(safe-area-inset-bottom, 20px);
 }
 
 #root {
@@ -137,10 +138,27 @@ button, a, [role="button"] {
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
+    padding-bottom: env(safe-area-inset-bottom, 40px);
   }
   
   .fixed {
     position: fixed;
     width: 100%;
+  }
+  
+  /* Extra bottom padding for Safari on mobile */
+  .safari-bottom-padding {
+    padding-bottom: 80px !important;
+  }
+}
+
+/* Extra bottom padding for all mobile devices */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 60px;
+  }
+  
+  footer {
+    margin-bottom: 30px;
   }
 }

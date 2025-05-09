@@ -71,6 +71,9 @@ const Index = () => {
             setIsAnnual={setIsAnnual} 
           />
         </Element>
+        
+        {/* Safari bottom padding fix */}
+        <div className="h-10 md:hidden"></div>
       </main>
       
       <Footer />
