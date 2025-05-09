@@ -3,7 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-scroll";
+import { Button } from "@/components/ui/button";
 
 interface Feature {
   title: string;
@@ -101,18 +101,15 @@ const FeaturesSection: React.FC = () => {
                     )}
                     
                     <div className="mt-auto">
-                      <Link 
-                        to="pricing-section" 
-                        spy={true} 
-                        smooth={true}
-                        offset={-70} 
-                        duration={500}
+                      <a 
+                        href="https://whop.com/content-blueprint/"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="group inline-flex items-center font-semibold text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
-                        activeClass="active"
                       >
                         Explore
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </Card>
