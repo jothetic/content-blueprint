@@ -1,7 +1,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import {
   Accordion,
   AccordionContent,
@@ -18,23 +17,23 @@ interface FAQItem {
 const faqs: FAQItem[] = [
   {
     question: "Do I need a big following to start?",
-    answer: "No, you don't need a large following to start. Our blueprint is designed for creators at all stages of their journey. We'll teach you how to grow your audience from scratch using proven strategies."
+    answer: "Nope. I started from zero. This blueprint is built to help you grow from the ground up—even if you've never posted before."
   },
   {
     question: "How long will it take to see results?",
-    answer: "Results vary by individual and commitment level, but most users begin seeing improvements within 4-6 weeks of implementing our strategies consistently. Success comes from applying what you learn consistently."
+    answer: "Depends on your effort—most see progress within a few consistent weeks."
   },
   {
     question: "What makes this different from other programs?",
-    answer: "Unlike generic courses, our blueprint provides real-world templates, personalized support, and a community of serious creators. We focus on practical implementation rather than just theory."
+    answer: "It's real, tested strategies + weekly support from someone actually doing it."
   },
   {
     question: "What exactly will I learn?",
-    answer: "You'll learn content strategy, growth tactics, monetization methods, audience engagement techniques, and systems to scale your creative business without burning out."
+    answer: "How to grow on social media and turn views into income, step by step."
   },
   {
     question: "Is this blueprint just for teens?",
-    answer: "No, our blueprint is for creators of all ages. We have members ranging from teenagers to professionals in their 50s. The principles work regardless of your age."
+    answer: "Not at all. It's for anyone ready to take social media seriously."
   }
 ];
 
@@ -42,24 +41,15 @@ const FAQSection: React.FC = () => {
   return (
     <section className="py-16 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
       <div className="max-w-3xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <motion.h2 
-            className="text-2xl md:text-4xl font-bold text-white"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Frequently asked questions
-          </motion.h2>
-          
-          <Button 
-            variant="outline" 
-            className="bg-blue-600 hover:bg-blue-700 text-white border-blue-500"
-          >
-            Edit FAQs
-          </Button>
-        </div>
+        <motion.h2 
+          className="text-2xl md:text-4xl font-bold text-white mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          Frequently asked questions
+        </motion.h2>
 
         <div className="space-y-4">
           <Accordion type="single" collapsible className="w-full">
