@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -103,7 +102,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
   return (
     <section 
       id="testimonials-section" 
-      className="py-6 md:py-12 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient"
+      className="py-4 md:py-8 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient"
       style={{ touchAction: "auto" }}
     >
       <div className="max-w-7xl mx-auto">
@@ -111,14 +110,14 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-white"
+          className="text-2xl md:text-4xl font-bold text-center mb-4 md:mb-6 text-white"
           style={{ touchAction: "auto" }}
         >
           Real Results from Real Students 🚀
         </motion.h2>
 
         {/* Written Testimonials Carousel */}
-        <div className="max-w-3xl mx-auto mb-8 md:mb-16">
+        <div className="max-w-3xl mx-auto mb-4 md:mb-8">
           <Carousel
             opts={{
               align: "center",
@@ -146,7 +145,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 ))
               )}
             </CarouselContent>
-            <div className="flex justify-center items-center space-x-2 mt-4">
+            <div className="flex justify-center items-center space-x-2 mt-2">
               <CarouselPrevious className="relative transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
               <CarouselNext className="relative transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
             </div>
@@ -155,7 +154,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
 
         {/* Success Stories Image Carousel - Simple Square Images */}
         <div className="max-w-3xl mx-auto">
-          <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-center text-white">
+          <h3 className="text-lg md:text-2xl font-semibold mb-2 md:mb-3 text-center text-white">
             Success Stories Showcase
           </h3>
           <Carousel
@@ -196,7 +195,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 ))
               )}
             </CarouselContent>
-            <div className="flex justify-center items-center space-x-2 mt-4">
+            <div className="flex justify-center items-center space-x-2 mt-2">
               <CarouselPrevious className="relative transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
               <CarouselNext className="relative transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
             </div>
