@@ -56,7 +56,7 @@ const VimeoEmbed = ({ videoId, className = "" }: VimeoEmbedProps) => {
         )}
         <iframe
           ref={iframeRef}
-          src={`https://player.vimeo.com/video/${videoId}?h=47620c33bc&badge=0&autopause=0&player_id=0&app_id=58479`}
+          src={`https://player.vimeo.com/video/${videoId}?badge=0&autopause=0&player_id=0&app_id=58479`}
           title="Vimeo video player"
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
           allowFullScreen
