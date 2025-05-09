@@ -66,6 +66,22 @@
   border-color: rgba(139, 92, 246, 0.3);
 }
 
+/* Responsive card styles */
+@media (max-width: 768px) {
+  .card-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  
+  .feature-card {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .feature-card h3 {
+    font-size: 1.1rem;
+  }
+}
+
 /* Subtle animations */
 @keyframes pulse-subtle {
   0%, 100% {
