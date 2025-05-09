@@ -5,6 +5,9 @@ import Navbar from "@/components/Navbar";
 import BackToTop from "@/components/BackToTop";
 import HeroSection from "@/components/sections/HeroSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import FeaturesSection from "@/components/sections/FeaturesSection";
+import PersonasSection from "@/components/sections/PersonasSection";
+import FAQSection from "@/components/sections/FAQSection";
 import PricingSection from "@/components/sections/PricingSection";
 import Footer from "@/components/Footer";
 
@@ -46,8 +49,20 @@ const Index = () => {
       <main className="flex-grow">
         <HeroSection visible={visible} />
 
+        <Element name="features">
+          <FeaturesSection />
+        </Element>
+
+        <Element name="personas">
+          <PersonasSection />
+        </Element>
+
         <Element name="testimonials">
           <TestimonialsSection isLoading={isLoading} />
+        </Element>
+
+        <Element name="faq">
+          <FAQSection />
         </Element>
 
         <Element name="pricing-section" id="pricing-section" className="scroll-mt-20">
