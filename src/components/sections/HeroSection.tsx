@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -129,7 +128,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
         >
           <div className="relative rounded-lg overflow-hidden shadow-2xl border border-white/10">
             <VimeoEmbed 
-              videoId="1082850975"
+              videoId="1082993090"
               className="w-full"
             />
           </div>
