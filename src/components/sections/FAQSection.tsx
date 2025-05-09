@@ -1,13 +1,13 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface FAQItem {
   question: string;
@@ -38,45 +38,83 @@ const faqs: FAQItem[] = [
 ];
 
 const FAQSection: React.FC = () => {
-  return (
-    <section className="py-16 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
-      <div className="max-w-3xl mx-auto">
-        <motion.h2 
-          className="text-2xl md:text-4xl font-bold text-white mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          Frequently asked questions
-        </motion.h2>
+  const [openItem, setOpenItem] = useState<string | null>(null);
 
-        <div className="space-y-4">
-          <Accordion type="single" collapsible className="w-full">
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
-              >
-                <AccordionItem 
-                  value={`item-${index}`}
-                  className="bg-black/70 border border-gray-800 rounded-lg mb-4 overflow-hidden"
-                >
-                  <AccordionTrigger className="px-6 py-4 text-white text-left hover:no-underline">
-                    <div className="flex-1 font-medium text-base md:text-lg">{faq.question}</div>
-                    <ChevronDown className="h-5 w-5 text-gray-400 shrink-0 transition-transform duration-200" />
-                  </AccordionTrigger>
-                  <AccordionContent className="px-6 pb-4 text-gray-300">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              </motion.div>
-            ))}
-          </Accordion>
+  const toggleItem = (itemId: string) => {
+    setOpenItem(openItem === itemId ? null : itemId);
+  };
+
+  return (
+    <section className="py-20 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-purple-700/80 text-white text-sm font-medium py-2 px-6 rounded-full inline-block mb-4"
+          >
+            FAQ
+          </motion.div>
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            Frequently Asked Questions
+          </motion.h2>
+          <motion.p 
+            className="text-gray-300 max-w-2xl mx-auto text-lg"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            Get answers to the most common questions about the creator blueprint.
+          </motion.p>
         </div>
+
+        <motion.div 
+          className="space-y-4 mt-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+        >
+          {faqs.map((faq, index) => (
+            <Collapsible
+              key={index}
+              open={openItem === `faq-${index}`}
+              onOpenChange={() => toggleItem(`faq-${index}`)}
+              className="border-b border-gray-800 py-3"
+            >
+              <CollapsibleTrigger className="flex items-center justify-between w-full text-left py-2">
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gray-800/50 flex items-center justify-center">
+                    <span className="text-gray-400 text-xs">?</span>
+                  </div>
+                  <h3 className="text-xl text-white font-medium">{faq.question}</h3>
+                </div>
+                <ChevronDown 
+                  className={cn(
+                    "h-5 w-5 text-gray-400 transition-transform duration-200",
+                    openItem === `faq-${index}` ? "rotate-180" : ""
+                  )}
+                />
+              </CollapsibleTrigger>
+              <CollapsibleContent className="pt-2 pb-4 pl-9 pr-4">
+                <div className={cn(
+                  "bg-gray-900/60 rounded-lg p-6 text-gray-300",
+                  openItem === `faq-${index}` ? "border-l-2 border-purple-500" : ""
+                )}>
+                  <p>{faq.answer}</p>
+                </div>
+              </CollapsibleContent>
+            </Collapsible>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

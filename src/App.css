@@ -87,3 +87,55 @@
   background: linear-gradient(90deg, transparent, #B197FF, transparent);
   margin: 0 auto;
 }
+
+/* Card colors for Features section */
+.feature-card-blue {
+  background-color: rgba(239, 246, 255, 0.9);
+}
+
+.feature-card-purple {
+  background-color: rgba(243, 232, 255, 0.9);
+}
+
+.feature-card-green {
+  background-color: rgba(236, 253, 245, 0.9);
+}
+
+.feature-card-pink {
+  background-color: rgba(253, 242, 248, 0.9);
+}
+
+.feature-card-orange {
+  background-color: rgba(255, 247, 237, 0.9);
+}
+
+/* Dark mode versions */
+.dark .feature-card-blue {
+  background-color: rgba(37, 99, 235, 0.15);
+}
+
+.dark .feature-card-purple {
+  background-color: rgba(139, 92, 246, 0.15);
+}
+
+.dark .feature-card-green {
+  background-color: rgba(16, 185, 129, 0.15);
+}
+
+.dark .feature-card-pink {
+  background-color: rgba(236, 72, 153, 0.15);
+}
+
+.dark .feature-card-orange {
+  background-color: rgba(249, 115, 22, 0.15);
+}
+
+/* FAQ styles */
+.faq-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faq-answer {
+  background: rgba(30, 30, 46, 0.6);
+  border-radius: 8px;
+}
