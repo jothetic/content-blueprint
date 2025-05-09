@@ -146,9 +146,9 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 ))
               )}
             </CarouselContent>
-            <div className="flex justify-center mt-4 gap-2 md:gap-4">
-              <CarouselPrevious className="static transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
-              <CarouselNext className="static transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
+            <div className="flex justify-center items-center space-x-2 mt-4">
+              <CarouselPrevious className="relative transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
+              <CarouselNext className="relative transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
             </div>
           </Carousel>
         </div>
@@ -196,9 +196,9 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
                 ))
               )}
             </CarouselContent>
-            <div className="flex justify-center mt-4 gap-2 md:gap-4">
-              <CarouselPrevious className="static transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
-              <CarouselNext className="static transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
+            <div className="flex justify-center items-center space-x-2 mt-4">
+              <CarouselPrevious className="relative transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
+              <CarouselNext className="relative transform-none bg-white/20 hover:bg-white/30 border border-white/40 text-white" />
             </div>
           </Carousel>
         </div>
