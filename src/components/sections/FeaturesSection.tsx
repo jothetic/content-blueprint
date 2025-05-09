@@ -65,52 +65,59 @@ const FeaturesSection: React.FC = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 * index }}
-              className="h-full"
-            >
-              <Card className={`rounded-xl overflow-hidden bg-white dark:bg-black/30 border-0 shadow-lg h-full flex flex-col ${
-                index === features.length - 1 && features.length % 2 !== 0 ? "md:col-span-2 md:max-w-md md:mx-auto" : ""
-              }`}>
-                <div className={`${feature.color} dark:opacity-10 p-4 md:p-6 lg:p-7 h-full flex flex-col`}>
-                  <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white mb-1 md:mb-2">{feature.title}</h3>
-                  <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 mb-3 md:mb-5 flex-grow">{feature.description}</p>
-                  
-                  {feature.tags && (
-                    <div className="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-6">
-                      {feature.tags.map((tag, tagIndex) => (
-                        <span 
-                          key={tagIndex}
-                          className="px-2 md:px-3 py-0.5 md:py-1 rounded-full text-xs font-medium bg-white/30 dark:bg-white/10 text-gray-800 dark:text-gray-200"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+          {features.map((feature, index) => {
+            // Check if this is the last card and should be centered on desktop (Announcements card)
+            const isLastCard = index === features.length - 1;
+            const isLastCardOdd = features.length % 2 !== 0;
+            const shouldCenter = isLastCard && isLastCardOdd;
+            
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
+                className={`h-full ${shouldCenter ? "md:col-span-2 md:flex md:justify-center" : ""}`}
+              >
+                <Card className={`rounded-xl overflow-hidden bg-white dark:bg-black/30 border-0 shadow-lg h-full flex flex-col ${
+                  shouldCenter ? "md:w-full md:max-w-md" : "w-full"
+                }`}>
+                  <div className={`${feature.color} dark:opacity-10 p-4 md:p-6 lg:p-7 h-full flex flex-col`}>
+                    <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white mb-1 md:mb-2">{feature.title}</h3>
+                    <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 mb-3 md:mb-5 flex-grow">{feature.description}</p>
+                    
+                    {feature.tags && (
+                      <div className="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-6">
+                        {feature.tags.map((tag, tagIndex) => (
+                          <span 
+                            key={tagIndex}
+                            className="px-2 md:px-3 py-0.5 md:py-1 rounded-full text-xs font-medium bg-white/30 dark:bg-white/10 text-gray-800 dark:text-gray-200"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    
+                    <div className="mt-auto">
+                      <Link 
+                        to="pricing-section" 
+                        spy={true} 
+                        smooth={true}
+                        offset={-70} 
+                        duration={500}
+                        className="group inline-flex items-center font-semibold text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
+                      >
+                        Explore
+                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </Link>
                     </div>
-                  )}
-                  
-                  <div className="mt-auto">
-                    <Link 
-                      to="pricing-section" 
-                      spy={true} 
-                      smooth={true}
-                      offset={-70} 
-                      duration={500}
-                      className="group inline-flex items-center font-semibold text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
-                    >
-                      Explore
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
                   </div>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
+                </Card>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
