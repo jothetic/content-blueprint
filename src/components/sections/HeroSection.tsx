@@ -1,8 +1,9 @@
+
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight as ArrowRightIcon, Star } from "lucide-react";
-import YouTubeEmbed from "@/components/YouTubeEmbed";
+import VimeoEmbed from "@/components/VimeoEmbed";
 import { scroller } from 'react-scroll';
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -127,8 +128,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
           className="relative max-w-4xl mx-auto mb-8 md:mb-12"
         >
           <div className="relative rounded-lg overflow-hidden shadow-2xl border border-white/10">
-            <YouTubeEmbed 
-              videoId="txknTYo3Gvs"
+            <VimeoEmbed 
+              videoId="1082850975"
               className="w-full"
             />
           </div>
