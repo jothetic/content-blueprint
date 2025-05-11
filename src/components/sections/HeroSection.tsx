@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight as ArrowRightIcon, Star } from "lucide-react";
-import VimeoEmbed from "@/components/VimeoEmbed";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { scroller } from 'react-scroll';
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -122,14 +122,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
           Watch this complete guide to grow your fan base on Instagram and TikTok in 2025.
         </motion.p>
         
-        {/* Video Section - simplified for better performance */}
+        {/* Video Section - Using YouTube instead of Vimeo */}
         <motion.div
           variants={fadeUpVariant}
           className="relative max-w-4xl mx-auto mb-8 md:mb-12"
         >
           <div className="relative rounded-lg overflow-hidden shadow-2xl border border-white/10">
-            <VimeoEmbed 
-              videoId="1082993090"
+            <YouTubeEmbed 
+              videoId="25fByvdnujU"
               className="w-full"
             />
           </div>
