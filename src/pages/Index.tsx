@@ -12,7 +12,6 @@ import PricingSection from "@/components/sections/PricingSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
-  const [isAnnual, setIsAnnual] = useState(true);
   const [visible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -66,10 +65,7 @@ const Index = () => {
         </Element>
 
         <Element name="pricing-section" id="pricing-section" className="scroll-mt-20">
-          <PricingSection 
-            isAnnual={isAnnual} 
-            setIsAnnual={setIsAnnual} 
-          />
+          <PricingSection />
         </Element>
         
         {/* Safari bottom padding fix */}

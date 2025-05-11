@@ -10,6 +10,8 @@ interface PricingCardProps {
   price?: string;
   monthlyPrice?: string;
   upfrontPrice?: string | null;
+  oneTimeText?: string;
+  monthlyText?: string;
   features: string[];
   ctaText: string;
   highlighted?: boolean;
@@ -22,6 +24,8 @@ const PricingCard = ({
   price,
   monthlyPrice,
   upfrontPrice,
+  oneTimeText,
+  monthlyText,
   features, 
   ctaText, 
   highlighted = false,
@@ -86,67 +90,36 @@ const PricingCard = ({
         
         <h3 className="text-xl font-semibold mb-4 text-white relative z-10">{title}</h3>
         {!applyOnly && (
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={monthlyPrice || price}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.5 }}
-              className="mb-6"
-            >
-              {monthlyPrice && (
-                <div>
-                  <div className="flex items-center">
-                    <motion.span
-                      initial={{ scale: 0.8 }}
-                      animate={{ scale: 1 }}
-                      transition={{ 
-                        type: "spring",
-                        stiffness: 500,
-                        damping: 10,
-                        delay: 0.1
-                      }}
-                      className="text-3xl font-bold text-white"
-                    >
-                      ${monthlyPrice}
-                    </motion.span>
-                    <span className="text-gray-300 ml-1">/month</span>
-                  </div>
-                  
-                  {upfrontPrice && (
-                    <motion.div 
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 }}
-                      className="text-gray-300 text-sm mt-1"
-                    >
-                      <span className="font-medium">${upfrontPrice}</span> billed annually
-                    </motion.div>
-                  )}
-                </div>
-              )}
-              
-              {/* For backward compatibility */}
-              {!monthlyPrice && price && (
-                <div className="flex items-center">
-                  <motion.span 
-                    initial={{ scale: 0.8 }}
-                    animate={{ scale: 1 }}
-                    transition={{ 
-                      type: "spring",
-                      stiffness: 500,
-                      damping: 10
-                    }}
-                    className="text-3xl font-bold text-white"
-                  >
-                    ${price}
-                  </motion.span>
-                  <span className="text-gray-300 ml-1">/month</span>
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
+          <div className="mb-6">
+            {price && (
+              <div className="flex items-center">
+                <motion.span
+                  initial={{ scale: 0.8 }}
+                  animate={{ scale: 1 }}
+                  transition={{ 
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 10
+                  }}
+                  className="text-3xl font-bold text-white"
+                >
+                  ${price}
+                </motion.span>
+                {monthlyText && <span className="text-gray-300 ml-1">{monthlyText}</span>}
+              </div>
+            )}
+            
+            {oneTimeText && (
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="text-gray-300 text-sm mt-1"
+              >
+                {oneTimeText}
+              </motion.div>
+            )}
+          </div>
         )}
         <ul className="space-y-4 mb-8 flex-grow">
           {features.map((feature, index) => (
