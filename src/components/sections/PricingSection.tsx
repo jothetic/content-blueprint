@@ -40,9 +40,9 @@ const PricingSection: React.FC = () => {
             oneTimeText="One-Time Payment"
             features={[
               "Creator Masterclass (views + income)",
-              "Premium Discord",
-              "Premium Content Blueprints",
-              "Premium Chat",
+              "Premium Discord + Chat",
+              "Exclusive Files, Templates, and Resources",
+              "14+ Hours of Video Content",
               "Announcements",
               "Blueprint Bot (free AI hook generator)"
             ]}
@@ -58,9 +58,9 @@ const PricingSection: React.FC = () => {
             oneTimeText="Billed Yearly ($15/month)"
             features={[
               "Creator Masterclass (views + income)",
-              "Premium Discord",
-              "Premium Content Blueprints",
-              "Premium Chat",
+              "Premium Discord + Chat",
+              "Exclusive Files, Templates, and Resources",
+              "14+ Hours of Video Content",
               "Announcements",
               "Blueprint Bot (free AI hook generator)"
             ]}
@@ -76,9 +76,9 @@ const PricingSection: React.FC = () => {
             monthlyText="per month"
             features={[
               "Creator Masterclass (views + income)",
-              "Premium Discord",
-              "Premium Content Blueprints",
-              "Premium Chat",
+              "Premium Discord + Chat",
+              "Exclusive Files, Templates, and Resources",
+              "14+ Hours of Video Content",
               "Announcements",
               "Blueprint Bot (free AI hook generator)"
             ]}
