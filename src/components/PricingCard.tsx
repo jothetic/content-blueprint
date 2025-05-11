@@ -8,6 +8,7 @@ import { useState } from "react";
 interface PricingCardProps {
   title: string;
   price?: string;
+  secondaryPrice?: string;
   monthlyPrice?: string;
   upfrontPrice?: string | null;
   oneTimeText?: string;
@@ -17,11 +18,13 @@ interface PricingCardProps {
   highlighted?: boolean;
   applyOnly?: boolean;
   onCtaClick?: () => void;
+  displayPriceAsMonthly?: boolean;
 }
 
 const PricingCard = ({ 
   title, 
   price,
+  secondaryPrice,
   monthlyPrice,
   upfrontPrice,
   oneTimeText,
@@ -30,7 +33,8 @@ const PricingCard = ({
   ctaText, 
   highlighted = false,
   applyOnly, 
-  onCtaClick 
+  onCtaClick,
+  displayPriceAsMonthly = false
 }: PricingCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   
@@ -93,23 +97,58 @@ const PricingCard = ({
           <div className="mb-6">
             {price && (
               <div className="flex items-center">
-                <motion.span
-                  initial={{ scale: 0.8 }}
-                  animate={{ scale: 1 }}
-                  transition={{ 
-                    type: "spring",
-                    stiffness: 500,
-                    damping: 10
-                  }}
-                  className="text-3xl font-bold text-white"
-                >
-                  ${price}
-                </motion.span>
-                {monthlyText && <span className="text-gray-300 ml-1">{monthlyText}</span>}
+                {displayPriceAsMonthly ? (
+                  <>
+                    <div className="flex flex-col">
+                      <div className="flex items-end">
+                        <motion.span
+                          initial={{ scale: 0.8 }}
+                          animate={{ scale: 1 }}
+                          transition={{ 
+                            type: "spring",
+                            stiffness: 500,
+                            damping: 10
+                          }}
+                          className="text-3xl font-bold text-white"
+                        >
+                          ${price}
+                        </motion.span>
+                        <span className="text-gray-300 ml-1">/mo</span>
+                      </div>
+                      
+                      {secondaryPrice && (
+                        <motion.div 
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.3 }}
+                          className="text-gray-300 text-sm mt-1"
+                        >
+                          ${secondaryPrice} billed yearly
+                        </motion.div>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <motion.span
+                      initial={{ scale: 0.8 }}
+                      animate={{ scale: 1 }}
+                      transition={{ 
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 10
+                      }}
+                      className="text-3xl font-bold text-white"
+                    >
+                      ${price}
+                    </motion.span>
+                    {monthlyText && <span className="text-gray-300 ml-1">{monthlyText}</span>}
+                  </>
+                )}
               </div>
             )}
             
-            {oneTimeText && (
+            {oneTimeText && !displayPriceAsMonthly && (
               <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}

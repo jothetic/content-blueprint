@@ -54,8 +54,9 @@ const PricingSection: React.FC = () => {
           {/* Annual Plan */}
           <PricingCard
             title="Content Blueprint Pro"
-            price="179"
-            oneTimeText="Billed Yearly ($15/month)"
+            price="9.99"
+            secondaryPrice="60"
+            oneTimeText="Billed Yearly"
             features={[
               "Creator Masterclass (views + income)",
               "Premium Discord + Chat",
@@ -67,12 +68,13 @@ const PricingSection: React.FC = () => {
             ctaText="Get Yearly Access"
             highlighted={true}
             onCtaClick={() => window.open("https://whop.com/checkout/plan_MC63d0DmpMZ7f?d2c=true", "_blank")}
+            displayPriceAsMonthly={true}
           />
 
           {/* Monthly Plan */}
           <PricingCard
             title="Content Blueprint Monthly"
-            price="25"
+            price="9.99"
             monthlyText="per month"
             features={[
               "Creator Masterclass (views + income)",
