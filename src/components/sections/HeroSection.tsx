@@ -97,21 +97,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
 
         <motion.div variants={titleVariants} className="relative z-10">
           <motion.h1 
-            className="text-3xl md:text-5xl lg:text-6xl font-bold mb-2 text-white tracking-tight"
+            className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 text-white tracking-tight"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <span className="inline-block">🚀</span>{" "}
             Master the blueprint to selling digital products
-          </motion.h1>
-          <motion.h1 
-            className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-soft-purple tracking-tight"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            and Monetize Your Audience.
           </motion.h1>
         </motion.div>
 
