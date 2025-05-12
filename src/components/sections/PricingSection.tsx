@@ -57,7 +57,7 @@ const PricingSection: React.FC = () => {
                   ]}
                   ctaText="Get Yearly Access"
                   highlighted={true}
-                  onCtaClick={() => window.open("https://whop.com/checkout/plan_MC63d0DmpMZ7f?d2c=true", "_blank")}
+                  onCtaClick={() => window.open("https://whop.com/checkout/plan_8MOVPHGY80pZF", "_blank")}
                   displayPriceAsMonthly={true}
                 />
               </div>
@@ -80,7 +80,7 @@ const PricingSection: React.FC = () => {
                   ]}
                   ctaText="Get Monthly Access"
                   highlighted={true}
-                  onCtaClick={() => window.open("https://whop.com/checkout/plan_D22BacLLTv4zt?d2c=true", "_blank")}
+                  onCtaClick={() => window.open("https://whop.com/checkout/plan_s6aR2uapUPqbD", "_blank")}
                 />
               </div>
             )}
@@ -99,7 +99,7 @@ const PricingSection: React.FC = () => {
                   "Announcements",
                   "Blueprint Bot (free AI hook generator)"
                 ]}
-                ctaText="Get One-Time Access"
+                ctaText="Get Access"
                 highlighted={false}
                 onCtaClick={() => window.open("https://whop.com/checkout/plan_UXAh2KKSIAy75/", "_blank")}
               />
