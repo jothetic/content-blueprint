@@ -2,7 +2,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface Feature {
@@ -88,7 +87,7 @@ const FeaturesSection: React.FC = () => {
                     <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 mb-3 md:mb-5 flex-grow">{feature.description}</p>
                     
                     {feature.tags && (
-                      <div className="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-6">
+                      <div className="flex flex-wrap gap-1 md:gap-2 mb-0">
                         {feature.tags.map((tag, tagIndex) => (
                           <span 
                             key={tagIndex}
@@ -99,18 +98,6 @@ const FeaturesSection: React.FC = () => {
                         ))}
                       </div>
                     )}
-                    
-                    <div className="mt-auto">
-                      <a 
-                        href="https://whop.com/content-blueprint/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group inline-flex items-center font-semibold text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
-                      >
-                        Explore
-                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </a>
-                    </div>
                   </div>
                 </Card>
               </motion.div>
