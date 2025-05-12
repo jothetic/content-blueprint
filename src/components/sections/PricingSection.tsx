@@ -54,7 +54,7 @@ const PricingSection: React.FC = () => {
           {/* Annual Plan */}
           <PricingCard
             title="Content Blueprint Pro"
-            price="9.99"
+            price="5"
             secondaryPrice="60"
             oneTimeText="Billed Yearly"
             features={[
