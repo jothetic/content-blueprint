@@ -62,11 +62,6 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				},
-				magenta: {
-					'500': '#D946EF',
-					'600': '#C026D3',
-					'700': '#A21CAF'
 				}
 			},
 			borderRadius: {
