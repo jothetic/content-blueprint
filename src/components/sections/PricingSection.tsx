@@ -36,27 +36,29 @@ const PricingSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto"
+          className={`grid grid-cols-1 ${isYearly ? 'md:grid-cols-3' : 'md:grid-cols-2'} gap-6 max-w-6xl mx-auto`}
         >
-          {/* Yearly Plan (displayed first) */}
-          <PricingCard
-            title="Content Blueprint Pro"
-            price="5"
-            secondaryPrice="60"
-            oneTimeText="Billed Yearly"
-            features={[
-              "Creator Masterclass (views + income)",
-              "Premium Discord + Chat",
-              "Exclusive Files, Templates, and Resources",
-              "14+ Hours of Video Content",
-              "Announcements",
-              "Blueprint Bot (free AI hook generator)"
-            ]}
-            ctaText="Get Yearly Access"
-            highlighted={true}
-            onCtaClick={() => window.open("https://whop.com/checkout/plan_MC63d0DmpMZ7f?d2c=true", "_blank")}
-            displayPriceAsMonthly={true}
-          />
+          {/* Yearly Plan (only shown when toggle is set to yearly) */}
+          {isYearly && (
+            <PricingCard
+              title="Content Blueprint Pro"
+              price="5"
+              secondaryPrice="60"
+              oneTimeText="Billed Yearly"
+              features={[
+                "Creator Masterclass (views + income)",
+                "Premium Discord + Chat",
+                "Exclusive Files, Templates, and Resources",
+                "14+ Hours of Video Content",
+                "Announcements",
+                "Blueprint Bot (free AI hook generator)"
+              ]}
+              ctaText="Get Yearly Access"
+              highlighted={true}
+              onCtaClick={() => window.open("https://whop.com/checkout/plan_MC63d0DmpMZ7f?d2c=true", "_blank")}
+              displayPriceAsMonthly={true}
+            />
+          )}
 
           {/* Monthly Plan (only shown when toggle is set to monthly) */}
           {!isYearly && (
@@ -73,7 +75,7 @@ const PricingSection: React.FC = () => {
                 "Blueprint Bot (free AI hook generator)"
               ]}
               ctaText="Get Monthly Access"
-              highlighted={false}
+              highlighted={true}
               onCtaClick={() => window.open("https://whop.com/checkout/plan_D22BacLLTv4zt?d2c=true", "_blank")}
             />
           )}
