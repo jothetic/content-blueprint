@@ -19,6 +19,8 @@ interface PricingCardProps {
   applyOnly?: boolean;
   onCtaClick?: () => void;
   displayPriceAsMonthly?: boolean;
+  cardStyle?: string;
+  buttonStyle?: string;
 }
 
 const PricingCard = ({ 
@@ -34,9 +36,19 @@ const PricingCard = ({
   highlighted = false,
   applyOnly, 
   onCtaClick,
-  displayPriceAsMonthly = false
+  displayPriceAsMonthly = false,
+  cardStyle,
+  buttonStyle
 }: PricingCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  
+  const defaultCardStyle = highlighted 
+    ? 'bg-white/15 border-soft-purple/50' 
+    : 'bg-white/10 border-white/20';
+  
+  const defaultButtonStyle = highlighted 
+    ? 'bg-soft-purple hover:bg-soft-purple/90' 
+    : 'bg-white/20 hover:bg-white/30';
   
   return (
     <motion.div
@@ -52,11 +64,7 @@ const PricingCard = ({
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      <Card className={`p-8 ${
-        highlighted 
-          ? 'bg-white/15 border-soft-purple/50' 
-          : 'bg-white/10 border-white/20'
-        } backdrop-blur-sm border shadow-xl relative overflow-hidden h-full flex flex-col`}>
+      <Card className={`p-8 ${cardStyle || defaultCardStyle} backdrop-blur-sm border shadow-xl relative overflow-hidden h-full flex flex-col`}>
         
         <motion.div
           className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"
@@ -199,11 +207,7 @@ const PricingCard = ({
           transition={{ type: "spring", stiffness: 500, damping: 10 }}
         >
           <Button 
-            className={`w-full ${
-              highlighted 
-                ? 'bg-soft-purple hover:bg-soft-purple/90' 
-                : 'bg-white/20 hover:bg-white/30'
-            } transition-all duration-200 font-medium relative overflow-hidden group`}
+            className={`w-full ${buttonStyle || defaultButtonStyle} transition-all duration-200 font-medium relative overflow-hidden group`}
             onClick={onCtaClick}
           >
             <motion.span
