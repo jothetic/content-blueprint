@@ -38,35 +38,59 @@ const PricingSection: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex justify-center"
         >
-          <div className={`grid grid-cols-1 ${isYearly ? 'md:grid-cols-3' : 'md:grid-cols-2'} gap-6 max-w-6xl mx-auto`}>
+          <div className="flex flex-col md:flex-row justify-center gap-6 w-full max-w-6xl">
             {/* Yearly Plan (only shown when toggle is set to yearly) */}
             {isYearly && (
-              <PricingCard
-                title="Content Blueprint Pro"
-                price="5"
-                secondaryPrice="60"
-                oneTimeText="Billed Yearly"
-                features={[
-                  "Creator Masterclass (views + income)",
-                  "Premium Discord + Chat",
-                  "Exclusive Files, Templates, and Resources",
-                  "14+ Hours of Video Content",
-                  "Announcements",
-                  "Blueprint Bot (free AI hook generator)"
-                ]}
-                ctaText="Get Yearly Access"
-                highlighted={true}
-                onCtaClick={() => window.open("https://whop.com/checkout/plan_MC63d0DmpMZ7f?d2c=true", "_blank")}
-                displayPriceAsMonthly={true}
-              />
+              <div className="w-full md:w-1/3 max-w-md mx-auto">
+                <PricingCard
+                  title="Content Blueprint Pro"
+                  price="5"
+                  secondaryPrice="60"
+                  oneTimeText="Billed Yearly"
+                  features={[
+                    "Creator Masterclass (views + income)",
+                    "Premium Discord + Chat",
+                    "Exclusive Files, Templates, and Resources",
+                    "14+ Hours of Video Content",
+                    "Announcements",
+                    "Blueprint Bot (free AI hook generator)"
+                  ]}
+                  ctaText="Get Yearly Access"
+                  highlighted={true}
+                  onCtaClick={() => window.open("https://whop.com/checkout/plan_MC63d0DmpMZ7f?d2c=true", "_blank")}
+                  displayPriceAsMonthly={true}
+                />
+              </div>
             )}
 
             {/* Monthly Plan (only shown when toggle is set to monthly) */}
             {!isYearly && (
+              <div className="w-full md:w-1/3 max-w-md mx-auto">
+                <PricingCard
+                  title="Content Blueprint Monthly"
+                  price="9.99"
+                  monthlyText="per month"
+                  features={[
+                    "Creator Masterclass (views + income)",
+                    "Premium Discord + Chat",
+                    "Exclusive Files, Templates, and Resources",
+                    "14+ Hours of Video Content",
+                    "Announcements",
+                    "Blueprint Bot (free AI hook generator)"
+                  ]}
+                  ctaText="Get Monthly Access"
+                  highlighted={true}
+                  onCtaClick={() => window.open("https://whop.com/checkout/plan_D22BacLLTv4zt?d2c=true", "_blank")}
+                />
+              </div>
+            )}
+
+            {/* Basic Plan (always visible) */}
+            <div className="w-full md:w-1/3 max-w-md mx-auto">
               <PricingCard
-                title="Content Blueprint Monthly"
-                price="9.99"
-                monthlyText="per month"
+                title="Content Blueprint Basic"
+                price="29"
+                oneTimeText="One-Time Payment"
                 features={[
                   "Creator Masterclass (views + income)",
                   "Premium Discord + Chat",
@@ -75,29 +99,11 @@ const PricingSection: React.FC = () => {
                   "Announcements",
                   "Blueprint Bot (free AI hook generator)"
                 ]}
-                ctaText="Get Monthly Access"
-                highlighted={true}
-                onCtaClick={() => window.open("https://whop.com/checkout/plan_D22BacLLTv4zt?d2c=true", "_blank")}
+                ctaText="Get One-Time Access"
+                highlighted={false}
+                onCtaClick={() => window.open("https://whop.com/checkout/plan_UXAh2KKSIAy75/", "_blank")}
               />
-            )}
-
-            {/* Basic Plan (always visible) */}
-            <PricingCard
-              title="Content Blueprint Basic"
-              price="29"
-              oneTimeText="One-Time Payment"
-              features={[
-                "Creator Masterclass (views + income)",
-                "Premium Discord + Chat",
-                "Exclusive Files, Templates, and Resources",
-                "14+ Hours of Video Content",
-                "Announcements",
-                "Blueprint Bot (free AI hook generator)"
-              ]}
-              ctaText="Get One-Time Access"
-              highlighted={false}
-              onCtaClick={() => window.open("https://whop.com/checkout/plan_UXAh2KKSIAy75/", "_blank")}
-            />
+            </div>
           </div>
         </motion.div>
       </div>
