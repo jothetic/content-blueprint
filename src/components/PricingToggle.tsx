@@ -7,7 +7,7 @@ interface PricingToggleProps {
 }
 
 const PricingToggle = ({ onToggle }: PricingToggleProps) => {
-  const [isYearly, setIsYearly] = useState(false);
+  const [isYearly, setIsYearly] = useState(true);
 
   const handleToggle = () => {
     const newValue = !isYearly;
@@ -40,7 +40,7 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
           <motion.div 
             className="w-6 h-6 rounded-full bg-soft-purple shadow-lg shadow-soft-purple/50"
             animate={{ 
-              x: isYearly ? 0 : 8,
+              x: isYearly ? 0 : 32,
             }}
             transition={{ 
               type: "spring", 
