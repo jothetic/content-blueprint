@@ -7,7 +7,7 @@ interface PricingToggleProps {
 }
 
 const PricingToggle = ({ onToggle }: PricingToggleProps) => {
-  const [isYearly, setIsYearly] = useState(true);
+  const [isYearly, setIsYearly] = useState(false); // Changed from true to false
 
   const handleToggle = () => {
     const newValue = !isYearly;
@@ -19,7 +19,7 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
     <div className="flex flex-col items-center justify-center mb-12">
       <div className="flex items-center justify-center mb-4">
         <span 
-          className={`text-lg font-medium mr-3 cursor-pointer transition-all duration-300 ${isYearly ? 'text-white scale-110' : 'text-gray-400 scale-90'}`}
+          className={`text-lg font-medium mr-3 cursor-pointer transition-all duration-300 ${!isYearly ? 'text-gray-400 scale-90' : 'text-white scale-110'}`}
           onClick={() => {
             setIsYearly(true);
             onToggle(true);
@@ -40,7 +40,7 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
           <motion.div 
             className="w-6 h-6 rounded-full bg-soft-purple shadow-lg shadow-soft-purple/50"
             animate={{ 
-              x: isYearly ? 0 : 32,
+              x: isYearly ? 32 : 0,
             }}
             transition={{ 
               type: "spring", 

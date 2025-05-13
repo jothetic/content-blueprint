@@ -5,7 +5,7 @@ import PricingCard from "@/components/PricingCard";
 import PricingToggle from "@/components/PricingToggle";
 
 const PricingSection: React.FC = () => {
-  const [isYearly, setIsYearly] = useState(true);
+  const [isYearly, setIsYearly] = useState(false); // Changed from true to false
   
   return (
     <section className="py-10 md:py-20 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
@@ -39,7 +39,29 @@ const PricingSection: React.FC = () => {
           className="flex justify-center"
         >
           <div className="flex flex-col md:flex-row justify-center gap-6 w-full max-w-6xl">
-            {/* Yearly Plan (only shown when toggle is set to yearly) */}
+            {/* Monthly Plan (shown when toggle is set to monthly) */}
+            {!isYearly && (
+              <div className="w-full md:w-1/3 max-w-md mx-auto">
+                <PricingCard
+                  title="Content Blueprint Monthly"
+                  price="9.99"
+                  monthlyText="per month"
+                  features={[
+                    "Creator Masterclass (views + income)",
+                    "Premium Discord + Chat",
+                    "Exclusive Files, Templates, and Resources",
+                    "14+ Hours of Video Content",
+                    "Announcements",
+                    "Blueprint Bot (free AI hook generator)"
+                  ]}
+                  ctaText="Get Monthly Access"
+                  highlighted={true}
+                  onCtaClick={() => window.open("https://whop.com/checkout/plan_s6aR2uapUPqbD", "_blank")}
+                />
+              </div>
+            )}
+
+            {/* Yearly Plan (shown when toggle is set to yearly) */}
             {isYearly && (
               <div className="w-full md:w-1/3 max-w-md mx-auto">
                 <PricingCard
@@ -59,28 +81,6 @@ const PricingSection: React.FC = () => {
                   highlighted={true}
                   onCtaClick={() => window.open("https://whop.com/checkout/plan_8MOVPHGY80pZF", "_blank")}
                   displayPriceAsMonthly={true}
-                />
-              </div>
-            )}
-
-            {/* Monthly Plan (only shown when toggle is set to monthly) */}
-            {!isYearly && (
-              <div className="w-full md:w-1/3 max-w-md mx-auto">
-                <PricingCard
-                  title="Content Blueprint Monthly"
-                  price="9.99"
-                  monthlyText="per month"
-                  features={[
-                    "Creator Masterclass (views + income)",
-                    "Premium Discord + Chat",
-                    "Exclusive Files, Templates, and Resources",
-                    "14+ Hours of Video Content",
-                    "Announcements",
-                    "Blueprint Bot (free AI hook generator)"
-                  ]}
-                  ctaText="Get Monthly Access"
-                  highlighted={true}
-                  onCtaClick={() => window.open("https://whop.com/checkout/plan_s6aR2uapUPqbD", "_blank")}
                 />
               </div>
             )}
