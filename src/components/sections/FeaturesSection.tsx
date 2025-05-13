@@ -1,13 +1,15 @@
 
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
+import Image from "@/components/Image";
+import { Bot } from "lucide-react";
 
 interface Feature {
   title: string;
   description: string;
-  color: string;
+  iconSrc?: string;
+  lucideIcon?: React.ReactNode;
   tags?: string[];
 }
 
@@ -15,38 +17,38 @@ const features: Feature[] = [
   {
     title: "Creator Masterclass (views + income)",
     description: "Grow fast. Monetize smart. Build something real.",
-    color: "bg-blue-100",
+    iconSrc: "/lovable-uploads/0609190e-9589-45c3-8e24-8c2eac94b4f3.png",
     tags: ["Video Training", "PDF Guides"]
   },
   {
     title: "Premium Discord",
     description: "Get access to a community of like-minded individuals who are putting in the work.",
-    color: "bg-orange-100",
+    iconSrc: "/lovable-uploads/0609190e-9589-45c3-8e24-8c2eac94b4f3.png",
     tags: ["Community", "Support"]
   },
   {
     title: "Premium Content Blueprints",
     description: "Unlock exclusive files, templates, and resources available only here.",
-    color: "bg-purple-100",
+    iconSrc: "/lovable-uploads/787869c9-3de6-44dd-a1c9-b9235f055e06.png",
     tags: ["Templates", "Resources"]
   },
   {
     title: "Premium Chat",
     description: "Chat in real-time and connect with the other members of our community.",
-    color: "bg-green-100",
+    iconSrc: "/lovable-uploads/eebeb5f9-fbd4-4fee-a264-b43e165b0801.png",
     tags: ["Real-time", "Messaging"]
   },
   {
     title: "Coaching Calls",
     description: "Access to 3 coaching calls per week to get direct help with your content growth.",
-    color: "bg-pink-100/80",
+    iconSrc: "/lovable-uploads/bb4f54b5-5fb8-4804-a001-6bb3f9c90622.png",
     tags: ["Weekly", "Live Support"]
   },
   {
-    title: "Announcements",
-    description: "Share your thoughts and connect with others on topics that matter to you.",
-    color: "bg-pink-100",
-    tags: ["Updates", "News"]
+    title: "Blueprint Bot",
+    description: "A trained AI hook generator which has been trained only on the BEST hooks.",
+    lucideIcon: <Bot className="w-10 h-10 text-blue-400" />,
+    tags: ["AI", "Hook Generator"]
   }
 ];
 
@@ -79,17 +81,35 @@ const FeaturesSection: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.1 * index }}
               className="h-full"
             >
-              <Card className="rounded-xl overflow-hidden bg-white dark:bg-black/30 border-0 shadow-lg h-full flex flex-col">
-                <div className={`${feature.color} dark:opacity-10 p-3 md:p-5 lg:p-6 h-full flex flex-col`}>
-                  <h3 className="text-base md:text-lg lg:text-xl font-bold text-gray-900 dark:text-white mb-1 md:mb-2">{feature.title}</h3>
-                  <p className="text-xs md:text-sm text-gray-700 dark:text-gray-300 mb-2 md:mb-3 flex-grow">{feature.description}</p>
+              <Card className="rounded-xl overflow-hidden bg-white/10 dark:bg-black/30 border border-white/10 shadow-lg h-full flex flex-col">
+                <div className="p-3 md:p-5 lg:p-6 h-full flex flex-col">
+                  <div className="flex items-center mb-4">
+                    {feature.iconSrc ? (
+                      <div className="w-12 h-12 rounded-md mr-3 flex-shrink-0 overflow-hidden">
+                        <Image 
+                          src={feature.iconSrc} 
+                          alt={feature.title}
+                          width={48}
+                          height={48}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ) : feature.lucideIcon ? (
+                      <div className="w-12 h-12 rounded-md mr-3 flex-shrink-0 flex items-center justify-center">
+                        {feature.lucideIcon}
+                      </div>
+                    ) : null}
+                    <h3 className="text-base md:text-lg lg:text-xl font-bold text-white">{feature.title}</h3>
+                  </div>
+                  
+                  <p className="text-xs md:text-sm text-gray-300 mb-3 md:mb-4 flex-grow">{feature.description}</p>
                   
                   {feature.tags && (
                     <div className="flex flex-wrap gap-1 md:gap-2 mb-0">
                       {feature.tags.map((tag, tagIndex) => (
                         <span 
                           key={tagIndex}
-                          className="px-1.5 md:px-2 py-0.5 rounded-full text-xs font-medium bg-white/30 dark:bg-white/10 text-gray-800 dark:text-gray-200"
+                          className="px-1.5 md:px-2 py-0.5 rounded-full text-xs font-medium bg-white/10 text-gray-200"
                         >
                           {tag}
                         </span>
