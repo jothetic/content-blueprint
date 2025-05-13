@@ -6,6 +6,9 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Skeleton } from "@/components/ui/skeleton";
 import type { CarouselApi } from "@/components/ui/carousel";
 import CarouselIndicator from "@/components/CarouselIndicator";
+import { Button } from "@/components/ui/button";
+import { scroller } from "react-scroll";
+import { ArrowRight } from "lucide-react";
 
 interface TestimonialsSectionProps {
   isLoading: boolean;
@@ -16,6 +19,26 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
   const [currentImageSlide, setCurrentImageSlide] = useState(0);
   const [testimonialCarouselApi, setTestimonialCarouselApi] = useState<CarouselApi | null>(null);
   const [imageCarouselApi, setImageCarouselApi] = useState<CarouselApi | null>(null);
+
+  const scrollToPricing = () => {
+    try {
+      scroller.scrollTo('pricing-section', {
+        duration: 800,
+        delay: 0,
+        smooth: 'easeInOutQuart',
+        offset: -50
+      });
+    } catch (error) {
+      console.error("Scroll error:", error);
+      // Fallback method
+      setTimeout(() => {
+        const pricingSection = document.getElementById('pricing-section');
+        if (pricingSection) {
+          pricingSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
 
   // Sample data for testimonials
   const writtenTestimonials = [
@@ -152,8 +175,8 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           </Carousel>
         </div>
 
-        {/* Success Stories Image Carousel - Simple Square Images */}
-        <div className="max-w-3xl mx-auto">
+        {/* Success Stories Image Carousel */}
+        <div className="max-w-3xl mx-auto mb-12">
           <h3 className="text-lg md:text-2xl font-semibold mb-2 md:mb-3 text-center text-white">
             Success Stories Showcase
           </h3>
@@ -201,6 +224,26 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
             </div>
           </Carousel>
         </div>
+        
+        {/* New CTA Button */}
+        <motion.div 
+          className="mt-8 mb-8 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="max-w-md mx-auto bg-white/10 backdrop-blur-sm p-6 rounded-lg border border-white/10">
+            <h3 className="text-xl text-white font-bold mb-3">Ready to join these success stories?</h3>
+            <p className="text-white/80 mb-4">Don't miss out on your chance to achieve similar results!</p>
+            <Button 
+              onClick={scrollToPricing}
+              className="bg-white text-purple-900 hover:bg-white/90 px-6 py-5 font-semibold text-base rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
+            >
+              See Pricing Options <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

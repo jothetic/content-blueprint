@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import Image from "@/components/Image";
 import { Bot } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { scroller } from "react-scroll";
 
 interface Feature {
   title: string;
@@ -53,6 +55,26 @@ const features: Feature[] = [
 ];
 
 const FeaturesSection: React.FC = () => {
+  const scrollToPricing = () => {
+    try {
+      scroller.scrollTo('pricing-section', {
+        duration: 800,
+        delay: 0,
+        smooth: 'easeInOutQuart',
+        offset: -50
+      });
+    } catch (error) {
+      console.error("Scroll error:", error);
+      // Fallback method
+      setTimeout(() => {
+        const pricingSection = document.getElementById('pricing-section');
+        if (pricingSection) {
+          pricingSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
+
   return (
     <section className="py-20 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
       <div className="max-w-5xl mx-auto">
@@ -121,6 +143,23 @@ const FeaturesSection: React.FC = () => {
             </motion.div>
           ))}
         </div>
+        
+        {/* New CTA Button */}
+        <motion.div 
+          className="mt-12 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <Button 
+            onClick={scrollToPricing}
+            className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+          >
+            Unlock All Features Now
+          </Button>
+          <p className="text-white/70 text-sm mt-2">Limited-time offer available today!</p>
+        </motion.div>
       </div>
     </section>
   );
