@@ -43,7 +43,7 @@ const PricingSection: React.FC = () => {
             {isYearly && (
               <div className="w-full md:w-1/3 max-w-md mx-auto">
                 <PricingCard
-                  title="Content Blueprint Pro"
+                  title="Content Blueprint Yearly"
                   price="5"
                   secondaryPrice="60"
                   oneTimeText="Billed Yearly"

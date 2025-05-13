@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
@@ -17,6 +16,12 @@ interface Feature {
 
 const features: Feature[] = [
   {
+    title: "Coaching Calls",
+    description: "Access to 3 coaching calls per week to get direct help with your content growth.",
+    iconSrc: "/lovable-uploads/bb4f54b5-5fb8-4804-a001-6bb3f9c90622.png",
+    tags: ["Weekly", "Live Support"]
+  },
+  {
     title: "Creator Masterclass (views + income)",
     description: "Grow fast. Monetize smart. Build something real.",
     iconSrc: "/lovable-uploads/0609190e-9589-45c3-8e24-8c2eac94b4f3.png",
@@ -33,18 +38,6 @@ const features: Feature[] = [
     description: "Unlock exclusive files, templates, and resources available only here.",
     iconSrc: "/lovable-uploads/787869c9-3de6-44dd-a1c9-b9235f055e06.png",
     tags: ["Templates", "Resources"]
-  },
-  {
-    title: "Premium Chat",
-    description: "Chat in real-time and connect with the other members of our community.",
-    iconSrc: "/lovable-uploads/eebeb5f9-fbd4-4fee-a264-b43e165b0801.png",
-    tags: ["Real-time", "Messaging"]
-  },
-  {
-    title: "Coaching Calls",
-    description: "Access to 3 coaching calls per week to get direct help with your content growth.",
-    iconSrc: "/lovable-uploads/bb4f54b5-5fb8-4804-a001-6bb3f9c90622.png",
-    tags: ["Weekly", "Live Support"]
   },
   {
     title: "Blueprint Bot",
@@ -144,7 +137,7 @@ const FeaturesSection: React.FC = () => {
           ))}
         </div>
         
-        {/* New CTA Button */}
+        {/* CTA Button */}
         <motion.div 
           className="mt-12 text-center"
           initial={{ opacity: 0, y: 20 }}
