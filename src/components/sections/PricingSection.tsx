@@ -5,7 +5,7 @@ import PricingCard from "@/components/PricingCard";
 import PricingToggle from "@/components/PricingToggle";
 
 const PricingSection: React.FC = () => {
-  const [isYearly, setIsYearly] = useState(true);
+  const [isYearly, setIsYearly] = useState(false);
   
   return (
     <section className="py-10 md:py-20 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">

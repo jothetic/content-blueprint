@@ -7,7 +7,7 @@ interface PricingToggleProps {
 }
 
 const PricingToggle = ({ onToggle }: PricingToggleProps) => {
-  const [isYearly, setIsYearly] = useState(true);
+  const [isYearly, setIsYearly] = useState(false);
 
   const handleToggle = () => {
     const newValue = !isYearly;
