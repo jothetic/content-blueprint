@@ -40,7 +40,7 @@ const PricingToggle = ({ onToggle }: PricingToggleProps) => {
           <motion.div 
             className="w-6 h-6 rounded-full bg-soft-purple shadow-lg shadow-soft-purple/50"
             animate={{ 
-              x: isYearly ? 8 : 0,
+              x: isYearly ? 0 : 8,
             }}
             transition={{ 
               type: "spring", 
