@@ -103,7 +103,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <span className="inline-block">🚀</span>{" "}
-            Master the blueprint to selling digital products
+            Master the blueprint to selling <span className="text-white">digital products</span>
           </motion.h1>
         </motion.div>
 
