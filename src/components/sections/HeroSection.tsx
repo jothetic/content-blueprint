@@ -1,17 +1,32 @@
-import React from "react";
-import { motion } from "framer-motion";
+
+import React, { useEffect, useState } from "react";
+import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { scroller } from "react-scroll";
-import { Link } from "react-router-dom";
+import { ArrowRight as ArrowRightIcon, Star } from "lucide-react";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
+import { scroller } from 'react-scroll';
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface HeroSectionProps {
   visible: boolean;
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
+  const [hasShownInitialAnimation, setHasShownInitialAnimation] = useState(false);
+  const controls = useAnimation();
+  const isMobile = useIsMobile();
+
+  useEffect(() => {
+    if (visible && !hasShownInitialAnimation) {
+      controls.start("visible");
+      setHasShownInitialAnimation(true);
+    }
+  }, [visible, hasShownInitialAnimation, controls]);
+
   const scrollToPricing = () => {
+    console.log("Scroll to pricing clicked");
     try {
+      // First try with react-scroll
       scroller.scrollTo('pricing-section', {
         duration: 800,
         delay: 0,
@@ -20,68 +35,133 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
       });
     } catch (error) {
       console.error("Scroll error:", error);
-      // Fallback method
+    }
+    
+    // Add a direct fallback method that will work even if react-scroll fails
+    setTimeout(() => {
       const pricingSection = document.getElementById('pricing-section');
       if (pricingSection) {
         pricingSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
+  const heroVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const titleVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 20
+      }
+    }
+  };
+
+  const fadeUpVariant = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 50,
+        damping: 20
       }
     }
   };
 
   return (
-    <section className="relative py-20 md:py-28 px-4 md:px-6 lg:px-8 overflow-hidden bg-deep-purple-gradient">
-      <motion.div 
-        className="absolute inset-0 z-0 opacity-20"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.2 }}
-        transition={{ duration: 1.5 }}
+    <section className="pt-6 md:pt-8 pb-10 md:pb-16 px-4 md:px-6 lg:px-8">
+      <motion.div
+        initial="hidden"
+        animate={controls}
+        variants={heroVariants}
+        className="max-w-4xl mx-auto text-center relative"
       >
-        <div className="absolute inset-0 bg-[url('/bg-pattern-1.svg')] bg-center bg-repeat"></div>
-        <div className="absolute inset-0 bg-[url('/grid-dots.svg')] bg-center bg-repeat mix-blend-soft-light"></div>
-      </motion.div>
-      
-      <div className="max-w-6xl mx-auto relative z-10">
-        <motion.div 
-          className="text-center mb-8 md:mb-10"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 30 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-        >
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 tracking-tight">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-white">
-              Grow Your Following & Monetize
-            </span>
-            <br />
-            <span className="text-white">Digital Products</span>
-            <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-white">
-              Like Never Before
-            </span>
-          </h1>
-          <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto">
-            Unlock the secrets to scaling your online influence and turning your passion into profit.
-          </p>
+        {/* Animated background elements - simplified for better performance */}
+        <div className="absolute top-20 -left-20 w-40 h-40 rounded-full bg-purple-500/10 blur-3xl"></div>
+        <div className="absolute bottom-0 -right-20 w-60 h-60 rounded-full bg-blue-500/10 blur-3xl"></div>
+
+        <motion.div variants={titleVariants} className="relative z-10">
+          <motion.h1 
+            className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 text-soft-purple tracking-tight"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <span className="inline-block">🚀</span>{" "}
+            Master the blueprint to selling digital products
+          </motion.h1>
         </motion.div>
 
-        <motion.div 
-          className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 30 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+        <motion.p 
+          variants={fadeUpVariant}
+          className="text-base md:text-lg text-white mb-6 md:mb-8 max-w-2xl mx-auto font-medium"
         >
-          <Button 
-            onClick={scrollToPricing}
-            className="bg-soft-purple hover:bg-soft-purple/90 text-white px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            See Pricing Options <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-          <a href="https://dubowsky.gumroad.com/l/creator-os" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" className="text-white hover:bg-white/10 px-6 py-4 text-base md:text-lg rounded-full transition-colors duration-300">
-              Get Free Training
-            </Button>
-          </a>
+          Watch this complete guide to grow your fan base on Instagram and TikTok in 2025.
+        </motion.p>
+        
+        {/* Video Section - Using YouTube instead of Vimeo */}
+        <motion.div
+          variants={fadeUpVariant}
+          className="relative max-w-4xl mx-auto mb-8 md:mb-12"
+        >
+          <div className="relative rounded-lg overflow-hidden shadow-2xl border border-white/10">
+            <YouTubeEmbed 
+              videoId="25fByvdnujU"
+              className="w-full"
+            />
+          </div>
         </motion.div>
-      </div>
+        
+        <motion.div
+          variants={fadeUpVariant}
+          className="flex flex-col items-center"
+        >
+          <div className="mb-4">
+            <Button 
+              className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer relative z-50 pointer-events-auto"
+              onClick={scrollToPricing}
+              tabIndex={0}
+              role="button"
+              aria-label="Start your journey - go to pricing section"
+            >
+              <span className="relative z-10 flex items-center">
+                → Start Your Journey <ArrowRightIcon className="ml-1 w-4 h-4 md:w-5 md:h-5" />
+              </span>
+            </Button>
+          </div>
+          
+          <motion.div 
+            className="flex items-center text-gray-400 text-xs md:text-sm mt-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+          >
+            <div className="flex">
+              {[1, 2, 3, 4, 5].map(i => (
+                <Star key={i} className="w-3 h-3 md:w-4 md:h-4 fill-yellow-400 text-yellow-400" />
+              ))}
+            </div>
+            <span className="ml-2">
+              4.98 (40+ reviews)
+            </span>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

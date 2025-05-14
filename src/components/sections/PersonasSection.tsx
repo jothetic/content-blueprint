@@ -1,9 +1,7 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { User, Target, Trophy } from "lucide-react";
-import { scroller } from "react-scroll";
 
 interface Persona {
   title: string;
@@ -34,37 +32,22 @@ const personas: Persona[] = [
 ];
 
 const PersonasSection: React.FC = () => {
-  const scrollToPricing = () => {
-    try {
-      scroller.scrollTo('pricing-section', {
-        duration: 800,
-        delay: 0,
-        smooth: 'easeInOutQuart',
-        offset: -50
-      });
-    } catch (error) {
-      console.error("Scroll error:", error);
-      // Fallback method
-      const pricingSection = document.getElementById('pricing-section');
-      if (pricingSection) {
-        pricingSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  };
-
   return (
     <section className="py-16 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         <motion.div 
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Who This Is For</h2>
-          <p className="text-lg text-white/80 max-w-3xl mx-auto">
-            Our program is designed for anyone looking to build and grow their online presence
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-white">
+              Who This Is For
+            </span>
+          </h2>
+          <div className="w-24 h-1 bg-soft-purple mx-auto rounded-full mt-2 mb-4"></div>
         </motion.div>
 
         <div className="space-y-4">
@@ -83,22 +66,6 @@ const PersonasSection: React.FC = () => {
             </motion.div>
           ))}
         </div>
-
-        <motion.div 
-          className="mt-12 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <Button 
-            onClick={scrollToPricing}
-            className="bg-soft-purple hover:bg-soft-purple/90 text-white px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            Start Your Growth Journey Today
-          </Button>
-          <p className="text-white/70 text-sm mt-2">Limited spots available!</p>
-        </motion.div>
       </div>
     </section>
   );

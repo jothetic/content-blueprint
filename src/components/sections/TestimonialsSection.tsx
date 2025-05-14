@@ -31,10 +31,12 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
     } catch (error) {
       console.error("Scroll error:", error);
       // Fallback method
-      const pricingSection = document.getElementById('pricing-section');
-      if (pricingSection) {
-        pricingSection.scrollIntoView({ behavior: 'smooth' });
-      }
+      setTimeout(() => {
+        const pricingSection = document.getElementById('pricing-section');
+        if (pricingSection) {
+          pricingSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
     }
   };
 
@@ -223,7 +225,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           </Carousel>
         </div>
         
-        {/* CTA Button - Fixed alignment and ensuring it works */}
+        {/* New CTA Button */}
         <motion.div 
           className="mt-8 mb-8 text-center"
           initial={{ opacity: 0, y: 20 }}
