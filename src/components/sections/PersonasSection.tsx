@@ -2,6 +2,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-scroll";
 
 interface Persona {
   title: string;
@@ -19,7 +21,7 @@ const personas: Persona[] = [
   },
   {
     title: "The Hidden Creator",
-    description: "Wants to grow but doesn't know how to get real attention."
+    description: "Wants to grow but doesn't know how to get attention."
   },
   {
     title: "The Hustler with No Blueprint",
@@ -66,6 +68,24 @@ const PersonasSection: React.FC = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* CTA Button */}
+        <motion.div 
+          className="flex justify-center mt-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <Link to="pricing-section" smooth={true} duration={800} offset={-20}>
+            <Button 
+              variant="default" 
+              className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white"
+            >
+              See Pricing Options
+            </Button>
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
