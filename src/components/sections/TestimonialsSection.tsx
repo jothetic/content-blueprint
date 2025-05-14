@@ -31,10 +31,12 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
     } catch (error) {
       console.error("Scroll error:", error);
       // Fallback method
-      const pricingSection = document.getElementById('pricing-section');
-      if (pricingSection) {
-        pricingSection.scrollIntoView({ behavior: 'smooth' });
-      }
+      setTimeout(() => {
+        const pricingSection = document.getElementById('pricing-section');
+        if (pricingSection) {
+          pricingSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
     }
   };
 
