@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -108,7 +109,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
           variants={fadeUpVariant}
           className="text-base md:text-lg text-white mb-6 md:mb-8 max-w-2xl mx-auto font-medium"
         >
-          Watch this complete guide to grow your fan base on Instagram and TikTok in 2025.
+          Watch this short video:
         </motion.p>
         
         {/* Video Section - Using YouTube instead of Vimeo */}
@@ -118,7 +119,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
         >
           <div className="relative rounded-lg overflow-hidden shadow-2xl border border-white/10">
             <YouTubeEmbed 
-              videoId="25fByvdnujU"
+              videoId="cJHWWlQlQsI"
               className="w-full"
             />
           </div>
