@@ -25,21 +25,24 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
 
   const scrollToPricing = () => {
     console.log("Scroll to pricing clicked");
-    try {
-      // First try with react-scroll
-      scroller.scrollTo('pricing-section', {
-        duration: 800,
-        delay: 0,
-        smooth: 'easeInOutQuart',
-        offset: -50
-      });
-    } catch (error) {
-      console.error("Scroll error:", error);
+    // Direct DOM approach for most reliability
+    const pricingSection = document.getElementById('pricing-section');
+    if (pricingSection) {
+      console.log("Found pricing section element, scrolling to it");
+      pricingSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.error("Could not find pricing section element");
       
-      // Add a direct fallback method that will work even if react-scroll fails
-      const pricingSection = document.getElementById('pricing-section');
-      if (pricingSection) {
-        pricingSection.scrollIntoView({ behavior: 'smooth' });
+      // Try react-scroll as fallback
+      try {
+        scroller.scrollTo('pricing-section', {
+          duration: 800,
+          delay: 0,
+          smooth: 'easeInOutQuart',
+          offset: -50
+        });
+      } catch (error) {
+        console.error("React-scroll error:", error);
       }
     }
   };
@@ -132,7 +135,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
           <div className="mb-4">
             <Button 
               className="bg-soft-purple hover:bg-soft-purple/90 text-white px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer relative z-50 pointer-events-auto"
-              onClick={scrollToPricing}
+              onClick={() => {
+                console.log("Button clicked!");
+                scrollToPricing();
+              }}
               tabIndex={0}
               role="button"
               aria-label="Start your journey - go to pricing section"
