@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -35,15 +34,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
       });
     } catch (error) {
       console.error("Scroll error:", error);
-    }
-    
-    // Add a direct fallback method that will work even if react-scroll fails
-    setTimeout(() => {
+      
+      // Add a direct fallback method that will work even if react-scroll fails
       const pricingSection = document.getElementById('pricing-section');
       if (pricingSection) {
         pricingSection.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 100);
+    }
   };
 
   const heroVariants = {

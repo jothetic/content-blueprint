@@ -8,7 +8,7 @@ const PricingSection: React.FC = () => {
   const [isYearly, setIsYearly] = useState(false);
   
   return (
-    <section className="py-10 md:py-20 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
+    <section className="py-10 md:py-20 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient" id="pricing-section">
       <div className="max-w-6xl mx-auto">
         <motion.h2 
           className="text-2xl md:text-4xl font-bold text-center mb-2 md:mb-4 text-white"

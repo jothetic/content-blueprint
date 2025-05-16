@@ -21,22 +21,10 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
   const [imageCarouselApi, setImageCarouselApi] = useState<CarouselApi | null>(null);
 
   const scrollToPricing = () => {
-    try {
-      scroller.scrollTo('pricing-section', {
-        duration: 800,
-        delay: 0,
-        smooth: 'easeInOutQuart',
-        offset: -50
-      });
-    } catch (error) {
-      console.error("Scroll error:", error);
-      // Fallback method
-      setTimeout(() => {
-        const pricingSection = document.getElementById('pricing-section');
-        if (pricingSection) {
-          pricingSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
+    // Direct DOM manipulation method which is most reliable
+    const pricingSection = document.getElementById('pricing-section');
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -225,7 +213,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ isLoading }) 
           </Carousel>
         </div>
         
-        {/* New CTA Button */}
+        {/* CTA Button */}
         <motion.div 
           className="mt-8 mb-8 text-center"
           initial={{ opacity: 0, y: 20 }}

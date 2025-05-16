@@ -1,10 +1,10 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import Image from "@/components/Image";
 import { Bot } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { scroller } from "react-scroll";
 
 interface Feature {
   title: string;
@@ -49,22 +49,9 @@ const features: Feature[] = [
 
 const FeaturesSection: React.FC = () => {
   const scrollToPricing = () => {
-    try {
-      scroller.scrollTo('pricing-section', {
-        duration: 800,
-        delay: 0,
-        smooth: 'easeInOutQuart',
-        offset: -50
-      });
-    } catch (error) {
-      console.error("Scroll error:", error);
-      // Fallback method
-      setTimeout(() => {
-        const pricingSection = document.getElementById('pricing-section');
-        if (pricingSection) {
-          pricingSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
+    const pricingSection = document.getElementById('pricing-section');
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

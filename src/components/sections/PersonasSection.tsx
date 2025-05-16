@@ -3,7 +3,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-scroll";
 
 interface Persona {
   title: string;
@@ -34,6 +33,13 @@ const personas: Persona[] = [
 ];
 
 const PersonasSection: React.FC = () => {
+  const scrollToPricing = () => {
+    const pricingSection = document.getElementById('pricing-section');
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="py-16 px-4 md:px-6 lg:px-8 bg-deep-purple-gradient">
       <div className="max-w-3xl mx-auto">
@@ -77,14 +83,13 @@ const PersonasSection: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          <Link to="pricing-section" smooth={true} duration={800} offset={-20}>
-            <Button 
-              variant="default" 
-              className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white"
-            >
-              See Pricing Options
-            </Button>
-          </Link>
+          <Button 
+            onClick={scrollToPricing}
+            variant="default" 
+            className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white"
+          >
+            See Pricing Options
+          </Button>
         </motion.div>
       </div>
     </section>
