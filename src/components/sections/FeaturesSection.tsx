@@ -126,7 +126,7 @@ const FeaturesSection: React.FC = () => {
         
         {/* CTA Button */}
         <motion.div 
-          className="mt-12 text-center"
+          className="mt-10 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -138,7 +138,7 @@ const FeaturesSection: React.FC = () => {
           >
             Unlock All Features Now
           </Button>
-          <p className="text-white/70 text-sm mt-2">Limited-time offer available today!</p>
+          <p className="text-white/70 text-sm mt-1">Limited-time offer available today!</p>
         </motion.div>
       </div>
     </section>
