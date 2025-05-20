@@ -16,8 +16,8 @@ interface Feature {
 
 const features: Feature[] = [
   {
-    title: "Coaching Calls",
-    description: "Access to 3 coaching calls per week to get direct help with your content growth.",
+    title: "Community Coaching Calls",
+    description: "Access to biweekly group coaching calls",
     iconSrc: "/lovable-uploads/bb4f54b5-5fb8-4804-a001-6bb3f9c90622.png",
     tags: ["Weekly", "Live Support"]
   },

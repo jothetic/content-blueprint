@@ -43,8 +43,8 @@ const PricingSection: React.FC = () => {
             {isYearly && (
               <PricingCard
                 title="Content Blueprint Yearly"
-                price="5"
-                secondaryPrice="60"
+                price="13"
+                secondaryPrice="159"
                 oneTimeText="Billed Yearly"
                 features={[
                   "Creator Masterclass (views + income)",
@@ -65,7 +65,7 @@ const PricingSection: React.FC = () => {
             {!isYearly && (
               <PricingCard
                 title="Content Blueprint Monthly"
-                price="9.99"
+                price="27"
                 monthlyText="per month"
                 features={[
                   "Creator Masterclass (views + income)",
