@@ -51,12 +51,12 @@ const PricingSection: React.FC = () => {
                   "Premium Discord + Chat",
                   "Exclusive Files, Templates, and Resources",
                   "14+ Hours of Video Content",
-                  "Announcements",
+                  "Group Coaching Calls",
                   "Blueprint Bot (free AI hook generator)"
                 ]}
                 ctaText="Get Yearly Access"
                 highlighted={true}
-                onCtaClick={() => window.open("https://whop.com/checkout/plan_8MOVPHGY80pZF", "_blank")}
+                onCtaClick={() => window.open("https://whop.com/checkout/plan_SGCoEJubA4kjw/", "_blank")}
                 displayPriceAsMonthly={true}
               />
             )}
@@ -72,12 +72,12 @@ const PricingSection: React.FC = () => {
                   "Premium Discord + Chat",
                   "Exclusive Files, Templates, and Resources",
                   "14+ Hours of Video Content",
-                  "Announcements",
+                  "Group Coaching Calls",
                   "Blueprint Bot (free AI hook generator)"
                 ]}
                 ctaText="Get Monthly Access"
                 highlighted={true}
-                onCtaClick={() => window.open("https://whop.com/checkout/plan_s6aR2uapUPqbD", "_blank")}
+                onCtaClick={() => window.open("https://whop.com/checkout/plan_b0JOwg2UwCX8A/", "_blank")}
               />
             )}
           </div>
