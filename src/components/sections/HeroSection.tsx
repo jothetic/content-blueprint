@@ -122,7 +122,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ visible }) => {
         >
           <div className="relative rounded-lg overflow-hidden shadow-2xl border border-white/10">
             <YouTubeEmbed 
-              videoId="cJHWWlQlQsI"
+              videoId="jLks5VNiocQ"
               className="w-full"
             />
           </div>
