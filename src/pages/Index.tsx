@@ -8,7 +8,7 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import PersonasSection from "@/components/sections/PersonasSection";
 import FAQSection from "@/components/sections/FAQSection";
-import CustomPricingSection from "@/components/sections/CustomPricingSection";
+import PricingSection from "@/components/sections/PricingSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -65,7 +65,7 @@ const Index = () => {
         </Element>
 
         <Element name="pricing-section" id="pricing-section" className="scroll-mt-20">
-          <CustomPricingSection />
+          <PricingSection />
         </Element>
         
         {/* Safari bottom padding fix */}
