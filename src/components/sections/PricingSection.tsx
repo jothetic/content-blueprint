@@ -50,7 +50,7 @@ const PricingSection: React.FC = () => {
                   "Creator Masterclass (views + income)",
                   "Premium Discord + Chat",
                   "Exclusive Files, Templates, and Resources",
-                  "14+ Hours of Video Content",
+                  "10+ Hours of Video Content",
                   "Group Coaching Calls",
                   "Blueprint Bot (free AI hook generator)"
                 ]}
@@ -71,7 +71,7 @@ const PricingSection: React.FC = () => {
                   "Creator Masterclass (views + income)",
                   "Premium Discord + Chat",
                   "Exclusive Files, Templates, and Resources",
-                  "14+ Hours of Video Content",
+                  "10+ Hours of Video Content",
                   "Group Coaching Calls",
                   "Blueprint Bot (free AI hook generator)"
                 ]}
